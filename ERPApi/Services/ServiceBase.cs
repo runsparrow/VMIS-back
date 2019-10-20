@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace ERPApi.Services
@@ -364,6 +365,43 @@ namespace ERPApi.Services
         protected static object JsonToObject(string jsonString, object obj)
         {
             return JsonConvert.DeserializeObject(jsonString, obj.GetType());
+        }
+
+        /// <summary>
+        /// 字段类型decimal的合计方法
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="queryable"></param>
+        /// <param name="entityAttrs"></param>
+        /// <returns></returns>
+        protected decimal Sum<SQLEntity>(Expression<Func<SQLEntity, decimal>> selector, IQueryable<SQLEntity> queryable, params string[] entityAttrs)
+        {
+            try
+            {
+                return queryable.Sum(selector);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// 字段类型int的合计方法
+        /// </summary>
+        /// <param name="selector"></param>
+        /// <param name="queryable"></param>
+        /// <param name="entityAttrs"></param>
+        /// <returns></returns>
+        protected int Sum<SQLEntity>(Expression<Func<SQLEntity, int>> selector, IQueryable<SQLEntity> queryable, params string[] entityAttrs)
+        {
+            try
+            {
+                return queryable.Sum(selector);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         #endregion
 

@@ -286,6 +286,12 @@ namespace ERPApi.Controllers.AVM
                 // 指向具体执行的方法
                 switch (request.Function.Name.ToLower())
                 {
+                    case "byregistryid":
+                        return base.ResponseOk(
+                                request.ToResponse(
+                                    service.ByRegistryId(ParseInt(request.Function.Args[0]))
+                                )
+                            );
                     default:
                         if (string.IsNullOrEmpty(request.Function.Name) || request.Function.Name.ToLower().Equals("byuserid"))
                         {

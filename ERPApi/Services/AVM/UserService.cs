@@ -5,7 +5,6 @@ using ERPApi.HttpClients.HttpModes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 
 namespace ERPApi.Services.AVM
@@ -546,14 +545,29 @@ namespace ERPApi.Services.AVM
             /// <returns></returns>
             public SummaryEntity PageSummary(string keyWord, int pageIndex, int pageSize, DateTime startDate, DateTime endDate, ModeBase.Status status, params string[] entityAttrs)
             {
-                try
+                using (VMISContext context = new VMISContext())
                 {
-                    // 返回
-                    return new SummaryEntity();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
+                    try
+                    {
+                        // 定义
+                        var queryable = SQLQueryable(context, entityAttrs);
+                        // keyWord查询
+                        queryable = KeyWordQueryable(queryable, keyWord, entityAttrs);
+                        // keyWordExt查询
+                        queryable = KeyWordExtQueryable(queryable, keyWord, entityAttrs);
+                        // 日期查询
+                        queryable = DateQueryable(queryable, startDate, endDate, entityAttrs);
+                        // status查询
+                        queryable = StatusQueryable(queryable, status, entityAttrs);
+                        // 分页
+                        queryable = PageQueryable(queryable, pageIndex, pageSize, entityAttrs);
+                        // 返回
+                        return new SummaryEntity();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
                 }
             }
         }
@@ -623,6 +637,8 @@ namespace ERPApi.Services.AVM
             {
                 // 加密
                 user.Password = EncryptHelper.GetBase64String(user.Password);
+                // 创建时间
+                user.CreateDateTime = DateTime.Now;
                 // 返回
                 return user;
             }
@@ -640,81 +656,14 @@ namespace ERPApi.Services.AVM
         {
             try
             {
+                // 修改时间
+                user.EditDateTime = DateTime.Now;
+                // 返回
                 return user;
             }
             catch (Exception ex)
             {
                 throw ex;
-            }
-        }
-        /// <summary>
-        /// 字段类型decimal的合计方法
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="keyWord"></param>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
-        /// <param name="status"></param>
-        /// <param name="entityAttrs"></param>
-        /// <returns></returns>
-        private decimal Sum(Expression<Func<SQLEntity, decimal>> selector, string keyWord, DateTime startDate, DateTime endDate, ModeBase.Status status, params string[] entityAttrs)
-        {
-            using (VMISContext context = new VMISContext())
-            {
-                try
-                {
-                    // 定义
-                    var queryable = SQLQueryable(context, entityAttrs);
-                    // keyWord查询
-                    queryable = KeyWordQueryable(queryable, keyWord, entityAttrs);
-                    // keyWordExt查询
-                    queryable = KeyWordExtQueryable(queryable, keyWord, entityAttrs);
-                    // 日期查询
-                    queryable = DateQueryable(queryable, startDate, endDate, entityAttrs);
-                    // status查询
-                    queryable = StatusQueryable(queryable, status, entityAttrs);
-                    // 返回
-                    return queryable.Sum(selector);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-        }
-        /// <summary>
-        /// 字段类型int的合计方法
-        /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="keyWord"></param>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
-        /// <param name="status"></param>
-        /// <param name="entityAttrs"></param>
-        /// <returns></returns>
-        private int Sum(Expression<Func<SQLEntity, int>> selector, string keyWord, DateTime startDate, DateTime endDate, ModeBase.Status status, params string[] entityAttrs)
-        {
-            using (VMISContext context = new VMISContext())
-            {
-                try
-                {
-                    // 定义
-                    var queryable = SQLQueryable(context, entityAttrs);
-                    // keyWord查询
-                    queryable = KeyWordQueryable(queryable, keyWord, entityAttrs);
-                    // keyWordExt查询
-                    queryable = KeyWordExtQueryable(queryable, keyWord, entityAttrs);
-                    // 日期查询
-                    queryable = DateQueryable(queryable, startDate, endDate, entityAttrs);
-                    // status查询
-                    queryable = StatusQueryable(queryable, status, entityAttrs);
-                    // 返回
-                    return queryable.Sum(selector);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
             }
         }
         /// <summary>
