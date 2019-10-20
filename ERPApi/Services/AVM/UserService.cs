@@ -95,24 +95,6 @@ namespace ERPApi.Services.AVM
             /// </summary>
             /// <param name="user"></param>
             /// <returns></returns>
-            public User ToInit(User user)
-            {
-                try
-                {
-                    return Commit(
-                            ReadyToStatus(user, "avm.user.init")
-                        );
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="user"></param>
-            /// <returns></returns>
             public User ToOpen(User user)
             {
                 try
@@ -455,6 +437,48 @@ namespace ERPApi.Services.AVM
                 }
             }
             /// <summary>
+            /// 根据角色Id查询
+            /// </summary>
+            /// <param name="roleId"></param>
+            /// <returns></returns>
+            public List<User> ByRoleId(int roleId)
+            {
+                try
+                {
+                    List<User> resultList = new List<User>();
+                    new RERoleUserService.RowsService().ByRoleId(roleId).ForEach(reRoleUser =>
+                    {
+                        resultList.Add(reRoleUser.User);
+                    });
+                    return resultList;
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            /// <summary>
+            /// 根据功能Id查询
+            /// </summary>
+            /// <param name="registryId"></param>
+            /// <returns></returns>
+            public List<User> ByRegistryId(int registryId)
+            {
+                try
+                {
+                    List<User> resultList = new List<User>();
+                    new REUserRegistryService.RowsService().ByRegistryId(registryId).ForEach(reUserRegistry =>
+                    {
+                        resultList.Add(reUserRegistry.User);
+                    });
+                    return resultList;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            /// <summary>
             ///  分页
             /// </summary>
             /// <param name="keyWord">关键字</param>
@@ -497,7 +521,6 @@ namespace ERPApi.Services.AVM
                     }
                 }
             }
-
             /// <summary>
             /// 分页计数
             /// 1.  本方法用于配套分页查询。

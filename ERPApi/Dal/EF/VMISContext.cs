@@ -15,6 +15,9 @@ namespace ERPApi.Dal.EFHelper
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Entities.AVM.UserPower>().HasKey(key => new { key.UserId, key.RegistryId });
+            modelBuilder.Entity<Entities.AVM.RERoleUser>().HasKey(key => new { key.UserId, key.RoleId });
+            modelBuilder.Entity<Entities.AVM.RERoleRegistry>().HasKey(key => new { key.RoleId, key.RegistryId });
+            modelBuilder.Entity<Entities.AVM.REUserRegistry>().HasKey(key => new { key.UserId, key.RegistryId });
             base.OnModelCreating(modelBuilder);
         }
 
@@ -35,6 +38,18 @@ namespace ERPApi.Dal.EFHelper
         /// 功能
         /// </summary>
         public virtual DbSet<Entities.AVM.Registry> AVM_Registry{ get; set; }
+        /// <summary>
+        /// 角色用户关系
+        /// </summary>
+        public virtual DbSet<Entities.AVM.RERoleUser> AVM_RE_RoleUser{ get; set; }
+        /// <summary>
+        /// 角色功能关系
+        /// </summary>
+        public virtual DbSet<Entities.AVM.RERoleRegistry> AVM_RE_RoleRegistry { get; set; }
+        /// <summary>
+        /// 用户功能关系
+        /// </summary>
+        public virtual DbSet<Entities.AVM.REUserRegistry> AVM_RE_UserRegistry { get; set; }
         #endregion
 
         #region ASM

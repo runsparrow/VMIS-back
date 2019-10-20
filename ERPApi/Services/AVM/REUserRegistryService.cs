@@ -1,6 +1,5 @@
 ﻿using ERPApi.Dal.EFHelper;
 using ERPApi.Entities.AVM;
-using ERPApi.Entities.WFM;
 using ERPApi.HttpClients.HttpModes;
 using System;
 using System.Collections.Generic;
@@ -12,13 +11,13 @@ namespace ERPApi.Services.AVM
     /// <summary>
     /// 
     /// </summary>
-    public class RoleService : ServiceBase<Role, VMISContext>
+    public class REUserRegistryService : ServiceBase<REUserRegistry, VMISContext>
     {
         #region RPC CreateMode
         /// <summary>
         /// CreateMode Service
         /// </summary>
-        public class CreateService : RoleService
+        public class CreateService : REUserRegistryService
         {
             /// <summary>
             /// 定义事务服务
@@ -34,18 +33,18 @@ namespace ERPApi.Services.AVM
             /// <summary>
             /// 默认的事务方法
             /// </summary>
-            /// <param name="role"></param>
+            /// <param name="reUserRegistry"></param>
             /// <returns></returns>
-            public Role Commit(Role role)
+            public REUserRegistry Commit(REUserRegistry reUserRegistry)
             {
                 try
                 {
                     // 定义
-                    Role result = new Role();
+                    REUserRegistry result = new REUserRegistry();
                     // 事务
                     transService.TransRegist(delegate {
                         result = base.Create(
-                                ReadyToCreate(role)
+                                ReadyToCreate(reUserRegistry)
                             );
                     });
                     // 提交
@@ -61,21 +60,21 @@ namespace ERPApi.Services.AVM
             /// <summary>
             /// 默认的事务方法
             /// </summary>
-            /// <param name="roleList"></param>
+            /// <param name="reUserRegistryList"></param>
             /// <returns></returns>
-            public List<Role> Commit(List<Role> roleList)
+            public List<REUserRegistry> Commit(List<REUserRegistry> reUserRegistryList)
             {
                 try
                 {
                     // 定义
-                    List<Role> resultList = new List<Role>();
+                    List<REUserRegistry> resultList = new List<REUserRegistry>();
                     // 事务
                     transService.TransRegist(delegate {
                         // 遍历
-                        roleList.ForEach(role =>
+                        reUserRegistryList.ForEach(reUserRegistry =>
                         {
                             resultList.Add(
-                                    new CreateService().Commit(role)
+                                    new CreateService().Commit(reUserRegistry)
                                 );
                         });
                     });
@@ -83,42 +82,6 @@ namespace ERPApi.Services.AVM
                     transService.TransCommit();
                     // 返回
                     return resultList;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="role"></param>
-            /// <returns></returns>
-            public Role ToOpen(Role role)
-            {
-                try
-                {
-                    return Commit(
-                            ReadyToStatus(role, "avm.role.open")
-                        );
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="role"></param>
-            /// <returns></returns>
-            public Role ToClose(Role role)
-            {
-                try
-                {
-                    return Commit(
-                            ReadyToStatus(role, "avm.role.close")
-                        );
                 }
                 catch (Exception ex)
                 {
@@ -133,7 +96,7 @@ namespace ERPApi.Services.AVM
         /// <summary>
         /// UpdateMode Service
         /// </summary>
-        public class UpdateService : RoleService
+        public class UpdateService : REUserRegistryService
         {
             /// <summary>
             /// 定义事务服务
@@ -149,18 +112,18 @@ namespace ERPApi.Services.AVM
             /// <summary>
             /// 默认的事务方法
             /// </summary>
-            /// <param name="role"></param>
+            /// <param name="reUserRegistry"></param>
             /// <returns></returns>
-            public Role Commit(Role role)
+            public REUserRegistry Commit(REUserRegistry reUserRegistry)
             {
                 try
                 {
                     // 定义
-                    Role result = new Role();
+                    REUserRegistry result = new REUserRegistry();
                     // 事务
                     transService.TransRegist(delegate {
                         result = base.Update(
-                                ReadyToUpdate(role)
+                                ReadyToUpdate(reUserRegistry)
                             );
                     });
                     // 提交
@@ -176,21 +139,21 @@ namespace ERPApi.Services.AVM
             /// <summary>
             /// 默认的事务方法
             /// </summary>
-            /// <param name="roleList"></param>
+            /// <param name="reUserRegistryList"></param>
             /// <returns></returns>
-            public List<Role> Commit(List<Role> roleList)
+            public List<REUserRegistry> Commit(List<REUserRegistry> reUserRegistryList)
             {
                 try
                 {
                     // 定义
-                    List<Role> resultList = new List<Role>();
+                    List<REUserRegistry> resultList = new List<REUserRegistry>();
                     // 事务
                     transService.TransRegist(delegate
                     {
-                        roleList.ForEach(role =>
+                        reUserRegistryList.ForEach(reUserRegistry =>
                         {
                             resultList.Add(
-                                    new UpdateService().Commit(role)
+                                    new UpdateService().Commit(reUserRegistry)
                                 );
                         });
                     });
@@ -204,42 +167,6 @@ namespace ERPApi.Services.AVM
                     throw ex;
                 }
             }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="role"></param>
-            /// <returns></returns>
-            public Role ToOpen(Role role)
-            {
-                try
-                {
-                    return Commit(
-                            ReadyToStatus(role, "avm.role.open")
-                        );
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="role"></param>
-            /// <returns></returns>
-            public Role ToClose(Role role)
-            {
-                try
-                {
-                    return Commit(
-                            ReadyToStatus(role, "avm.role.close")
-                        );
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
         }
         #endregion
 
@@ -247,7 +174,7 @@ namespace ERPApi.Services.AVM
         /// <summary>
         /// DeleteMode Service
         /// </summary>
-        public class DeleteService : RoleService
+        public class DeleteService : REUserRegistryService
         {
             /// <summary>
             /// 定义事务服务
@@ -263,17 +190,17 @@ namespace ERPApi.Services.AVM
             /// <summary>
             /// 默认的事务方法
             /// </summary>
-            /// <param name="role"></param>
+            /// <param name="reUserRegistry"></param>
             /// <returns></returns>
-            public Role Commit(Role role)
+            public REUserRegistry Commit(REUserRegistry reUserRegistry)
             {
                 try
                 {
                     // 定义
-                    Role result = new Role();
+                    REUserRegistry result = new REUserRegistry();
                     // 事务
                     transService.TransRegist(delegate {
-                        result = base.Delete(role);
+                        result = base.Delete(reUserRegistry);
                     });
                     // 提交
                     transService.TransCommit();
@@ -288,20 +215,20 @@ namespace ERPApi.Services.AVM
             /// <summary>
             /// 默认的事务方法
             /// </summary>
-            /// <param name="roleList"></param>
+            /// <param name="reUserRegistryList"></param>
             /// <returns></returns>
-            public List<Role> Commit(List<Role> roleList)
+            public List<REUserRegistry> Commit(List<REUserRegistry> reUserRegistryList)
             {
                 try
                 {
                     // 定义
-                    List<Role> resultList = new List<Role>();
+                    List<REUserRegistry> resultList = new List<REUserRegistry>();
                     // 事务
                     transService.TransRegist(delegate {
-                        roleList.ForEach(role =>
+                        reUserRegistryList.ForEach(reUserRegistry =>
                         {
                             resultList.Add(
-                                    new DeleteService().Commit(role)
+                                    new DeleteService().Commit(reUserRegistry)
                                 );
                         });
                     });
@@ -322,17 +249,17 @@ namespace ERPApi.Services.AVM
         /// <summary>
         /// ColumnsMode Service
         /// </summary>
-        public class ColumnsService : RoleService
+        public class ColumnsService : REUserRegistryService
         {
             /// <summary>
             /// 返回字段集
             /// </summary>
             /// <returns></returns>
-            public Role Default()
+            public REUserRegistry Default()
             {
                 try
                 {
-                    return new Role();
+                    return new REUserRegistry();
                 }
                 catch (Exception ex)
                 {
@@ -348,14 +275,15 @@ namespace ERPApi.Services.AVM
         /// <summary>
         /// 
         /// </summary>
-        public class RowService : RoleService
+        public class RowService : REUserRegistryService
         {
             /// <summary>
-            /// 根据 id 查询
+            /// 查询唯一值
             /// </summary>
-            /// <param name="id">Id</param>
+            /// <param name="registryId"></param>
+            /// <param name="userId"></param>
             /// <returns></returns>
-            public Role ById(int id)
+            public REUserRegistry Only(int registryId, int userId)
             {
                 using (VMISContext context = new VMISContext())
                 {
@@ -363,7 +291,7 @@ namespace ERPApi.Services.AVM
                     {
                         return SQLEntityToSingle(
                                 SQLQueryable(context)
-                                    .Where(row => row.Role.Id == id)
+                                    .Where(row => row.REUserRegistry.RegistryId == registryId && row.REUserRegistry.UserId == userId)
                                     .SingleOrDefault()
                             );
                     }
@@ -382,14 +310,14 @@ namespace ERPApi.Services.AVM
         /// <summary>
         /// 
         /// </summary>
-        public class RowsService : RoleService
+        public class RowsService : REUserRegistryService
         {
             /// <summary>
-            /// 模糊查询
+            /// 根据功能Id查询
             /// </summary>
-            /// <param name="keyWord">关键字</param>
+            /// <param name="registryId">功能Id</param>
             /// <returns></returns>
-            public List<Role> ByKeyWord(string keyWord)
+            public List<REUserRegistry> ByRegistryId(int registryId)
             {
                 using (VMISContext context = new VMISContext())
                 {
@@ -397,8 +325,7 @@ namespace ERPApi.Services.AVM
                     {
                         return SQLEntityToList(
                                 SQLQueryable(context)
-                                    .Where(row => row.Role.Name.Contains(keyWord))
-                                    .OrderBy(row => row.Role.Id)
+                                    .Where(row => row.REUserRegistry.RegistryId == registryId)
                                     .ToList()
                             );
                     }
@@ -411,43 +338,24 @@ namespace ERPApi.Services.AVM
             /// <summary>
             /// 根据用户Id查询
             /// </summary>
-            /// <param name="userId"></param>
+            /// <param name="userId">用户Id</param>
             /// <returns></returns>
-            public List<Role> ByUserId(int userId)
+            public List<REUserRegistry> ByUserId(int userId)
             {
-                try
+                using (VMISContext context = new VMISContext())
                 {
-                    List<Role> resultList = new List<Role>();
-                    new RERoleUserService.RowsService().ByRoleId(userId).ForEach(reRoleUser =>
+                    try
                     {
-                        resultList.Add(reRoleUser.Role);
-                    });
-                    return resultList;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-            /// <summary>
-            /// 根据功能Id查询
-            /// </summary>
-            /// <param name="registryId"></param>
-            /// <returns></returns>
-            public List<Role> ByRegistryId(int registryId)
-            {
-                try
-                {
-                    List<Role> resultList = new List<Role>();
-                    new RERoleRegistryService.RowsService().ByRegistryId(registryId).ForEach(reRoleRegistry =>
+                        return SQLEntityToList(
+                                SQLQueryable(context)
+                                    .Where(row => row.REUserRegistry.UserId == userId)
+                                    .ToList()
+                            );
+                    }
+                    catch (Exception ex)
                     {
-                        resultList.Add(reRoleRegistry.Role);
-                    });
-                    return resultList;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
+                        throw ex;
+                    }
                 }
             }
             /// <summary>
@@ -462,7 +370,7 @@ namespace ERPApi.Services.AVM
             /// <param name="sort">排序</param>
             /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Role> Page(string keyWord, int pageIndex, int pageSize, DateTime startDate, DateTime endDate, ModeBase.Status status, ModeBase.Sort sort, params string[] entityAttrs)
+            public List<REUserRegistry> Page(string keyWord, int pageIndex, int pageSize, DateTime startDate, DateTime endDate, ModeBase.Status status, ModeBase.Sort sort, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
@@ -493,7 +401,6 @@ namespace ERPApi.Services.AVM
                     }
                 }
             }
-
             /// <summary>
             /// 分页计数
             /// 1.  本方法用于配套分页查询。
@@ -599,18 +506,19 @@ namespace ERPApi.Services.AVM
         /// <summary>
         /// 
         /// </summary>
-        public class TreeService : RoleService
+        public class TreeService : REUserRegistryService
         {
             /// <summary>
-            /// 模糊查询
+            /// 查询唯一值
             /// </summary>
-            /// <param name="keyWord">关键字</param>
+            /// <param name="registryId">功能Id</param>
+            /// <param name="userId">用户Id</param>
             /// <returns></returns>
-            public List<Role> ByKeyWord(string keyWord)
+            public REUserRegistry Only(int registryId, int userId)
             {
                 try
                 {
-                    return new RowsService().ByKeyWord(keyWord);
+                    return new RowService().Only(registryId, userId);
                 }
                 catch (Exception ex)
                 {
@@ -626,13 +534,13 @@ namespace ERPApi.Services.AVM
         /// <summary>
         /// Create预备方法
         /// </summary>
-        /// <param name="role"></param>
+        /// <param name="reUserRegistry"></param>
         /// <returns></returns>
-        private Role ReadyToCreate(Role role)
+        private REUserRegistry ReadyToCreate(REUserRegistry reUserRegistry)
         {
             try
             {
-                return role;
+                return reUserRegistry;
             }
             catch (Exception ex)
             {
@@ -642,13 +550,13 @@ namespace ERPApi.Services.AVM
         /// <summary>
         /// Update预备方法
         /// </summary>
-        /// <param name="role"></param>
+        /// <param name="reUserRegistry"></param>
         /// <returns></returns>
-        private Role ReadyToUpdate(Role role)
+        private REUserRegistry ReadyToUpdate(REUserRegistry reUserRegistry)
         {
             try
             {
-                return role;
+                return reUserRegistry;
             }
             catch (Exception ex)
             {
@@ -663,28 +571,41 @@ namespace ERPApi.Services.AVM
         /// <returns></returns>
         private IQueryable<SQLEntity> SQLQueryable(VMISContext context, params string[] entityAttrs)
         {
-            var left = context.AVM_Role.Select(Main => new
+            var left = context.AVM_RE_UserRegistry.Select(Main => new
             {
-                Role = Main,
-                Status = context.WFM_Status.FirstOrDefault(row => row.Id != row.Id)
+                REUserRegistry = Main,
+                Registry = context.AVM_Registry.FirstOrDefault(row => row.Id != row.Id),
+                User = context.AVM_User.FirstOrDefault(row => row.Id != row.Id)
             });
 
             foreach (string entityAttr in entityAttrs)
             {
-                // SQLEntity.Status
-                if (entityAttr.Equals("Status"))
+                // SQLEntity.Registry
+                if (entityAttr.ToLower().Equals("registry"))
                     left = left
-                        // main: Role | left : Status
-                        .LeftOuterJoin(context.WFM_Status, Main => Main.Role.StatusId, Left => Left.Id, (Main, Left) => new
+                        // main: REUserRegistry | left : Registry
+                        .LeftOuterJoin(context.AVM_Registry, Main => Main.REUserRegistry.RegistryId, Left => Left.Id, (Main, Left) => new
                         {
-                            Main.Role,
-                            Status = Left
+                            Main.REUserRegistry,
+                            Registry = Left,
+                            Main.User
+                        });
+                // SQLEntity.User
+                if (entityAttr.ToLower().Equals("user"))
+                    left = left
+                        // main: REUserRegistry | left : User
+                        .LeftOuterJoin(context.AVM_User, Main => Main.REUserRegistry.UserId, Left => Left.Id, (Main, Left) => new
+                        {
+                            Main.REUserRegistry,
+                            Main.Registry,
+                            User = Left
                         });
             }
             var group = left.Select(Main => new SQLEntity
             {
-                Role = Main.Role,
-                Status = Main.Status
+                REUserRegistry = Main.REUserRegistry,
+                Registry = Main.Registry,
+                User = Main.User
             });
 
             foreach (string entityAttr in entityAttrs)
@@ -716,22 +637,15 @@ namespace ERPApi.Services.AVM
                     for (var i = 0; i < ands.Length; i++)
                     {
                         var andKeyWord = ands[i];
-                        queryable = queryable.Where(row =>
-                                row.Role.Name.Contains(andKeyWord)
-                            );
                     }
                 }
                 else if (ors.Length > 1)
                 {
-                    queryable = queryable.Where(row =>
-                            ors.Contains(row.Role.Name)
-                        );
+
                 }
                 else
                 {
-                    queryable = queryable.Where(row =>
-                            row.Role.Name.Contains(keyWord)
-                        );
+
                 }
                 // 返回
                 return queryable;
@@ -761,10 +675,15 @@ namespace ERPApi.Services.AVM
                     // 遍历
                     for (var i = 0; i < splits.Length; i++)
                     {
-                        if (splits[i].ToLower().Contains("statusid"))
+                        if (splits[i].ToLower().Contains("registryid"))
                         {
-                            int statusId = int.Parse(splits[i].Substring(splits[i].IndexOf("=") + 1, splits[i].Length - splits[i].IndexOf("=") - 1));
-                            queryable = queryable.Where(row => row.Role.StatusId == statusId);
+                            int registryId = int.Parse(splits[i].Substring(splits[i].IndexOf("=") + 1, splits[i].Length - splits[i].IndexOf("=") - 1));
+                            queryable = queryable.Where(row => row.REUserRegistry.RegistryId == registryId);
+                        }
+                        if (splits[i].ToLower().Contains("userid"))
+                        {
+                            int userId = int.Parse(splits[i].Substring(splits[i].IndexOf("=") + 1, splits[i].Length - splits[i].IndexOf("=") - 1));
+                            queryable = queryable.Where(row => row.REUserRegistry.UserId == userId);
                         }
                     }
                 }
@@ -787,15 +706,6 @@ namespace ERPApi.Services.AVM
         {
             try
             {
-                startDate = startDate == null ? DateTime.MinValue : startDate;
-                endDate = endDate == null ? DateTime.MaxValue : endDate.TimeOfDay.TotalSeconds == 0 ? endDate.Date.AddDays(1).AddSeconds(-1) : endDate;
-                if (entityAttrs.Contains("CreateDateTime"))
-                {
-                    return queryable
-                        .Where(row =>
-                            row.Role.CreateDateTime >= startDate && row.Role.CreateDateTime <= endDate
-                        );
-                }
                 return queryable;
             }
             catch (Exception ex)
@@ -832,15 +742,15 @@ namespace ERPApi.Services.AVM
         {
             try
             {
-                if (sort.Name.ToLower().Equals("id"))
+                if (sort.Name.ToLower().Equals("registryid"))
                 {
                     if (sort.Mode.ToLower().Equals("asc"))
                     {
-                        return queryable.OrderBy(row => row.Role.Id);
+                        return queryable.OrderBy(row => row.REUserRegistry.RegistryId);
                     }
                     else
                     {
-                        return queryable.OrderByDescending(row => row.Role.Id);
+                        return queryable.OrderByDescending(row => row.REUserRegistry.RegistryId);
                     }
                 }
                 return queryable;
@@ -876,7 +786,7 @@ namespace ERPApi.Services.AVM
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        private Role SQLEntityToSingle(SQLEntity entity)
+        private REUserRegistry SQLEntityToSingle(SQLEntity entity)
         {
             //判断搜索结果是否为空
             if (entity == null)
@@ -884,11 +794,13 @@ namespace ERPApi.Services.AVM
             else
             {
                 // 主表
-                Role role = entity.Role;
-                // 状态
-                role.Status = entity.Status ?? null;
+                REUserRegistry reUserRegistry = entity.REUserRegistry;
+                // 功能
+                reUserRegistry.Registry = entity.Registry ?? null;
+                // 用户
+                reUserRegistry.User = entity.User ?? null;
                 // 返回
-                return role;
+                return reUserRegistry;
             }
         }
         /// <summary>
@@ -896,19 +808,19 @@ namespace ERPApi.Services.AVM
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
-        private List<Role> SQLEntityToList(List<SQLEntity> list)
+        private List<REUserRegistry> SQLEntityToList(List<SQLEntity> list)
         {
-            // 为 Role 赋值
-            List<Role> roleList = new List<Role>();
+            // 为 REUserRegistry 赋值
+            List<REUserRegistry> reUserRegistryList = new List<REUserRegistry>();
             list.ForEach(
                 row =>
                 {
-                    roleList.Add(
+                    reUserRegistryList.Add(
                             SQLEntityToSingle(row)
                         );
                 }
             );
-            return roleList;
+            return reUserRegistryList;
         }
 
         #endregion
@@ -919,8 +831,9 @@ namespace ERPApi.Services.AVM
         /// </summary>
         private class SQLEntity
         {
-            public Role Role { get; set; }
-            public Status Status { get; set; }
+            public REUserRegistry REUserRegistry { get; set; }
+            public Registry Registry { get; set; }
+            public User User { get; set; }
         }
         /// <summary>
         /// 

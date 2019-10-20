@@ -432,6 +432,48 @@ namespace ERPApi.Services.AVM
                 }
             }
             /// <summary>
+            /// 根据角色Id查询
+            /// </summary>
+            /// <param name="roleId"></param>
+            /// <returns></returns>
+            public List<Registry> ByRoleId(int roleId)
+            {
+                try
+                {
+                    List<Registry> resultList = new List<Registry>();
+                    new RERoleRegistryService.RowsService().ByRoleId(roleId).ForEach(reRoleRegistry =>
+                    {
+                        resultList.Add(reRoleRegistry.Registry);
+                    });
+                    return resultList;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            /// <summary>
+            /// 根据用户Id查询
+            /// </summary>
+            /// <param name="userId"></param>
+            /// <returns></returns>
+            public List<Registry> ByUserId(int userId)
+            {
+                try
+                {
+                    List<Registry> resultList = new List<Registry>();
+                    new REUserRegistryService.RowsService().ByUserId(userId).ForEach(reUserRegistry =>
+                    {
+                        resultList.Add(reUserRegistry.Registry);
+                    });
+                    return resultList;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            /// <summary>
             /// 根据父Id查询
             /// </summary>
             /// <param name="pid">父Id</param>

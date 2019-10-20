@@ -328,6 +328,18 @@ namespace ERPApi.Controllers.AVM
                                     service.ByPath(request.Function.Args[0])
                                 )
                             );
+                    case "byuserid":
+                        return base.ResponseOk(
+                                request.ToResponse(
+                                    service.ByUserId(ParseInt(request.Function.Args[0]))
+                                )
+                            );
+                    case "byroleid":
+                        return base.ResponseOk(
+                                request.ToResponse(
+                                    service.ByRoleId(ParseInt(request.Function.Args[0]))
+                                )
+                            );
                     default:
                         if (string.IsNullOrEmpty(request.Function.Name) || request.Function.Name.ToLower().Equals("bykeyword"))
                         {
