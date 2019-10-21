@@ -1,6 +1,7 @@
 ﻿using ERPApi.Entities.WFM;
 using ERPApi.HttpClients.HttpModes;
 using ERPApi.Services.WFM;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace ERPApi.Controllers.WFM
     /// 用户
     /// </summary>
     [ControllerGroup("WFM", "Status")]
+    [Authorize("wzkj")]
     public class StatusController : ControllerBase<Status, StatusService>
     {
 
@@ -34,6 +36,21 @@ namespace ERPApi.Controllers.WFM
                 if (request == null)
                 {
                     throw new Exception("Request无效！");
+                }
+                // Entity
+                if (request.Entity != null)
+                {
+                    request.Entity.CreateUserId = GetUserIdFromClaim();
+                    request.Entity.CreateDateTime = DateTime.Now;
+                }
+                // Entities
+                if (request.Entities != null)
+                {
+                    request.Entities.ForEach(entity =>
+                    {
+                        entity.CreateUserId = GetUserIdFromClaim();
+                        entity.CreateDateTime = DateTime.Now;
+                    });
                 }
                 // 指向具体执行的方法
                 switch (request.Function.Name.ToLower())
@@ -88,6 +105,21 @@ namespace ERPApi.Controllers.WFM
                 if (request == null)
                 {
                     throw new Exception("Request无效！");
+                }
+                // Entity
+                if (request.Entity != null)
+                {
+                    request.Entity.EditUserId = GetUserIdFromClaim();
+                    request.Entity.EditDateTime = DateTime.Now;
+                }
+                // Entities
+                if (request.Entities != null)
+                {
+                    request.Entities.ForEach(entity =>
+                    {
+                        entity.EditUserId = GetUserIdFromClaim();
+                        entity.EditDateTime = DateTime.Now;
+                    });
                 }
                 // 指向具体执行的方法
                 switch (request.Function.Name.ToLower())

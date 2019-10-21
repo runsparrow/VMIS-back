@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Ocelot.DependencyInjection;
+using Ocelot.JwtAuthorize;
 using Ocelot.Middleware;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Collections.Generic;
@@ -32,6 +33,10 @@ namespace GatewayApi
             //{
             //    options.SwaggerDoc("Gateway Api", new Info { Title = "网关服务", Version = "v1" });
             //});
+            // 注册JWT
+            //services.AddTokenJwtAuthorize();
+            // 注册JWT
+            services.AddOcelotJwtAuthorize();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

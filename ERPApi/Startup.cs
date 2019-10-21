@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Ocelot.JwtAuthorize;
 using Swashbuckle.AspNetCore.Swagger;
-using System;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace ERPApi
@@ -36,6 +35,13 @@ namespace ERPApi
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("ERPApi", new Info { Title = "ERP Api", Version = "v1" });
+            });
+            // 注册JWT
+            services.AddTokenJwtAuthorize();
+
+            services.AddApiJwtAuthorize((context) =>
+            {
+                return true;
             });
         }
 

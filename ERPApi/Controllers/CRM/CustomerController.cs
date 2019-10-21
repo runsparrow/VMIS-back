@@ -1,6 +1,7 @@
 ﻿using ERPApi.Entities.CRM;
 using ERPApi.HttpClients.HttpModes;
 using ERPApi.Services.CRM;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace ERPApi.Controllers.CRM
     /// 客户
     /// </summary>
     [ControllerGroup("CRM", "Customer")]
+    [Authorize("wzkj")]
     public class CustomerController : ControllerBase<Customer, CustomerService>
     {
         #region RPC
@@ -33,6 +35,21 @@ namespace ERPApi.Controllers.CRM
                 if (request == null)
                 {
                     throw new Exception("Request无效！");
+                }
+                // Entity
+                if (request.Entity != null)
+                {
+                    request.Entity.CreateUserId = GetUserIdFromClaim();
+                    request.Entity.CreateDateTime = DateTime.Now;
+                }
+                // Entities
+                if (request.Entities != null)
+                {
+                    request.Entities.ForEach(entity =>
+                    {
+                        entity.CreateUserId = GetUserIdFromClaim();
+                        entity.CreateDateTime = DateTime.Now;
+                    });
                 }
                 // 指向具体执行的方法
                 switch (request.Function.Name.ToLower())
@@ -99,6 +116,21 @@ namespace ERPApi.Controllers.CRM
                 if (request == null)
                 {
                     throw new Exception("Request无效！");
+                }
+                // Entity
+                if (request.Entity != null)
+                {
+                    request.Entity.EditUserId = GetUserIdFromClaim();
+                    request.Entity.EditDateTime = DateTime.Now;
+                }
+                // Entities
+                if (request.Entities != null)
+                {
+                    request.Entities.ForEach(entity =>
+                    {
+                        entity.EditUserId = GetUserIdFromClaim();
+                        entity.EditDateTime = DateTime.Now;
+                    });
                 }
                 // 指向具体执行的方法
                 switch (request.Function.Name.ToLower())

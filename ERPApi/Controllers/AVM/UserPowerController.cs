@@ -1,6 +1,7 @@
 ﻿using ERPApi.Entities.AVM;
 using ERPApi.HttpClients.HttpModes;
 using ERPApi.Services.AVM;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace ERPApi.Controllers.AVM
     /// 用户权限
     /// </summary>
     [ControllerGroup("AVM", "UserPower")]
+    [Authorize("wzkj")]
     public class UserPowerController : ControllerBase<UserPower, UserPowerService>
     {
         #region RPC

@@ -1,9 +1,12 @@
 ﻿using ERPApi.Entities.AVM;
 using ERPApi.HttpClients.HttpModes;
 using ERPApi.Services.AVM;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using static ERPApi.Controllers.AVM.UserController.HttpEntity;
 
 namespace ERPApi.Controllers.AVM
@@ -12,16 +15,9 @@ namespace ERPApi.Controllers.AVM
     /// 用户
     /// </summary>
     [ControllerGroup("AVM", "User")]
+    [Authorize("wzkj")]
     public class UserController : ControllerBase<User, UserService>
     {
-        [Route("ERP/Test", Name = "ERP_Test")]
-        [HttpGet]
-        [ApiExplorerSettings(IgnoreApi = true)]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            return new string[] { "value1 from ERP Api", "value2 from ERP Api" };
-        }
-
         #region RPC
 
         #region CreateMode
@@ -41,6 +37,21 @@ namespace ERPApi.Controllers.AVM
                 if (request == null)
                 {
                     throw new Exception("Request无效！");
+                }
+                // Entity
+                if (request.Entity != null)
+                {
+                    request.Entity.CreateUserId = GetUserIdFromClaim();
+                    request.Entity.CreateDateTime = DateTime.Now;
+                }
+                // Entities
+                if (request.Entities != null)
+                {
+                    request.Entities.ForEach(entity =>
+                    {
+                        entity.CreateUserId = GetUserIdFromClaim();
+                        entity.CreateDateTime = DateTime.Now;
+                    });
                 }
                 // 指向具体执行的方法
                 switch (request.Function.Name.ToLower())
@@ -107,6 +118,21 @@ namespace ERPApi.Controllers.AVM
                 if (request == null)
                 {
                     throw new Exception("Request无效！");
+                }
+                // Entity
+                if (request.Entity != null)
+                {
+                    request.Entity.EditUserId = GetUserIdFromClaim();
+                    request.Entity.EditDateTime = DateTime.Now;
+                }
+                // Entities
+                if (request.Entities != null)
+                {
+                    request.Entities.ForEach(entity =>
+                    {
+                        entity.EditUserId = GetUserIdFromClaim();
+                        entity.EditDateTime = DateTime.Now;
+                    });
                 }
                 // 指向具体执行的方法
                 switch (request.Function.Name.ToLower())

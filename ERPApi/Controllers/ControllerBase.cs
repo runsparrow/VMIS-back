@@ -116,6 +116,7 @@ namespace ERPApi.Controllers
             MethodInfo m = requestClass.GetType().GetMethod("ToResponse");
             return m.Invoke(requestClass, new object[] { request });
         }
+
         #endregion
         
         #region RPC 方式
@@ -347,6 +348,7 @@ namespace ERPApi.Controllers
             Array.ConstrainedCopy(args, startIndex, paramsArgs, 0, args.Length - startIndex);
             return paramsArgs;
         }
+
         #endregion
 
         #region Application
@@ -390,6 +392,17 @@ namespace ERPApi.Controllers
         //        return ((Dictionary<string, DictionaryMap>)HttpContext.Current.Application["DictionaryApplication"]);
         //    }
         //}
+        #endregion
+
+        #region Auth
+        /// <summary>
+        /// 从Claim获取UserId
+        /// </summary>
+        /// <returns></returns>
+        public int GetUserIdFromClaim()
+        {
+            return ParseInt(HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid").Value);
+        }
         #endregion
 
         #endregion
