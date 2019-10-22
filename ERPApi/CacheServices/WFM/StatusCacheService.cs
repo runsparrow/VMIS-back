@@ -1,5 +1,6 @@
 ﻿using ERPApi.Dal.EFHelper;
 using ERPApi.Entities.WFM;
+using ERPApi.HttpClients.HttpModes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,17 +33,17 @@ namespace ERPApi.CacheServices.WFM
             /// <summary>
             /// 默认的基础方法
             /// </summary>
-            /// <param name="statuss"></param>
+            /// <param name="statusList"></param>
             /// <returns></returns>
-            public override List<Status> Create(List<Status> statuss)
+            public override List<Status> Create(List<Status> statusList)
             {
-                statuss.ForEach(
+                statusList.ForEach(
                         status =>
                         {
                             Status.Instance.Insert(status);
                         }
                     );
-                return statuss;
+                return statusList;
             }
         }
 
@@ -66,17 +67,17 @@ namespace ERPApi.CacheServices.WFM
             /// <summary>
             /// 默认的基础方法
             /// </summary>
-            /// <param name="statuss"></param>
+            /// <param name="statusList"></param>
             /// <returns></returns>
-            public override List<Status> Update(List<Status> statuss)
+            public override List<Status> Update(List<Status> statusList)
             {
-                statuss.ForEach(
+                statusList.ForEach(
                         status =>
                         {
                             Status.Instance.Update(status);
                         }
                     );
-                return statuss;
+                return statusList;
             }
         }
         #endregion
@@ -99,17 +100,17 @@ namespace ERPApi.CacheServices.WFM
             /// <summary>
             /// 默认的基础方法
             /// </summary>
-            /// <param name="statuss"></param>
+            /// <param name="statusList"></param>
             /// <returns></returns>
-            public override List<Status> Delete(List<Status> statuss)
+            public override List<Status> Delete(List<Status> statusList)
             {
-                statuss.ForEach(
+                statusList.ForEach(
                         status =>
                         {
                             Status.Instance.Delete(status);
                         }
                     );
-                return statuss;
+                return statusList;
             }
         }
         #endregion
@@ -172,82 +173,94 @@ namespace ERPApi.CacheServices.WFM
             /// <returns></returns>
             public Status ById(int id, params string[] entityAttrs)
             {
-                using (VMISContext context = new VMISContext())
+                try
                 {
-                    try
-                    {
-                        return SQLEntityToSingle(
-                                SQLToList()
-                                    .Where(row => row.Id == id)
-                                    .SingleOrDefault()
-                            );
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
+                    return SQLEntityToSingle(
+                            SQLToList()
+                                .Where(row => row.Id == id)
+                                .SingleOrDefault()
+                        );
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            /// <summary>
+            /// 根据 key 查询
+            /// </summary>
+            /// <param name="key">key</param>
+            /// <param name="entityAttrs">可变参数</param>
+            /// <returns></returns>
+            public Status ByKey(string key, params string[] entityAttrs)
+            {
+                try
+                {
+                    return SQLEntityToSingle(
+                            SQLToList()
+                                .Where(row => row.Key == key)
+                                .SingleOrDefault()
+                        );
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
                 }
             }
             /// <summary>
             /// 首记录
             /// </summary>
             /// <param name="keyWord"></param>
-            /// <param name="statusValues"></param>
+            /// <param name="status"></param>
             /// <param name="entityAttrs"></param>
             /// <returns></returns>
-            public Status First(string keyWord, int[] statusValues, params string[] entityAttrs)
+            public Status First(string keyWord, ModeBase.Status status, params string[] entityAttrs)
             {
-                using (VMISContext context = new VMISContext())
+                try
                 {
-                    try
-                    {
-                        // 定义
-                        var list = SQLToList();
-                        // keyWord查询
-                        list = KeyWordToList(list, keyWord);
-                        // keyWordExt查询
-                        list = KeyWordExtToList(list, keyWord);
-                        // statusValues查询
-                        list = StatusToList(list, statusValues);
-                        // 返回结果
-                        return SQLEntityToSingle(
-                                list.FirstOrDefault()
-                            );
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
+                    // 定义
+                    var list = SQLToList();
+                    // keyWord查询
+                    list = KeyWordToList(list, keyWord);
+                    // keyWordExt查询
+                    list = KeyWordExtToList(list, keyWord);
+                    // status查询
+                    list = StatusToList(list, status);
+                    // 返回结果
+                    return SQLEntityToSingle(
+                            list.FirstOrDefault()
+                        );
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
                 }
             }
             /// <summary>
             /// 末记录
             /// </summary>
             /// <param name="keyWord"></param>
-            /// <param name="statusValues"></param>
+            /// <param name="status"></param>
             /// <param name="entityAttrs"></param>
             /// <returns></returns>
-            public Status Last(string keyWord, int[] statusValues, params string[] entityAttrs)
+            public Status Last(string keyWord, ModeBase.Status status, params string[] entityAttrs)
             {
-                using (VMISContext context = new VMISContext())
+                try
                 {
-                    try
-                    {
-                        // 定义
-                        var list = SQLToList();
-                        // keyWord查询
-                        list = KeyWordToList(list, keyWord);
-                        // keyWordExt查询
-                        list = KeyWordExtToList(list, keyWord);
-                        // statusValues查询
-                        list = StatusToList(list, statusValues);
-                        // 返回结果
-                        return list.LastOrDefault();
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
+                    // 定义
+                    var list = SQLToList();
+                    // keyWord查询
+                    list = KeyWordToList(list, keyWord);
+                    // keyWordExt查询
+                    list = KeyWordExtToList(list, keyWord);
+                    // status查询
+                    list = StatusToList(list, status);
+                    // 返回结果
+                    return list.LastOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
                 }
             }
             /// <summary>
@@ -255,30 +268,27 @@ namespace ERPApi.CacheServices.WFM
             /// </summary>
             /// <param name="id"></param>
             /// <param name="keyWord"></param>
-            /// <param name="statusValues"></param>
+            /// <param name="status"></param>
             /// <param name="entityAttrs"></param>
             /// <returns></returns>
-            public Status Next(int id, string keyWord, int[] statusValues, params string[] entityAttrs)
+            public Status Next(int id, string keyWord, ModeBase.Status status, params string[] entityAttrs)
             {
-                using (VMISContext context = new VMISContext())
+                try
                 {
-                    try
-                    {
-                        // 定义
-                        var list = SQLToList();
-                        // keyWord查询
-                        list = KeyWordToList(list, keyWord);
-                        // keyWordExt查询
-                        list = KeyWordExtToList(list, keyWord + "^Id>" + id);
-                        // statusValues查询
-                        list = StatusToList(list, statusValues);
-                        // 返回结果
-                        return list.FirstOrDefault();
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
+                    // 定义
+                    var list = SQLToList();
+                    // keyWord查询
+                    list = KeyWordToList(list, keyWord);
+                    // keyWordExt查询
+                    list = KeyWordExtToList(list, keyWord + "^Id>" + id);
+                    // status查询
+                    list = StatusToList(list, status);
+                    // 返回结果
+                    return list.FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
                 }
             }
             /// <summary>
@@ -286,30 +296,27 @@ namespace ERPApi.CacheServices.WFM
             /// </summary>
             /// <param name="id"></param>
             /// <param name="keyWord"></param>
-            /// <param name="statusValues"></param>
+            /// <param name="status"></param>
             /// <param name="entityAttrs"></param>
             /// <returns></returns>
-            public Status Prev(int id, string keyWord, int[] statusValues, params string[] entityAttrs)
+            public Status Prev(int id, string keyWord, ModeBase.Status status, params string[] entityAttrs)
             {
-                using (VMISContext context = new VMISContext())
+                try
                 {
-                    try
-                    {
-                        // 定义
-                        var list = SQLToList();
-                        // keyWord查询
-                        list = KeyWordToList(list, keyWord);
-                        // keyWordExt查询
-                        list = KeyWordExtToList(list, keyWord + "^Id<" + id);
-                        // statusValues查询
-                        list = StatusToList(list, statusValues);
-                        // 返回结果
-                        return list.FirstOrDefault();
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
+                    // 定义
+                    var list = SQLToList();
+                    // keyWord查询
+                    list = KeyWordToList(list, keyWord);
+                    // keyWordExt查询
+                    list = KeyWordExtToList(list, keyWord + "^Id<" + id);
+                    // status查询
+                    list = StatusToList(list, status);
+                    // 返回结果
+                    return list.FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
                 }
             }
         }
@@ -325,7 +332,6 @@ namespace ERPApi.CacheServices.WFM
         {
             /// <summary>
             /// 返回全表数据
-            /// I.  只在数据量可控是使用。
             /// </summary>
             /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
@@ -344,7 +350,6 @@ namespace ERPApi.CacheServices.WFM
             }
             /// <summary>
             /// 模糊查询
-            /// 1.  使用关键字进行模糊查询。
             /// </summary>
             /// <param name="keyWord">关键字</param>
             /// <param name="entityAttrs">可变参数</param>
@@ -367,62 +372,19 @@ namespace ERPApi.CacheServices.WFM
                     throw ex;
                 }
             }
-
-            /// <summary>
-            /// 根据用户Id查询 返回角色集合
-            /// </summary>
-            /// <param name="roleId">用户Id</param>
-            /// <returns></returns>
-            public List<Status> ByRoleId(int roleId)
-            {
-                try
-                {
-                    List<Status> resultMaps = new List<Status>();
-                    //List<RERoleStatus> reRoleStatuss = new RERoleStatusCacheService.RowsService().ByRoleId(roleId);
-                    //reRoleStatuss.ForEach(
-                    //    reRoleStatus =>
-                    //    {
-                    //        resultMaps.Add(reRoleStatus.ToMap().Status.ToMap());
-                    //    }
-                    //);
-                    return resultMaps;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-            /// <summary>
-            /// 根据 RoleId 查询数量
-            /// </summary>
-            /// <param name="roleId">状态Id</param>
-            /// <param name="entityAttrs">可变参数</param>
-            /// <returns></returns>
-            public int CountByRoleId(int roleId, params string[] entityAttrs)
-            {
-                try
-                {
-                    //return new RERoleStatusCacheService.RowsService().CountByRoleId(roleId);
-                    return 0;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
             /// <summary>
             /// 分页查询
             /// </summary>
             /// <param name="keyWord">关键字</param>
             /// <param name="pageIndex">页码</param>
             /// <param name="pageSize">每页显示数</param>
-            /// <param name="statusValues">状态值</param>
             /// <param name="startDate">起始时间</param>
             /// <param name="endDate">结束时间</param>
+            /// <param name="status">状态</param>
             /// <param name="sort">排序</param>
             /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Status> Page(string keyWord, int pageIndex, int pageSize, int[] statusValues, DateTime startDate, DateTime endDate, string sort, params string[] entityAttrs)
+            public List<Status> Page(string keyWord, int pageIndex, int pageSize, DateTime startDate, DateTime endDate, ModeBase.Status status, ModeBase.Sort sort, params string[] entityAttrs)
             {
                 try
                 {
@@ -432,8 +394,8 @@ namespace ERPApi.CacheServices.WFM
                     list = KeyWordToList(list, keyWord);
                     // keyWordExt查询
                     list = KeyWordExtToList(list, keyWord);
-                    // statusValues查询
-                    list = StatusToList(list, statusValues);
+                    // status查询
+                    list = StatusToList(list, status);
                     // 时间范围查询
                     list = DateToList(list, startDate, endDate);
                     // 排序
@@ -450,15 +412,15 @@ namespace ERPApi.CacheServices.WFM
             }
             /// <summary>
             /// 分页计数
-            /// I.  本方法用于配套分页查询。
             /// </summary>
             /// <param name="keyWord">关键字</param>
+            /// <param name="startDate">起始时间</param>
+            /// <param name="endDate">结束时间</param>
+            /// <param name="status">状态</param>
+            /// <param name="sort">排序</param>
             /// <param name="entityAttrs">可变参数</param>
-            /// <param name="statusValues">可变参数</param>
-            /// <param name="startDate">状态值</param>
-            /// <param name="endDate">起始时间</param>
             /// <returns></returns>
-            public int PageCount(string keyWord, int[] statusValues, DateTime startDate, DateTime endDate, params string[] entityAttrs)
+            public int PageCount(string keyWord, DateTime startDate, DateTime endDate, ModeBase.Status status, ModeBase.Sort sort, params string[] entityAttrs)
             {
                 try
                 {
@@ -468,8 +430,8 @@ namespace ERPApi.CacheServices.WFM
                     list = KeyWordToList(list, keyWord);
                     // keyWordExt查询
                     list = KeyWordExtToList(list, keyWord);
-                    // statusValues查询
-                    list = StatusToList(list, statusValues);
+                    // status查询
+                    list = StatusToList(list, status);
                     // 时间范围查询
                     list = DateToList(list, startDate, endDate);
                     // 返回
@@ -488,10 +450,11 @@ namespace ERPApi.CacheServices.WFM
             /// <param name="pageSize"></param>
             /// <param name="startDate"></param>
             /// <param name="endDate"></param>
-            /// <param name="statusValues"></param>
+            /// <param name="status"></param>
+            /// <param name="sort"></param>
             /// <param name="entityAttrs"></param>
             /// <returns></returns>
-            public SummaryEntity PageSummary(string keyWord, int pageIndex, int pageSize, DateTime startDate, DateTime endDate, int[] statusValues, params string[] entityAttrs)
+            public SummaryEntity PageSummary(string keyWord, int pageIndex, int pageSize, DateTime startDate, DateTime endDate, ModeBase.Status status, ModeBase.Sort sort, params string[] entityAttrs)
             {
                 try
                 {
@@ -547,11 +510,11 @@ namespace ERPApi.CacheServices.WFM
             /// <returns></returns>
             public List<Status> ById(int id, params string[] entityAttrs)
             {
-                List<Status> statuss = new List<Status>();
-                statuss.Add(
+                List<Status> resultList = new List<Status>();
+                resultList.Add(
                         new RowService().ById(id, entityAttrs)
                     );
-                return statuss;
+                return resultList;
             }
             #endregion
 
@@ -590,61 +553,32 @@ namespace ERPApi.CacheServices.WFM
         /// 
         /// </summary>
         /// <param name="selector"></param>
-        /// <param name="keyWord"></param>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
-        /// <param name="statusValues"></param>
+        /// <param name="entityList"></param>
         /// <param name="entityAttrs"></param>
         /// <returns></returns>
-        private decimal Sum(Func<Status, decimal> selector, string keyWord, DateTime startDate, DateTime endDate, int[] statusValues, params string[] entityAttrs)
+        private decimal Sum(Func<Status, decimal> selector, List<Status> entityList, params string[] entityAttrs)
         {
             try
             {
-                // 定义
-                var list = SQLToList();
-                // keyWord查询
-                list = KeyWordToList(list, keyWord);
-                // keyWordExt查询
-                list = KeyWordExtToList(list, keyWord);
-                // statusValues查询
-                list = StatusToList(list, statusValues);
-                // 时间范围查询
-                list = DateToList(list, startDate, endDate);
-                // 返回
-                return list.Sum(selector);
+                return entityList.Sum(selector);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
         /// <param name="selector"></param>
-        /// <param name="keyWord"></param>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
-        /// <param name="statusValues"></param>
+        /// <param name="entityList"></param>
         /// <param name="entityAttrs"></param>
         /// <returns></returns>
-        private int Sum(Func<Status, int> selector, string keyWord, DateTime startDate, DateTime endDate, int[] statusValues, params string[] entityAttrs)
+        private int Sum(Func<Status, int> selector,  List<Status> entityList, params string[] entityAttrs)
         {
             try
             {
-                // 定义
-                var list = SQLToList();
-                // keyWord查询
-                list = KeyWordToList(list, keyWord);
-                // keyWordExt查询
-                list = KeyWordExtToList(list, keyWord);
-                // statusValues查询
-                list = StatusToList(list, statusValues);
-                // 时间范围查询
-                list = DateToList(list, startDate, endDate);
-                // 返回
-                return list.Sum(selector);
+                return entityList.Sum(selector);
             }
             catch (Exception ex)
             {
@@ -673,8 +607,9 @@ namespace ERPApi.CacheServices.WFM
         /// </summary>
         /// <param name="list"></param>
         /// <param name="keyWord"></param>
+        /// <param name="entityAttrs"></param>
         /// <returns></returns>
-        private List<Status> KeyWordToList(List<Status> list, string keyWord)
+        private List<Status> KeyWordToList(List<Status> list, string keyWord, params string[] entityAttrs)
         {
             try
             {
@@ -722,9 +657,10 @@ namespace ERPApi.CacheServices.WFM
         /// 
         /// </summary>
         /// <param name="list"></param>
-        /// <param name="keyWord"></param>
+        /// <param name="keyWord"></param
+        /// <param name="entityAttrs"></param>
         /// <returns></returns>
-        private List<Status> KeyWordExtToList(List<Status> list, string keyWord)
+        private List<Status> KeyWordExtToList(List<Status> list, string keyWord, params string[] entityAttrs)
         {
             try
             {
@@ -753,8 +689,9 @@ namespace ERPApi.CacheServices.WFM
         /// <param name="list"></param>
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
+        /// <param name="entityAttrs"></param>
         /// <returns></returns>
-        private List<Status> DateToList(List<Status> list, DateTime startDate, DateTime endDate)
+        private List<Status> DateToList(List<Status> list, DateTime startDate, DateTime endDate, params string[] entityAttrs)
         {
             try
             {
@@ -771,9 +708,10 @@ namespace ERPApi.CacheServices.WFM
         /// 
         /// </summary>
         /// <param name="list"></param>
-        /// <param name="statusValues"></param>
+        /// <param name="status"></param>
+        /// <param name="entityAttrs"></param>
         /// <returns></returns>
-        private List<Status> StatusToList(List<Status> list, int[] statusValues)
+        private List<Status> StatusToList(List<Status> list, ModeBase.Status status, params string[] entityAttrs)
         {
             try
             {
@@ -789,8 +727,9 @@ namespace ERPApi.CacheServices.WFM
         /// </summary>
         /// <param name="list"></param>
         /// <param name="sort"></param>
+        /// <param name="entityAttrs"></param>
         /// <returns></returns>
-        private List<Status> SortToList(List<Status> list, string sort)
+        private List<Status> SortToList(List<Status> list, ModeBase.Sort sort, params string[] entityAttrs)
         {
             try
             {
@@ -807,8 +746,9 @@ namespace ERPApi.CacheServices.WFM
         /// <param name="list"></param>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
+        /// <param name="entityAttrs"></param>
         /// <returns></returns>
-        private List<Status> PageToList(List<Status> list, int pageIndex, int pageSize)
+        private List<Status> PageToList(List<Status> list, int pageIndex, int pageSize, params string[] entityAttrs)
         {
             try
             {

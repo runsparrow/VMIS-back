@@ -460,9 +460,10 @@ namespace ERPApi.Services.CRM
             /// <param name="startDate">开始时间</param>
             /// <param name="endDate">结束时间</param>
             /// <param name="status">状态</param>
+            /// <param name="sort">排序</param>
             /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public int PageCount(string keyWord, DateTime startDate, DateTime endDate, ModeBase.Status status, params string[] entityAttrs)
+            public int PageCount(string keyWord, DateTime startDate, DateTime endDate, ModeBase.Status status, ModeBase.Sort sort, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
@@ -478,6 +479,8 @@ namespace ERPApi.Services.CRM
                         queryable = DateQueryable(queryable, startDate, endDate, entityAttrs);
                         // status查询
                         queryable = StatusQueryable(queryable, status, entityAttrs);
+                        // 排序
+                        queryable = SortQueryable(queryable, sort, entityAttrs);
                         // 返回
                         return queryable.Count();
                     }
@@ -490,15 +493,16 @@ namespace ERPApi.Services.CRM
             /// <summary>
             /// 汇总信息
             /// </summary>
-            /// <param name="keyWord"></param>
-            /// <param name="pageIndex"></param>
-            /// <param name="pageSize"></param>
-            /// <param name="startDate"></param>
-            /// <param name="endDate"></param>
-            /// <param name="status"></param>
-            /// <param name="entityAttrs"></param>
+            /// <param name="keyWord">关键字</param>
+            /// <param name="pageIndex">页码</param>
+            /// <param name="pageSize">单页数据量</param>
+            /// <param name="startDate">开始时间</param>
+            /// <param name="endDate">结束时间</param>
+            /// <param name="status">状态</param>
+            /// <param name="sort">排序</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public SummaryEntity PageSummary(string keyWord, int pageIndex, int pageSize, DateTime startDate, DateTime endDate, ModeBase.Status status, params string[] entityAttrs)
+            public SummaryEntity PageSummary(string keyWord, int pageIndex, int pageSize, DateTime startDate, DateTime endDate, ModeBase.Status status, ModeBase.Sort sort, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
@@ -514,6 +518,8 @@ namespace ERPApi.Services.CRM
                         queryable = DateQueryable(queryable, startDate, endDate, entityAttrs);
                         // status查询
                         queryable = StatusQueryable(queryable, status, entityAttrs);
+                        // 排序
+                        queryable = SortQueryable(queryable, sort, entityAttrs);
                         // 分页
                         queryable = PageQueryable(queryable, pageIndex, pageSize, entityAttrs);
                         // 返回

@@ -1,4 +1,5 @@
-﻿using ERPApi.Entities.WFM;
+﻿using ERPApi.CacheServices.WFM;
+using ERPApi.Entities.WFM;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -414,15 +415,14 @@ namespace ERPApi.Services
         /// 
         /// </summary>
         /// <param name="entity"></param>
-        /// <param name="statusCode"></param>
+        /// <param name="statusKey"></param>
         /// <returns></returns>
-        protected T ReadyToStatus(T entity, string statusCode)
+        protected T ReadyToStatus(T entity, string statusKey)
         {
             try
             {
                 // 从缓存中获取
-                //var status = new StatusCacheService.RowService().ByStatusCode(statusCode).ToBase();
-                var status = new Status();
+                var status = new StatusCacheService.RowService().ByKey(statusKey);
                 // 使用反射赋值
                 if (entity.GetType().GetProperty("StatusId") != null)
                 {

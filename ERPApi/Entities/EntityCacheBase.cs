@@ -36,7 +36,7 @@ namespace ERPApi.Entities
                 {
                     manager = CacheFactory.Build("getStartedCache", settings =>
                     {
-                        settings.WithSystemRuntimeCacheHandle("handleName"); //使用内存缓存
+                        settings.WithMicrosoftMemoryCacheHandle("handleName");
                     });
                 }
                 return entity;

@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using ERPApi.Entities.WFM;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Ocelot.JwtAuthorize;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Threading.Tasks;
@@ -29,6 +31,8 @@ namespace ERPApi
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            // 启动基础表的缓存
+            Status.Instance.CacheAll();
             // 注册AspNetMvc
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             // 注册Swagger生成器，定义一个和多个Swagger 文档

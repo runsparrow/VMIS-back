@@ -1,4 +1,5 @@
-﻿using ERPApi.Entities.WFM;
+﻿using ERPApi.CacheServices.WFM;
+using ERPApi.Entities.WFM;
 using ERPApi.HttpClients.HttpModes;
 using ERPApi.Services.WFM;
 using Microsoft.AspNetCore.Authorization;
@@ -428,8 +429,8 @@ namespace ERPApi.Controllers.WFM
                             return base.ResponseOk(
                                     request.ToResponse(
                                         service.Page(request.Function.Args[0], request.PageIndex, request.PageSize, request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1)),
-                                        service.PageCount(request.Function.Args[0], request.StartDate, request.EndDate, request.Status, ToParams(request.Function.Args, 1)),
-                                        service.PageSummary(request.Function.Args[0], request.PageIndex, request.PageSize, request.StartDate, request.EndDate, request.Status, ToParams(request.Function.Args, 1))
+                                        service.PageCount(request.Function.Args[0], request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1)),
+                                        service.PageSummary(request.Function.Args[0], request.PageIndex, request.PageSize, request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }

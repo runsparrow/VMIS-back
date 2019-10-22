@@ -1,4 +1,5 @@
-﻿using ERPApi.Entities.WFM;
+﻿using ERPApi.CacheServices.WFM;
+using ERPApi.Entities.WFM;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
@@ -125,13 +126,24 @@ namespace ERPApi.Entities.AVM
         //[NotMapped]
         //public List<> Roles { get; set; }
 
+        private Status _status;
         /// <summary>
         /// 状态
         /// </summary>
         [Description("状态")]
         [JsonProperty("status")]
         [NotMapped]
-        public Status Status { get; set; }
+        public Status Status
+        {
+            get
+            {
+                return new StatusCacheService.RowService().ById(StatusId);
+            }
+            set
+            {
+                _status = value;
+            }
+        }
         /// <summary>
         /// 新密码
         /// </summary>
