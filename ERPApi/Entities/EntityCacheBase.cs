@@ -21,7 +21,7 @@ namespace ERPApi.Entities
         private static string cacheName = null;
 
         /// <summary>
-        /// 单件实例
+        /// 单例实例
         /// </summary>
         public static T Instance
         {

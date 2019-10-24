@@ -1,49 +1,49 @@
 ﻿using ERPApi.Dal.EFHelper;
-using ERPApi.Entities.AVM;
+using ERPApi.Entities.ASM;
 using ERPApi.HttpClients.HttpModes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using static ERPApi.Services.AVM.UserService;
+using static ERPApi.Services.ASM.DictionaryService;
 
-namespace ERPApi.CacheServices.AVM
+namespace ERPApi.CacheServices.ASM
 {
     /// <summary>
     /// 
     /// </summary>
-    public class UserCacheService : CacheServiceBase<User, VMISContext>
+    public class DictionaryCacheService : CacheServiceBase<Dictionary, VMISContext>
     {
 
         #region RPC CreateMode
         /// <summary>
         /// CreateMode Service
         /// </summary>
-        public class CreateService : UserCacheService
+        public class CreateService : DictionaryCacheService
         {
             /// <summary>
             /// 默认的基础方法
             /// </summary>
             /// <param name="status"></param>
             /// <returns></returns>
-            public override User Create(User user)
+            public override Dictionary Create(Dictionary dictionary)
             {
-                return User.Instance.Insert(user);
+                return Dictionary.Instance.Insert(dictionary);
             }
             /// <summary>
             /// 默认的基础方法
             /// </summary>
-            /// <param name="userList"></param>
+            /// <param name="dictionaryList"></param>
             /// <returns></returns>
-            public override List<User> Create(List<User> userList)
+            public override List<Dictionary> Create(List<Dictionary> dictionaryList)
             {
-                userList.ForEach(
-                        user =>
+                dictionaryList.ForEach(
+                        dictionary =>
                         {
-                            User.Instance.Insert(user);
+                            Dictionary.Instance.Insert(dictionary);
                         }
                     );
-                return userList;
+                return dictionaryList;
             }
         }
 
@@ -53,31 +53,31 @@ namespace ERPApi.CacheServices.AVM
         /// <summary>
         /// UpdateMode Service
         /// </summary>
-        public class UpdateService : UserCacheService
+        public class UpdateService : DictionaryCacheService
         {
             /// <summary>
             /// 默认的基础方法
             /// </summary>
             /// <param name="status"></param>
             /// <returns></returns>
-            public override User Update(User user)
+            public override Dictionary Update(Dictionary dictionary)
             {
-                return User.Instance.Update(user);
+                return Dictionary.Instance.Update(dictionary);
             }
             /// <summary>
             /// 默认的基础方法
             /// </summary>
-            /// <param name="userList"></param>
+            /// <param name="dictionaryList"></param>
             /// <returns></returns>
-            public override List<User> Update(List<User> userList)
+            public override List<Dictionary> Update(List<Dictionary> dictionaryList)
             {
-                userList.ForEach(
-                        user =>
+                dictionaryList.ForEach(
+                        dictionary =>
                         {
-                            User.Instance.Update(user);
+                            Dictionary.Instance.Update(dictionary);
                         }
                     );
-                return userList;
+                return dictionaryList;
             }
         }
         #endregion
@@ -86,31 +86,31 @@ namespace ERPApi.CacheServices.AVM
         /// <summary>
         /// DeleteMode Service
         /// </summary>
-        public class DeleteService : UserCacheService
+        public class DeleteService : DictionaryCacheService
         {
             /// <summary>
             /// 默认的基础方法
             /// </summary>
             /// <param name="status"></param>
             /// <returns></returns>
-            public override User Delete(User user)
+            public override Dictionary Delete(Dictionary dictionary)
             {
-                return User.Instance.Delete(user);
+                return Dictionary.Instance.Delete(dictionary);
             }
             /// <summary>
             /// 默认的基础方法
             /// </summary>
-            /// <param name="userList"></param>
+            /// <param name="dictionaryList"></param>
             /// <returns></returns>
-            public override List<User> Delete(List<User> userList)
+            public override List<Dictionary> Delete(List<Dictionary> dictionaryList)
             {
-                userList.ForEach(
-                        user =>
+                dictionaryList.ForEach(
+                        dictionary =>
                         {
-                            User.Instance.Delete(user);
+                            Dictionary.Instance.Delete(dictionary);
                         }
                     );
-                return userList;
+                return dictionaryList;
             }
         }
         #endregion
@@ -119,18 +119,18 @@ namespace ERPApi.CacheServices.AVM
         /// <summary>
         /// ColumnsMode Service
         /// </summary>
-        public class ColumnsService : UserCacheService
+        public class ColumnsService : DictionaryCacheService
         {
             /// <summary>
             /// 返回字段集
             /// I.  只含本表字段
             /// </summary>
             /// <returns></returns>
-            public User Sample()
+            public Dictionary Sample()
             {
                 try
                 {
-                    return new User();
+                    return new Dictionary();
                 }
                 catch (Exception ex)
                 {
@@ -143,11 +143,11 @@ namespace ERPApi.CacheServices.AVM
             /// I.  含相关表字段
             /// </summary>
             /// <returns></returns>
-            public User Full()
+            public Dictionary Full()
             {
                 try
                 {
-                    return new User();
+                    return new Dictionary();
                 }
                 catch (Exception ex)
                 {
@@ -163,7 +163,7 @@ namespace ERPApi.CacheServices.AVM
         /// <summary>
         /// 
         /// </summary>
-        public class RowService : UserCacheService
+        public class RowService : DictionaryCacheService
         {
             /// <summary>
             /// 根据 id 查询
@@ -171,7 +171,7 @@ namespace ERPApi.CacheServices.AVM
             /// <param name="id">Id</param>
             /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public User ById(int id, params string[] entityAttrs)
+            public Dictionary ById(int id, params string[] entityAttrs)
             {
                 try
                 {
@@ -187,13 +187,34 @@ namespace ERPApi.CacheServices.AVM
                 }
             }
             /// <summary>
+            /// 根据 key 查询
+            /// </summary>
+            /// <param name="key">key</param>
+            /// <param name="entityAttrs">可变参数</param>
+            /// <returns></returns>
+            public Dictionary ByKey(string key, params string[] entityAttrs)
+            {
+                try
+                {
+                    return SQLEntityToSingle(
+                            SQLToList()
+                                .Where(row => row.Key == key)
+                                .SingleOrDefault()
+                        );
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            /// <summary>
             /// 首记录
             /// </summary>
             /// <param name="keyWord"></param>
             /// <param name="status"></param>
             /// <param name="entityAttrs"></param>
             /// <returns></returns>
-            public User First(string keyWord, ModeBase.Status status, params string[] entityAttrs)
+            public Dictionary First(string keyWord, ModeBase.Status status, params string[] entityAttrs)
             {
                 try
                 {
@@ -203,7 +224,7 @@ namespace ERPApi.CacheServices.AVM
                     list = KeyWordToList(list, keyWord);
                     // keyWordExt查询
                     list = KeyWordExtToList(list, keyWord);
-                    // user查询
+                    // status查询
                     list = StatusToList(list, status);
                     // 返回结果
                     return SQLEntityToSingle(
@@ -222,7 +243,7 @@ namespace ERPApi.CacheServices.AVM
             /// <param name="status"></param>
             /// <param name="entityAttrs"></param>
             /// <returns></returns>
-            public User Last(string keyWord, ModeBase.Status status, params string[] entityAttrs)
+            public Dictionary Last(string keyWord, ModeBase.Status status, params string[] entityAttrs)
             {
                 try
                 {
@@ -232,7 +253,7 @@ namespace ERPApi.CacheServices.AVM
                     list = KeyWordToList(list, keyWord);
                     // keyWordExt查询
                     list = KeyWordExtToList(list, keyWord);
-                    // user查询
+                    // status查询
                     list = StatusToList(list, status);
                     // 返回结果
                     return list.LastOrDefault();
@@ -250,7 +271,7 @@ namespace ERPApi.CacheServices.AVM
             /// <param name="status"></param>
             /// <param name="entityAttrs"></param>
             /// <returns></returns>
-            public User Next(int id, string keyWord, ModeBase.Status status, params string[] entityAttrs)
+            public Dictionary Next(int id, string keyWord, ModeBase.Status status, params string[] entityAttrs)
             {
                 try
                 {
@@ -260,7 +281,7 @@ namespace ERPApi.CacheServices.AVM
                     list = KeyWordToList(list, keyWord);
                     // keyWordExt查询
                     list = KeyWordExtToList(list, keyWord + "^Id>" + id);
-                    // user查询
+                    // status查询
                     list = StatusToList(list, status);
                     // 返回结果
                     return list.FirstOrDefault();
@@ -278,7 +299,7 @@ namespace ERPApi.CacheServices.AVM
             /// <param name="status"></param>
             /// <param name="entityAttrs"></param>
             /// <returns></returns>
-            public User Prev(int id, string keyWord, ModeBase.Status status, params string[] entityAttrs)
+            public Dictionary Prev(int id, string keyWord, ModeBase.Status status, params string[] entityAttrs)
             {
                 try
                 {
@@ -288,7 +309,7 @@ namespace ERPApi.CacheServices.AVM
                     list = KeyWordToList(list, keyWord);
                     // keyWordExt查询
                     list = KeyWordExtToList(list, keyWord + "^Id<" + id);
-                    // user查询
+                    // status查询
                     list = StatusToList(list, status);
                     // 返回结果
                     return list.FirstOrDefault();
@@ -307,14 +328,14 @@ namespace ERPApi.CacheServices.AVM
         /// <summary>
         /// 
         /// </summary>
-        public class RowsService : UserCacheService
+        public class RowsService : DictionaryCacheService
         {
             /// <summary>
             /// 返回全表数据
             /// </summary>
             /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<User> All(params string[] entityAttrs)
+            public List<Dictionary> All(params string[] entityAttrs)
             {
                 try
                 {
@@ -333,7 +354,7 @@ namespace ERPApi.CacheServices.AVM
             /// <param name="keyWord">关键字</param>
             /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<User> ByKeyWord(string keyWord, params string[] entityAttrs)
+            public List<Dictionary> ByKeyWord(string keyWord, params string[] entityAttrs)
             {
                 try
                 {
@@ -359,11 +380,11 @@ namespace ERPApi.CacheServices.AVM
             /// <param name="pageSize">每页显示数</param>
             /// <param name="startDate">起始时间</param>
             /// <param name="endDate">结束时间</param>
-            /// <param name="user">状态</param>
+            /// <param name="dictionary">状态</param>
             /// <param name="sort">排序</param>
             /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<User> Page(string keyWord, int pageIndex, int pageSize, DateTime startDate, DateTime endDate, ModeBase.Status status, ModeBase.Sort sort, params string[] entityAttrs)
+            public List<Dictionary> Page(string keyWord, int pageIndex, int pageSize, DateTime startDate, DateTime endDate, ModeBase.Status status, ModeBase.Sort sort, params string[] entityAttrs)
             {
                 try
                 {
@@ -373,7 +394,7 @@ namespace ERPApi.CacheServices.AVM
                     list = KeyWordToList(list, keyWord);
                     // keyWordExt查询
                     list = KeyWordExtToList(list, keyWord);
-                    // user查询
+                    // status查询
                     list = StatusToList(list, status);
                     // 时间范围查询
                     list = DateToList(list, startDate, endDate);
@@ -395,7 +416,7 @@ namespace ERPApi.CacheServices.AVM
             /// <param name="keyWord">关键字</param>
             /// <param name="startDate">起始时间</param>
             /// <param name="endDate">结束时间</param>
-            /// <param name="user">状态</param>
+            /// <param name="dictionary">状态</param>
             /// <param name="sort">排序</param>
             /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
@@ -409,7 +430,7 @@ namespace ERPApi.CacheServices.AVM
                     list = KeyWordToList(list, keyWord);
                     // keyWordExt查询
                     list = KeyWordExtToList(list, keyWord);
-                    // user查询
+                    // status查询
                     list = StatusToList(list, status);
                     // 时间范围查询
                     list = DateToList(list, startDate, endDate);
@@ -477,7 +498,7 @@ namespace ERPApi.CacheServices.AVM
         /// <summary>
         /// 
         /// </summary>
-        public class TreeService : UserCacheService
+        public class TreeService : DictionaryCacheService
         {
             #region 调用RowService的方法
             /// <summary>
@@ -487,9 +508,9 @@ namespace ERPApi.CacheServices.AVM
             /// <param name="id">id</param>
             /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<User> ById(int id, params string[] entityAttrs)
+            public List<Dictionary> ById(int id, params string[] entityAttrs)
             {
-                List<User> resultList = new List<User>();
+                List<Dictionary> resultList = new List<Dictionary>();
                 resultList.Add(
                         new RowService().ById(id, entityAttrs)
                     );
@@ -504,7 +525,7 @@ namespace ERPApi.CacheServices.AVM
             /// <param name="keyWord"></param>
             /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<User> ByKeyWord(string keyWord, params string[] entityAttrs)
+            public List<Dictionary> ByKeyWord(string keyWord, params string[] entityAttrs)
             {
                 return new RowsService().ByKeyWord(keyWord, entityAttrs);
             }
@@ -517,7 +538,7 @@ namespace ERPApi.CacheServices.AVM
         /// <summary>
         /// 
         /// </summary>
-        public List<User> CacheAll()
+        public List<Dictionary> CacheAll()
         {
             try
             {
@@ -535,7 +556,7 @@ namespace ERPApi.CacheServices.AVM
         /// <param name="entityList"></param>
         /// <param name="entityAttrs"></param>
         /// <returns></returns>
-        private decimal Sum(Func<User, decimal> selector, List<User> entityList, params string[] entityAttrs)
+        private decimal Sum(Func<Dictionary, decimal> selector, List<Dictionary> entityList, params string[] entityAttrs)
         {
             try
             {
@@ -553,7 +574,7 @@ namespace ERPApi.CacheServices.AVM
         /// <param name="entityList"></param>
         /// <param name="entityAttrs"></param>
         /// <returns></returns>
-        private int Sum(Func<User, int> selector, List<User> entityList, params string[] entityAttrs)
+        private int Sum(Func<Dictionary, int> selector, List<Dictionary> entityList, params string[] entityAttrs)
         {
             try
             {
@@ -569,16 +590,16 @@ namespace ERPApi.CacheServices.AVM
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        private User SQLEntityToSingle(User entity)
+        private Dictionary SQLEntityToSingle(Dictionary entity)
         {
             if (entity == null)
                 return null;
             else
             {
                 // 主表
-                User user = entity;
+                Dictionary dictionary = entity;
                 // 返回
-                return user;
+                return dictionary;
             }
         }
         /// <summary>
@@ -588,7 +609,7 @@ namespace ERPApi.CacheServices.AVM
         /// <param name="keyWord"></param>
         /// <param name="entityAttrs"></param>
         /// <returns></returns>
-        private List<User> KeyWordToList(List<User> list, string keyWord, params string[] entityAttrs)
+        private List<Dictionary> KeyWordToList(List<Dictionary> list, string keyWord, params string[] entityAttrs)
         {
             try
             {
@@ -605,20 +626,23 @@ namespace ERPApi.CacheServices.AVM
                     {
                         var andKeyWord = ands[i];
                         list = list.Where(row =>
-                                row.Name.Contains(andKeyWord)
+                                row.Name.Contains(andKeyWord) ||
+                                row.Key.Contains(andKeyWord)
                             ).ToList();
                     }
                 }
                 else if (ors.Length > 1)
                 {
                     list = list.Where(row =>
-                            ors.Contains(row.Name)
+                            ors.Contains(row.Name) ||
+                            ors.Contains(row.Key)
                         ).ToList();
                 }
                 else
                 {
                     list = list.Where(row =>
-                            row.Name.Contains(keyWord)
+                            row.Name.Contains(keyWord) ||
+                            row.Key.Contains(keyWord)
                         ).ToList();
                 }
                 // 返回
@@ -636,7 +660,7 @@ namespace ERPApi.CacheServices.AVM
         /// <param name="keyWord"></param
         /// <param name="entityAttrs"></param>
         /// <returns></returns>
-        private List<User> KeyWordExtToList(List<User> list, string keyWord, params string[] entityAttrs)
+        private List<Dictionary> KeyWordExtToList(List<Dictionary> list, string keyWord, params string[] entityAttrs)
         {
             try
             {
@@ -667,7 +691,7 @@ namespace ERPApi.CacheServices.AVM
         /// <param name="endDate"></param>
         /// <param name="entityAttrs"></param>
         /// <returns></returns>
-        private List<User> DateToList(List<User> list, DateTime startDate, DateTime endDate, params string[] entityAttrs)
+        private List<Dictionary> DateToList(List<Dictionary> list, DateTime startDate, DateTime endDate, params string[] entityAttrs)
         {
             try
             {
@@ -687,7 +711,7 @@ namespace ERPApi.CacheServices.AVM
         /// <param name="status"></param>
         /// <param name="entityAttrs"></param>
         /// <returns></returns>
-        private List<User> StatusToList(List<User> list, ModeBase.Status status, params string[] entityAttrs)
+        private List<Dictionary> StatusToList(List<Dictionary> list, ModeBase.Status status, params string[] entityAttrs)
         {
             try
             {
@@ -705,7 +729,7 @@ namespace ERPApi.CacheServices.AVM
         /// <param name="sort"></param>
         /// <param name="entityAttrs"></param>
         /// <returns></returns>
-        private List<User> SortToList(List<User> list, ModeBase.Sort sort, params string[] entityAttrs)
+        private List<Dictionary> SortToList(List<Dictionary> list, ModeBase.Sort sort, params string[] entityAttrs)
         {
             try
             {
@@ -724,7 +748,7 @@ namespace ERPApi.CacheServices.AVM
         /// <param name="pageSize"></param>
         /// <param name="entityAttrs"></param>
         /// <returns></returns>
-        private List<User> PageToList(List<User> list, int pageIndex, int pageSize, params string[] entityAttrs)
+        private List<Dictionary> PageToList(List<Dictionary> list, int pageIndex, int pageSize, params string[] entityAttrs)
         {
             try
             {
@@ -742,11 +766,11 @@ namespace ERPApi.CacheServices.AVM
         /// 
         /// </summary>
         /// <returns></returns>
-        private List<User> SQLToList()
+        private List<Dictionary> SQLToList()
         {
             try
             {
-                return User.Instance.CacheAll();
+                return Dictionary.Instance.CacheAll();
             }
             catch (Exception ex)
             {

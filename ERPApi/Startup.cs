@@ -31,8 +31,6 @@ namespace ERPApi
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            // 启动基础表的缓存
-            Status.Instance.CacheAll();
             // 注册AspNetMvc
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             // 注册Swagger生成器，定义一个和多个Swagger 文档
@@ -74,6 +72,8 @@ namespace ERPApi
             defaultFilesOptions.DefaultFileNames.Add("index.html");
             app.UseDefaultFiles(defaultFilesOptions);
             app.UseStaticFiles();
+            // 启动基础表的缓存
+            new CacheStartup();
             // 启动重定向
             app.Run(context =>
             {

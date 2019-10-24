@@ -18,12 +18,6 @@ namespace GatewayApi
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            // 注入Ocelot验证
-            //var authenticationProviderKey = "OcelotKey";
-            //services.AddAuthentication().AddJwtBearer(authenticationProviderKey, x => {
-            //    x.Authority = "test";
-            //    x.Audience = "test";
-            //});
             // 注入Ocelot服务
             services.AddOcelot();
             // 注入MVC
@@ -34,12 +28,13 @@ namespace GatewayApi
             //    options.SwaggerDoc("Gateway Api", new Info { Title = "网关服务", Version = "v1" });
             //});
             // 注册JWT
-            //services.AddTokenJwtAuthorize();
-            // 注册JWT
             services.AddOcelotJwtAuthorize();
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
