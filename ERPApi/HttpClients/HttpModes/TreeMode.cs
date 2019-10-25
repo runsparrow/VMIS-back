@@ -31,6 +31,16 @@ namespace ERPApi.HttpClients.HttpModes
             [JsonProperty(PropertyName = "token")]
             public virtual string Token { get; set; } = "";
             /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty(PropertyName = "pageSize")]
+            public int PageSize { get; set; } = int.MaxValue;
+            /// <summary>
+            /// 
+            /// </summary>
+            [JsonProperty(PropertyName = "pageIndex")]
+            public int PageIndex { get; set; } = 1;
+            /// <summary>
             /// 状态
             /// </summary>
             [JsonProperty(PropertyName = "status")]

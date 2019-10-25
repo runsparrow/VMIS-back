@@ -33,9 +33,9 @@ namespace ERPApi.Controllers.AVM
         /// </summary>
         /// <param name="authEntity"></param>
         /// <returns></returns>
-        [Route("ERP/Auth/Login", Name = "ERP_Auth_Login")]
+        [Route("ERP/Auth/GetToken", Name = "ERP_Auth_Get_Token")]
         [HttpPost]
-        public IActionResult Login([FromForm]HttpEntity authEntity)
+        public IActionResult GetToken([FromForm]HttpEntity authEntity)
         {
             var user = new UserService.SingleService().Verify(authEntity.AccountName, authEntity.AccountPwd);
             if (user != null)
