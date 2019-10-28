@@ -14,7 +14,7 @@ namespace ERPApi.Controllers.ASM
     /// </summary>
     [ControllerGroup("ASM", "Dictionary")]
     [Authorize("wzkj")]
-    public class DictionaryController : ControllerBase<Dictionary, DictionaryService>
+    public class DictionaryController : BaseController<Dictionary, DictionaryService>
     {
         #region RPC
 

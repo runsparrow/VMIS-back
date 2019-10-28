@@ -14,7 +14,7 @@ namespace ERPApi.Entities.SRM
     [Table("SRM_Venue")]
     [JsonObject(MemberSerialization.OptOut)]
     [Serializable]
-    public class Venue : EntityCacheBase<Venue>
+    public class Venue : BaseCacheEntity<Venue>
     {
         #region Property
         /// <summary>

@@ -1,4 +1,4 @@
-﻿using ERPApi.Dal.EFHelper;
+﻿using ERPApi.Dal.EF;
 using ERPApi.Entities.ASM;
 using ERPApi.Entities.WFM;
 using ERPApi.HttpClients.HttpModes;
@@ -12,7 +12,7 @@ namespace ERPApi.Services.ASM
     /// <summary>
     /// 
     /// </summary>
-    public class DictionaryService : ServiceBase<Dictionary, VMISContext>
+    public class DictionaryService : BaseService<Dictionary, VMISContext>
     {
         #region RPC CreateMode
         /// <summary>

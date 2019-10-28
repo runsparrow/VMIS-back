@@ -9,7 +9,7 @@ namespace ERPApi.Services
     /// <summary>
     /// 
     /// </summary>
-    public static class ServiceExtension
+    public static class ExtensionService
     {
         /// <summary>
         ///  将Request传入的Entity与原始Entity进行比较并合并

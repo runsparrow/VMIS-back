@@ -1,4 +1,4 @@
-﻿using ERPApi.Dal.EFHelper;
+﻿using ERPApi.Dal.EF;
 using ERPApi.Entities.AVM;
 using ERPApi.HttpClients.HttpModes;
 using System;
@@ -12,7 +12,7 @@ namespace ERPApi.CacheServices.AVM
     /// <summary>
     /// 
     /// </summary>
-    public class RegistryCacheService : CacheServiceBase<Registry, VMISContext>
+    public class RegistryCacheService : CacheBaseService<Registry, VMISContext>
     {
 
         #region RPC CreateMode

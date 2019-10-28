@@ -14,7 +14,7 @@ namespace ERPApi.Entities.AVM
     [Table("AVM_Role")]
     [JsonObject(MemberSerialization.OptOut)]
     [Serializable]
-    public class Role : EntityCacheBase<Role>
+    public class Role : BaseCacheEntity<Role>
     {
         #region Property
         /// <summary>

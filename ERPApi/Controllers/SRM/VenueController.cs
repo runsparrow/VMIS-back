@@ -14,7 +14,7 @@ namespace ERPApi.Controllers.SRM
     /// </summary>
     [ControllerGroup("SRM", "Venue")]
     [Authorize("wzkj")]
-    public class VenueController : ControllerBase<Venue, VenueService>
+    public class VenueController : BaseController<Venue, VenueService>
     {
         #region RPC
 

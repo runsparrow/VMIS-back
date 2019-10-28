@@ -15,7 +15,7 @@ namespace ERPApi.Controllers.WFM
     /// </summary>
     [ControllerGroup("WFM", "Status")]
     [Authorize("wzkj")]
-    public class StatusController : ControllerBase<Status, StatusService>
+    public class StatusController : BaseController<Status, StatusService>
     {
 
         #region RPC

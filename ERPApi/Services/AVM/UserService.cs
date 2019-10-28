@@ -1,7 +1,8 @@
-﻿using ERPApi.Dal.EFHelper;
+﻿using ERPApi.Dal.EF;
 using ERPApi.Entities.AVM;
 using ERPApi.Entities.WFM;
 using ERPApi.HttpClients.HttpModes;
+using ERPApi.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace ERPApi.Services.AVM
     /// <summary>
     /// 
     /// </summary>
-    public class UserService : ServiceBase<User, VMISContext>
+    public class UserService : BaseService<User, VMISContext>
     {
 
         #region RPC CreateMode

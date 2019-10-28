@@ -14,7 +14,7 @@ namespace ERPApi.Controllers.AVM
     /// </summary>
     [ControllerGroup("AVM", "Registry")]
     [Authorize("wzkj")]
-    public class RegistryController : ControllerBase<Registry, RegistryService>
+    public class RegistryController : BaseController<Registry, RegistryService>
     {
         #region RPC
 

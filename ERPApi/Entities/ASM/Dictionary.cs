@@ -14,7 +14,7 @@ namespace ERPApi.Entities.ASM
     [Table("ASM_Dictionary")]
     [JsonObject(MemberSerialization.OptOut)]
     [Serializable]
-    public class Dictionary : EntityCacheBase<Dictionary>
+    public class Dictionary : BaseCacheEntity<Dictionary>
     {
         #region Property
         /// <summary>

@@ -14,7 +14,7 @@ namespace ERPApi.Controllers.ASM
     /// </summary>
     [ControllerGroup("ASM", "Region")]
     [Authorize("wzkj")]
-    public class RegionController : ControllerBase<Region, RegionService>
+    public class RegionController : BaseController<Region, RegionService>
     {
         #region RPC
 

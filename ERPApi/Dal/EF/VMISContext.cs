@@ -1,7 +1,8 @@
 ﻿
+using ERPApi.Tools;
 using Microsoft.EntityFrameworkCore;
 
-namespace ERPApi.Dal.EFHelper
+namespace ERPApi.Dal.EF
 {
     /// <summary>
     /// 

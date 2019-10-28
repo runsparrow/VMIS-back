@@ -14,7 +14,7 @@ namespace ERPApi.Entities.CRM
     [Table("CRM_Customer")]
     [JsonObject(MemberSerialization.OptOut)]
     [Serializable]
-    public class Customer : EntityCacheBase<Customer>
+    public class Customer : BaseCacheEntity<Customer>
     {
         #region Property
         /// <summary>

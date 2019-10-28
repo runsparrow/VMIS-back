@@ -1,4 +1,4 @@
-﻿using ERPApi.Dal.EFHelper;
+﻿using ERPApi.Dal.EF;
 using ERPApi.Entities.AVM;
 using ERPApi.HttpClients.HttpModes;
 using System;
@@ -11,7 +11,7 @@ namespace ERPApi.Services.AVM
     /// <summary>
     /// 
     /// </summary>
-    public class RERoleUserService : ServiceBase<RERoleUser, VMISContext>
+    public class RERoleUserService : BaseService<RERoleUser, VMISContext>
     {
         #region RPC CreateMode
         /// <summary>

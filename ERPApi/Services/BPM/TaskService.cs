@@ -1,4 +1,4 @@
-﻿using ERPApi.Dal.EFHelper;
+﻿using ERPApi.Dal.EF;
 using ERPApi.Entities.BPM;
 using ERPApi.Entities.WFM;
 using ERPApi.HttpClients.HttpModes;
@@ -12,7 +12,7 @@ namespace ERPApi.Services.BPM
     /// <summary>
     /// 
     /// </summary>
-    public class TaskService : ServiceBase<Task, VMISContext>
+    public class TaskService : BaseService<Task, VMISContext>
     {
         #region RPC CreateMode
         /// <summary>

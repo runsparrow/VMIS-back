@@ -10,7 +10,7 @@ namespace ERPApi.Controllers
     /// <summary>
     /// 
     /// </summary>
-    public class ControllerExtension : Controller
+    public class ExtensionController : Controller
     {
 
     }

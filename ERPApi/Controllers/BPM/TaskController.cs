@@ -14,7 +14,7 @@ namespace ERPApi.Controllers.BPM
     /// </summary>
     [ControllerGroup("BPM", "Task")]
     [Authorize("wzkj")]
-    public class TaskController : ControllerBase<Task, TaskService>
+    public class TaskController : BaseController<Task, TaskService>
     {
         #region RPC
 

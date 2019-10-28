@@ -14,7 +14,7 @@ namespace ERPApi.Controllers.SRM
     /// </summary>
     [ControllerGroup("SRM", "Site")]
     [Authorize("wzkj")]
-    public class SiteController : ControllerBase<Site, SiteService>
+    public class SiteController : BaseController<Site, SiteService>
     {
         #region RPC
 

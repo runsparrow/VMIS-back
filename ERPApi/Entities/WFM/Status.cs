@@ -12,7 +12,7 @@ namespace ERPApi.Entities.WFM
     [Table("WFM_Status")]
     [JsonObject(MemberSerialization.OptOut)]
     [Serializable]
-    public class Status : EntityCacheBase<Status>
+    public class Status : BaseCacheEntity<Status>
     {
         #region Property
         /// <summary>

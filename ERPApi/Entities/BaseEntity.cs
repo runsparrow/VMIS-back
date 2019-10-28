@@ -6,7 +6,7 @@ namespace ERPApi.Entities
     /// 
     /// </summary>
     [Serializable]
-    public abstract class EntityBase
+    public abstract class BaseEntity
     {
 
     }

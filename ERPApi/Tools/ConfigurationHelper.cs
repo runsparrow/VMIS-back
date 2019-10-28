@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System.IO;
 
-namespace ERPApi
+namespace ERPApi.Tools
 {
     public class ConfigurationHelper
     {

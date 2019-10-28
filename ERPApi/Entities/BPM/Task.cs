@@ -14,7 +14,7 @@ namespace ERPApi.Entities.BPM
     [Table("BPM_Task")]
     [JsonObject(MemberSerialization.OptOut)]
     [Serializable]
-    public class Task : EntityCacheBase<Task>
+    public class Task : BaseCacheEntity<Task>
     {
         #region Property
         /// <summary>

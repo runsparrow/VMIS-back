@@ -14,7 +14,7 @@ namespace ERPApi.Controllers.AVM
     /// </summary>
     [ControllerGroup("AVM", "Role")]
     [Authorize("wzkj")]
-    public class RoleController : ControllerBase<Role, RoleService>
+    public class RoleController : BaseController<Role, RoleService>
     {
         #region RPC
 

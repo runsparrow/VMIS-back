@@ -14,7 +14,7 @@ namespace ERPApi.Entities.ASM
     [Table("ASM_Region")]
     [JsonObject(MemberSerialization.OptOut)]
     [Serializable]
-    public class Region : EntityCacheBase<Region>
+    public class Region : BaseCacheEntity<Region>
     {
         #region Property
         /// <summary>

@@ -1,4 +1,4 @@
-﻿using ERPApi.Dal.EFHelper;
+﻿using ERPApi.Dal.EF;
 using ERPApi.Entities.CRM;
 using ERPApi.HttpClients.HttpModes;
 using System;
@@ -12,7 +12,7 @@ namespace ERPApi.CacheServices.CRM
     /// <summary>
     /// 
     /// </summary>
-    public class CustomerCacheService : CacheServiceBase<Customer, VMISContext>
+    public class CustomerCacheService : CacheBaseService<Customer, VMISContext>
     {
 
         #region RPC CreateMode

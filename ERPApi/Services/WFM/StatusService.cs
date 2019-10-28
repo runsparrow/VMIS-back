@@ -1,4 +1,4 @@
-﻿using ERPApi.Dal.EFHelper;
+﻿using ERPApi.Dal.EF;
 using ERPApi.Entities.WFM;
 using ERPApi.HttpClients.HttpModes;
 using System;
@@ -11,7 +11,7 @@ namespace ERPApi.Services.WFM
     /// <summary>
     /// 
     /// </summary>
-    public class StatusService : ServiceBase<Status, VMISContext>
+    public class StatusService : BaseService<Status, VMISContext>
     {
         #region RPC CreateMode
         /// <summary>

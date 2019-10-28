@@ -13,7 +13,7 @@ namespace ERPApi.Controllers
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="TService"></typeparam>
-    public abstract class ControllerBase<T, TService> : Controller
+    public abstract class BaseController<T, TService> : Controller
         where T : class
         where TService : class, new()
     {

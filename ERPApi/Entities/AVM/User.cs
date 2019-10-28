@@ -14,7 +14,7 @@ namespace ERPApi.Entities.AVM
     [Table("AVM_User")]
     [JsonObject(MemberSerialization.OptOut)]
     [Serializable]
-    public class User : EntityCacheBase<User>
+    public class User : BaseCacheEntity<User>
     {
         #region Property
         /// <summary>

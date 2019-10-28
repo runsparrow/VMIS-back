@@ -13,7 +13,7 @@ namespace ERPApi.Entities.AVM
     [Table("AVM_RE_RoleRegistry")]
     [JsonObject(MemberSerialization.OptOut)]
     [Serializable]
-    public class RERoleRegistry : EntityCacheBase<RERoleRegistry>
+    public class RERoleRegistry : BaseCacheEntity<RERoleRegistry>
     {
         #region Property
         /// <summary>

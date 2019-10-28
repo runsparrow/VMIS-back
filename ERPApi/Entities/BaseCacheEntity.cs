@@ -11,7 +11,7 @@ namespace ERPApi.Entities
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [Serializable]
-    public class EntityCacheBase<T> : EntityBase
+    public class BaseCacheEntity<T> : BaseEntity
         where T : class, new()
     {
         private static T entity = null;

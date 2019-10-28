@@ -1,6 +1,4 @@
 ﻿using ERPApi.CacheServices.WFM;
-using ERPApi.Entities.WFM;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
@@ -16,7 +14,7 @@ namespace ERPApi.Services
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="TContext"></typeparam>
-    public abstract class ServiceBase<T, TContext>
+    public abstract class BaseService<T, TContext>
         where T : class
         where TContext : DbContext, new()
     {

@@ -13,7 +13,7 @@ namespace ERPApi.Entities.AVM
     [Table("AVM_UserPower")]
     [JsonObject(MemberSerialization.OptOut)]
     [Serializable]
-    public class UserPower : EntityCacheBase<UserPower>
+    public class UserPower : BaseCacheEntity<UserPower>
     {
         #region Property
         /// <summary>

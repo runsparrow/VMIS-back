@@ -13,7 +13,7 @@ namespace ERPApi.Entities.AVM
     [Table("AVM_RE_UserRegistry")]
     [JsonObject(MemberSerialization.OptOut)]
     [Serializable]
-    public class REUserRegistry : EntityCacheBase<REUserRegistry>
+    public class REUserRegistry : BaseCacheEntity<REUserRegistry>
     {
         #region Property
         /// <summary>

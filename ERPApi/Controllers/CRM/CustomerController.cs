@@ -14,7 +14,7 @@ namespace ERPApi.Controllers.CRM
     /// </summary>
     [ControllerGroup("CRM", "Customer")]
     [Authorize("wzkj")]
-    public class CustomerController : ControllerBase<Customer, CustomerService>
+    public class CustomerController : BaseController<Customer, CustomerService>
     {
         #region RPC
 
