@@ -18,10 +18,10 @@ namespace GatewayApi
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            // 注入Ocelot服务
-            services.AddOcelot();
             // 注入MVC
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            // 注入Ocelot服务
+            services.AddOcelot();
             //// 注入Swagger
             //services.AddSwaggerGen(options =>
             //{
@@ -41,8 +41,8 @@ namespace GatewayApi
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseOcelot().Wait();
             app.UseMvc();
+            app.UseOcelot().Wait();
         }
     }
 }

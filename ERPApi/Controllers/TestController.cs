@@ -1,25 +1,25 @@
-﻿
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace GatewayApi
+namespace ERPApi.Controllers
 {
     public class TestController: Controller
     {
-
         /// <summary>
-        /// 测试Ocelot连接
+        /// 测试ERPApi连接
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [Route("Ocelot/Test", Name = "Ocelot_Test")]
+        [Route("ERP/Test", Name = "ERP_Test")]
         [HttpGet]
         public IActionResult Test()
         {
             try
             {
-                return new OkObjectResult(new TestObject() { Title = "测试通过", Content = "Ocelot Test Success！" });
+                return new OkObjectResult(new TestObject() { Title="测试通过", Content="ERP Test Success！" });
             }
             catch (Exception ex)
             {
