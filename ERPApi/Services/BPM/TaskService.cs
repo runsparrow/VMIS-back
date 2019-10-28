@@ -12,7 +12,7 @@ namespace ERPApi.Services.BPM
     /// <summary>
     /// 
     /// </summary>
-    public class TaskService : BaseService<Task, VMISContext>
+    public class TaskService : BaseService.EF<Task, VMISContext>
     {
         #region RPC CreateMode
         /// <summary>

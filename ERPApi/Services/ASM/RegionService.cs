@@ -12,7 +12,7 @@ namespace ERPApi.Services.ASM
     /// <summary>
     /// 
     /// </summary>
-    public class RegionService : BaseService<Region, VMISContext>
+    public class RegionService : BaseService.EF<Region, VMISContext>
     {
         #region RPC CreateMode
         /// <summary>

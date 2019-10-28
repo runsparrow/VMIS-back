@@ -12,7 +12,7 @@ namespace ERPApi.CacheServices.WFM
     /// <summary>
     /// 
     /// </summary>
-    public class StatusCacheService : CacheBaseService<Status, VMISContext>
+    public class StatusCacheService : BaseCacheService.EF<Status, VMISContext>
     {
 
         #region RPC CreateMode

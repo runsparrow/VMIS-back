@@ -12,7 +12,7 @@ namespace ERPApi.CacheServices.AVM
     /// <summary>
     /// 
     /// </summary>
-    public class RegistryCacheService : CacheBaseService<Registry, VMISContext>
+    public class RegistryCacheService : BaseCacheService.EF<Registry, VMISContext>
     {
 
         #region RPC CreateMode

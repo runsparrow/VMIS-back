@@ -12,7 +12,7 @@ namespace ERPApi.CacheServices.SRM
     /// <summary>
     /// 
     /// </summary>
-    public class VenueCacheService : CacheBaseService<Venue, VMISContext>
+    public class VenueCacheService : BaseCacheService.EF<Venue, VMISContext>
     {
 
         #region RPC CreateMode

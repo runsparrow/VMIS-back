@@ -12,7 +12,7 @@ namespace ERPApi.CacheServices.CRM
     /// <summary>
     /// 
     /// </summary>
-    public class CustomerCacheService : CacheBaseService<Customer, VMISContext>
+    public class CustomerCacheService : BaseCacheService.EF<Customer, VMISContext>
     {
 
         #region RPC CreateMode

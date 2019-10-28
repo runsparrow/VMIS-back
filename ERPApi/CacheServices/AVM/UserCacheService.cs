@@ -12,7 +12,7 @@ namespace ERPApi.CacheServices.AVM
     /// <summary>
     /// 
     /// </summary>
-    public class UserCacheService : CacheBaseService<User, VMISContext>
+    public class UserCacheService : BaseCacheService.EF<User, VMISContext>
     {
 
         #region RPC CreateMode

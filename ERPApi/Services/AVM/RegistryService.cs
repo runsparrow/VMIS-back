@@ -12,7 +12,7 @@ namespace ERPApi.Services.AVM
     /// <summary>
     /// 
     /// </summary>
-    public class RegistryService : BaseService<Registry, VMISContext>
+    public class RegistryService : BaseService.EF<Registry, VMISContext>
     {
         #region RPC CreateMode
         /// <summary>

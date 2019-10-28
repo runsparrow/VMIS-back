@@ -13,7 +13,7 @@ namespace ERPApi.Services.AVM
     /// <summary>
     /// 
     /// </summary>
-    public class UserService : BaseService<User, VMISContext>
+    public class UserService : BaseService.EF<User, VMISContext>
     {
 
         #region RPC CreateMode

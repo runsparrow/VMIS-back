@@ -12,7 +12,7 @@ namespace ERPApi.Services.SRM
     /// <summary>
     /// 
     /// </summary>
-    public class VenueService : BaseService<Venue, VMISContext>
+    public class VenueService : BaseService.EF<Venue, VMISContext>
     {
         #region RPC CreateMode
         /// <summary>

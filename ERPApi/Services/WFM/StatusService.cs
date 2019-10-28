@@ -11,7 +11,7 @@ namespace ERPApi.Services.WFM
     /// <summary>
     /// 
     /// </summary>
-    public class StatusService : BaseService<Status, VMISContext>
+    public class StatusService : BaseService.EF<Status, VMISContext>
     {
         #region RPC CreateMode
         /// <summary>

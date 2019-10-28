@@ -11,7 +11,7 @@ namespace ERPApi.Services.AVM
     /// <summary>
     /// 
     /// </summary>
-    public class RERoleUserService : BaseService<RERoleUser, VMISContext>
+    public class RERoleUserService : BaseService.EF<RERoleUser, VMISContext>
     {
         #region RPC CreateMode
         /// <summary>

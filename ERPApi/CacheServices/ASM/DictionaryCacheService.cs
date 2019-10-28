@@ -12,7 +12,7 @@ namespace ERPApi.CacheServices.ASM
     /// <summary>
     /// 
     /// </summary>
-    public class DictionaryCacheService : CacheBaseService<Dictionary, VMISContext>
+    public class DictionaryCacheService : BaseCacheService.EF<Dictionary, VMISContext>
     {
 
         #region RPC CreateMode

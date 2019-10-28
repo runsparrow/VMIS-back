@@ -12,7 +12,7 @@ namespace ERPApi.Services.SRM
     /// <summary>
     /// 
     /// </summary>
-    public class SiteService : BaseService<Site, VMISContext>
+    public class SiteService : BaseService.EF<Site, VMISContext>
     {
         #region RPC CreateMode
         /// <summary>

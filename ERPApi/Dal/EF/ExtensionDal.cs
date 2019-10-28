@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace ERPApi.Dal.EF
 {
     /// <summary>
     /// 
     /// </summary>
-    public static class EFExtension
+    public static class ExtensionDal
     {
 
         #region Left Outer Join 扩展方法
@@ -219,6 +220,62 @@ namespace ERPApi.Dal.EF
             var invokedExpr = Expression.Invoke(expr2, expr1.Parameters.Cast<Expression>());
             return Expression.Lambda<Func<T, bool>>
                     (Expression.And(expr1.Body, invokedExpr), expr1.Parameters);
+        }
+        #endregion
+
+        #region Mergin
+
+        /// <summary>
+        ///  将Request传入的Entity与原始Entity进行比较并合并
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="dbEntity">原始Entity</param>
+        /// <param name="reqEntity">由Request传入的Entity</param>
+        /// <returns></returns>
+        public static TEntity MergeFrom<TEntity>(this TEntity dbEntity, TEntity reqEntity)
+        {
+            if (reqEntity.GetType() == dbEntity.GetType())
+            {
+                PropertyInfo[] properties = dbEntity.GetType().GetProperties();
+
+                foreach (var p in properties)
+                {
+                    var reqEntityValue = p.GetValue(reqEntity, null);
+                    if (reqEntityValue != null)
+                    {
+                        if (p.IsMapped())
+                        {
+                            if (reqEntityValue != GetDefault(p.GetType()))
+                            {
+                                p.SetValue(dbEntity, reqEntityValue, null);
+                            }
+                        }
+                    }
+                }
+            }
+            return dbEntity;
+        }
+        /// <summary>
+        /// 判断属性是否有效，即能否存入数据库
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public static bool IsMapped(this PropertyInfo p)
+        {
+            return p.CustomAttributes.Where(x => x.AttributeType.Name == "NotMappedAttribute").ToList().Count == 0;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        private static object GetDefault(Type type)
+        {
+            if (type.IsValueType)
+            {
+                return Activator.CreateInstance(type);
+            }
+            return null;
         }
         #endregion
     }

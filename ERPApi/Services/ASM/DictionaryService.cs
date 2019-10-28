@@ -12,7 +12,7 @@ namespace ERPApi.Services.ASM
     /// <summary>
     /// 
     /// </summary>
-    public class DictionaryService : BaseService<Dictionary, VMISContext>
+    public class DictionaryService : BaseService.EF<Dictionary, VMISContext>
     {
         #region RPC CreateMode
         /// <summary>

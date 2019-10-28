@@ -12,7 +12,7 @@ namespace ERPApi.Services.CRM
     /// <summary>
     /// 
     /// </summary>
-    public class CustomerService : BaseService<Customer, VMISContext>
+    public class CustomerService : BaseService.EF<Customer, VMISContext>
     {
         #region RPC CreateMode
         /// <summary>
