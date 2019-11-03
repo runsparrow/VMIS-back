@@ -409,6 +409,30 @@ namespace ERPApi.Services.SRM
                 }
             }
             /// <summary>
+            /// 根据场地Id查询
+            /// </summary>
+            /// <param name="siteId">场地Id</param>
+            /// <returns></returns>
+            public List<Venue> BySiteId(int siteId)
+            {
+                using (VMISContext context = new VMISContext())
+                {
+                    try
+                    {
+                        return SQLEntityToList(
+                                SQLQueryable(context)
+                                    .Where(row => row.Venue.SiteId == siteId)
+                                    .OrderBy(row => row.Venue.Id)
+                                    .ToList()
+                            );
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
+            }
+            /// <summary>
             ///  分页
             /// </summary>
             /// <param name="keyWord">关键字</param>
