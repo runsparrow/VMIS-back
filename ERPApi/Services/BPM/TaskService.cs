@@ -409,6 +409,78 @@ namespace ERPApi.Services.BPM
                 }
             }
             /// <summary>
+            /// 根据类型Id查询
+            /// </summary>
+            /// <param name="typeId">类型Id</param>
+            /// <returns></returns>
+            public List<Task> ByTypeId(int typeId)
+            {
+                using (VMISContext context = new VMISContext())
+                {
+                    try
+                    {
+                        return SQLEntityToList(
+                                SQLQueryable(context)
+                                    .Where(row => row.Task.TypeId == typeId)
+                                    .OrderBy(row => row.Task.Id)
+                                    .ToList()
+                            );
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
+            }
+            /// <summary>
+            /// 根据场地Id查询
+            /// </summary>
+            /// <param name="siteId">场地Id</param>
+            /// <returns></returns>
+            public List<Task> BySiteId(int siteId)
+            {
+                using (VMISContext context = new VMISContext())
+                {
+                    try
+                    {
+                        return SQLEntityToList(
+                                SQLQueryable(context)
+                                    .Where(row => row.Task.SiteId == siteId)
+                                    .OrderBy(row => row.Task.Id)
+                                    .ToList()
+                            );
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
+            }
+            /// <summary>
+            /// 根据场馆Id查询
+            /// </summary>
+            /// <param name="venueId">场馆Id</param>
+            /// <returns></returns>
+            public List<Task> ByVenueId(int venueId)
+            {
+                using (VMISContext context = new VMISContext())
+                {
+                    try
+                    {
+                        return SQLEntityToList(
+                                SQLQueryable(context)
+                                    .Where(row => row.Task.VenueId == venueId)
+                                    .OrderBy(row => row.Task.Id)
+                                    .ToList()
+                            );
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
+            }
+            /// <summary>
             ///  分页
             /// </summary>
             /// <param name="keyWord">关键字</param>
