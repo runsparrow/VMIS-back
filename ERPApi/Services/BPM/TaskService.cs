@@ -433,6 +433,54 @@ namespace ERPApi.Services.BPM
                 }
             }
             /// <summary>
+            /// 根据接待人Id查询
+            /// </summary>
+            /// <param name="receptionId">接待人Id</param>
+            /// <returns></returns>
+            public List<Task> ByReceptionId(int receptionId)
+            {
+                using (VMISContext context = new VMISContext())
+                {
+                    try
+                    {
+                        return SQLEntityToList(
+                                SQLQueryable(context)
+                                    .Where(row => row.Task.ReceptionId == receptionId)
+                                    .OrderBy(row => row.Task.Id)
+                                    .ToList()
+                            );
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
+            }
+            /// <summary>
+            /// 根据客户Id查询
+            /// </summary>
+            /// <param name="customerId">客户Id</param>
+            /// <returns></returns>
+            public List<Task> ByCustomerId(int customerId)
+            {
+                using (VMISContext context = new VMISContext())
+                {
+                    try
+                    {
+                        return SQLEntityToList(
+                                SQLQueryable(context)
+                                    .Where(row => row.Task.CustomerId == customerId)
+                                    .OrderBy(row => row.Task.Id)
+                                    .ToList()
+                            );
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
+            }
+            /// <summary>
             /// 根据场地Id查询
             /// </summary>
             /// <param name="siteId">场地Id</param>

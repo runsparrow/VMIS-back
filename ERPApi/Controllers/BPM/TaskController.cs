@@ -348,6 +348,18 @@ namespace ERPApi.Controllers.BPM
                                     service.ByTypeId(ParseInt(request.Function.Args[0]))
                                 )
                             );
+                    case "bycustomerid":
+                        return base.ResponseOk(
+                                request.ToResponse(
+                                    service.ByCustomerId(ParseInt(request.Function.Args[0]))
+                                )
+                            );
+                    case "byreceptionid":
+                        return base.ResponseOk(
+                                request.ToResponse(
+                                    service.ByReceptionId(ParseInt(request.Function.Args[0]))
+                                )
+                            );
                     case "bysiteid":
                         return base.ResponseOk(
                                 request.ToResponse(
