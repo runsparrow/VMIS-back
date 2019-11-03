@@ -48,7 +48,7 @@ namespace ERPApi.Controllers.AVM
                 };
                 var ip = HttpContext.Features.Get<IHttpConnectionFeature>()?.RemoteIpAddress?.ToString();
                 var token = _tokenBuilder.BuildJwtToken(claims, ip, DateTime.UtcNow, DateTime.Now.AddSeconds(1200));
-                return new JsonResult(new { Result = true, Data = token, User = user });
+                return new JsonResult(new { Result = true, Data = token, User = new { UserId=user.Id, UserName = user.Name, RealName = user.RealName} });
             }
             else
             {
