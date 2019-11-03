@@ -21,20 +21,20 @@ namespace ERPApi.Entities.AVM
         /// </summary>
         [Description("用户Id")]
         [JsonProperty("userId")]
-        public int UserId { get; set; } = 0;
+        public int UserId { get; set; } = -1;
         /// <summary>
         /// 功能Id
         /// </summary>
         [Description("功能键")]
         [JsonProperty("registryId")]
-        public int RegistryId { get; set; } = 0;
+        public int RegistryId { get; set; } = -1;
         /// <summary>
         /// 用户享有的权限Id
         /// </summary>
         [StringLength(int.MaxValue)]
         [Description("用户享有的权限Id")]
         [JsonProperty("powerIds")]
-        public string PowerIds { get; set; }
+        public string PowerIds { get; set; } = "";
         #endregion
 
         #region Not Mapped Property

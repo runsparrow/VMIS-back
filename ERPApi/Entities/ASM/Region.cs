@@ -29,42 +29,42 @@ namespace ERPApi.Entities.ASM
         /// </summary>
         [Description("父Id")]
         [JsonProperty("pid")]
-        public int Pid { get; set; }
+        public int Pid { get; set; } = -1;
         /// <summary>
         /// 区域名
         /// </summary>
         [StringLength(255)]
         [Description("区域名")]
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         /// <summary>
         /// 区域路径
         /// </summary>
         [StringLength(4000)]
         [Description("区域路径")]
         [JsonProperty("path")]
-        public string Path { get; set; }
+        public string Path { get; set; } = "";
         /// <summary>
         /// 区域键名
         /// </summary>
         [StringLength(255)]
         [Description("区域键名")]
         [JsonProperty("key")]
-        public string Key { get; set; }
+        public string Key { get; set; } = "";
         /// <summary>
         /// 区域键值
         /// </summary>
         [StringLength(255)]
         [Description("区域键值")]
         [JsonProperty("value")]
-        public string Value { get; set; }
+        public string Value { get; set; } = "";
         /// <summary>
         /// 描述
         /// </summary>
         [StringLength(4000)]
         [Description("描述")]
         [JsonProperty("desc")]
-        public string Desc { get; set; }
+        public string Desc { get; set; } = "";
         /// <summary>
         /// 创建时间
         /// </summary>
@@ -76,7 +76,7 @@ namespace ERPApi.Entities.ASM
         /// </summary>
         [Description("创建人Id")]
         [JsonProperty("createUserId")]
-        public int CreateUserId { get; set; } = 0;
+        public int CreateUserId { get; set; } = -1;
         /// <summary>
         /// 修改时间
         /// </summary>
@@ -88,13 +88,13 @@ namespace ERPApi.Entities.ASM
         /// </summary>
         [Description("修改人Id")]
         [JsonProperty("editUserId")]
-        public int EditUserId { get; set; } = 0;
+        public int EditUserId { get; set; } = -1;
         /// <summary>
         /// 状态Id
         /// </summary>
         [Description("状态Id")]
         [JsonProperty("statusId")]
-        public int StatusId { get; set; } = 0;
+        public int StatusId { get; set; } = -1;
         #endregion
 
         #region Not Mapped Property

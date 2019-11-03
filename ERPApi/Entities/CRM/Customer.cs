@@ -30,42 +30,42 @@ namespace ERPApi.Entities.CRM
         [StringLength(255)]
         [Description("客户名")]
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         /// <summary>
         /// 描述
         /// </summary>
         [StringLength(4000)]
         [Description("描述")]
         [JsonProperty("desc")]
-        public string Desc { get; set; }
+        public string Desc { get; set; } = "";
         /// <summary>
         /// 默认联系人姓名
         /// </summary>
         [StringLength(255)]
         [Description("默认联系人姓名")]
         [JsonProperty("defaultName")]
-        public string DefaultName { get; set; }
+        public string DefaultName { get; set; } = "";
         /// <summary>
         /// 默认联系人手机
         /// </summary>
         [StringLength(255)]
         [Description("默认联系人手机")]
         [JsonProperty("defaultMobile")]
-        public string DefaultMobile { get; set; }
+        public string DefaultMobile { get; set; } = "";
         /// <summary>
         /// 默认联系人邮箱
         /// </summary>
         [StringLength(255)]
         [Description("默认联系人邮箱")]
         [JsonProperty("defaultEmail")]
-        public string DefaultEmail { get; set; }
+        public string DefaultEmail { get; set; } = "";
         /// <summary>
         /// 默认联系人地址
         /// </summary>
         [StringLength(255)]
         [Description("默认联系人地址")]
         [JsonProperty("defaultAdress")]
-        public string DefaultAdress { get; set; }
+        public string DefaultAdress { get; set; } = "";
         /// <summary>
         /// 创建时间
         /// </summary>
@@ -77,7 +77,7 @@ namespace ERPApi.Entities.CRM
         /// </summary>
         [Description("创建人Id")]
         [JsonProperty("createUserId")]
-        public int CreateUserId { get; set; } = 0;
+        public int CreateUserId { get; set; }  = -1;
         /// <summary>
         /// 修改时间
         /// </summary>
@@ -89,13 +89,13 @@ namespace ERPApi.Entities.CRM
         /// </summary>
         [Description("修改人Id")]
         [JsonProperty("editUserId")]
-        public int EditUserId { get; set; } = 0;
+        public int EditUserId { get; set; }  = -1;
         /// <summary>
         /// 状态Id
         /// </summary>
         [Description("状态Id")]
         [JsonProperty("statusId")]
-        public int StatusId { get; set; } = 0;
+        public int StatusId { get; set; }  = -1;
         #endregion
 
         #region Not Mapped Property

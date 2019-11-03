@@ -30,14 +30,14 @@ namespace ERPApi.Entities.AVM
         [StringLength(255)]
         [Description("角色名")]
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         /// <summary>
         /// 描述
         /// </summary>
         [StringLength(4000)]
         [Description("描述")]
         [JsonProperty("desc")]
-        public string Desc { get; set; }
+        public string Desc { get; set; } = "";
         /// <summary>
         /// 是否作为模板
         /// </summary>
@@ -55,7 +55,7 @@ namespace ERPApi.Entities.AVM
         /// </summary>
         [Description("创建人Id")]
         [JsonProperty("createUserId")]
-        public int CreateUserId { get; set; } = 0;
+        public int CreateUserId { get; set; } = -1;
         /// <summary>
         /// 修改时间
         /// </summary>
@@ -67,13 +67,13 @@ namespace ERPApi.Entities.AVM
         /// </summary>
         [Description("修改人Id")]
         [JsonProperty("editUserId")]
-        public int EditUserId { get; set; } = 0;
+        public int EditUserId { get; set; } = -1;
         /// <summary>
         /// 状态Id
         /// </summary>
         [Description("状态Id")]
         [JsonProperty("statusId")]
-        public int StatusId { get; set; } = 0;
+        public int StatusId { get; set; } = -1;
         #endregion
 
         #region Not Mapped Property

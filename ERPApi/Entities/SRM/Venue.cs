@@ -29,93 +29,93 @@ namespace ERPApi.Entities.SRM
         /// </summary>
         [Description("场地Id")]
         [JsonProperty("siteId")]
-        public int SiteId { get; set; }
+        public int SiteId { get; set; } = -1;
         /// <summary>
         /// 展厅名
         /// </summary>
         [StringLength(255)]
         [Description("展厅名")]
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         /// <summary>
         /// 展厅代码
         /// </summary>
         [StringLength(255)]
         [Description("展厅代码")]
         [JsonProperty("code")]
-        public string Code { get; set; }
+        public string Code { get; set; } = "";
         /// <summary>
         /// 展厅别名
         /// </summary>
         [StringLength(255)]
         [Description("展厅别名")]
         [JsonProperty("alias")]
-        public string Alias { get; set; }
+        public string Alias { get; set; } = "";
         /// <summary>
         /// 描述
         /// </summary>
         [StringLength(4000)]
         [Description("描述")]
         [JsonProperty("desc")]
-        public string Desc { get; set; }
+        public string Desc { get; set; } = "";
         /// <summary>
         /// 房号
         /// </summary>
         [StringLength(255)]
         [Description("房号")]
         [JsonProperty("roomNo")]
-        public string RoomNo { get; set; }
+        public string RoomNo { get; set; } = "";
         /// <summary>
         /// 楼层
         /// </summary>
         [StringLength(255)]
         [Description("楼层")]
         [JsonProperty("floorNo")]
-        public string FloorNo { get; set; }
+        public string FloorNo { get; set; } = "";
         /// <summary>
         /// 层高
         /// </summary>
         [Description("层高")]
         [JsonProperty("height")]
-        public decimal Height { get; set; } = 0;
+        public decimal Height { get; set; } = -1;
         /// <summary>
         /// 面积
         /// </summary>
         [Description("面积")]
         [JsonProperty("area")]
-        public decimal Area { get; set; } = 0;
+        public decimal Area { get; set; } = -1;
         /// <summary>
         /// 容纳人数
         /// </summary>
         [Description("容纳人数")]
         [JsonProperty("holdQuantity")]
-        public int HoldQuantity { get; set; }
+        public int HoldQuantity { get; set; } = -1;
         /// <summary>
         /// 展台尺寸限制
         /// </summary>
         [Description("展台尺寸限制")]
         [JsonProperty("sizeLimit")]
-        public decimal SizeLimit { get; set; } = 0;
+        public decimal SizeLimit { get; set; } = -1;
         /// <summary>
         /// 展台高度限制
         /// </summary>
         [Description("展台高度限制")]
         [JsonProperty("heightLimit")]
-        public decimal HeightLimit { get; set; } = 0;
+        public decimal HeightLimit { get; set; } = -1;
         /// <summary>
         /// 开口
         /// </summary>
         [StringLength(255)]
         [Description("开口")]
         [JsonProperty("opening")]
-        public string Opening { get; set; }
+        public string Opening { get; set; } = "";
         /// <summary>
         /// 吊点
         /// </summary>
         [StringLength(255)]
         [Description("吊点")]
         [JsonProperty("suspension")]
-        public string Suspension { get; set; }
+        public string Suspension { get; set; } = "";
         /// <summary>
         /// 创建时间
         /// </summary>
@@ -127,7 +127,7 @@ namespace ERPApi.Entities.SRM
         /// </summary>
         [Description("创建人Id")]
         [JsonProperty("createUserId")]
-        public int CreateUserId { get; set; } = 0;
+        public int CreateUserId { get; set; } = -1;
         /// <summary>
         /// 修改时间
         /// </summary>
@@ -139,13 +139,13 @@ namespace ERPApi.Entities.SRM
         /// </summary>
         [Description("修改人Id")]
         [JsonProperty("editUserId")]
-        public int EditUserId { get; set; } = 0;
+        public int EditUserId { get; set; } = -1;
         /// <summary>
         /// 状态Id
         /// </summary>
         [Description("状态Id")]
         [JsonProperty("statusId")]
-        public int StatusId { get; set; } = 0;
+        public int StatusId { get; set; } = -1;
         #endregion
 
         #region Not Mapped Property

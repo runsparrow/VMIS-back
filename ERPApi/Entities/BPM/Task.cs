@@ -30,26 +30,26 @@ namespace ERPApi.Entities.BPM
         [StringLength(255)]
         [Description("任务名")]
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         /// <summary>
         /// 任务类型
         /// </summary>
         [Description("任务类型")]
         [JsonProperty("typeId")]
-        public int TypeId { get; set; } = 0;
+        public int TypeId { get; set; }  = -1;
         /// <summary>
         /// 描述
         /// </summary>
         [StringLength(4000)]
         [Description("描述")]
         [JsonProperty("desc")]
-        public string Desc { get; set; }
+        public string Desc { get; set; } = "";
         /// <summary>
         /// 接待人Id
         /// </summary>
         [Description("接待人Id")]
         [JsonProperty("receptionId")]
-        public int ReceptionId { get; set; } = 0;
+        public int ReceptionId { get; set; }  = -1;
         /// <summary>
         /// 接待时间
         /// </summary>
@@ -61,59 +61,59 @@ namespace ERPApi.Entities.BPM
         /// </summary>
         [Description("客户Id")]
         [JsonProperty("customerId")]
-        public int CustomerId { get; set; } = 0;
+        public int CustomerId { get; set; }  = -1;
         /// <summary>
         /// 对接人姓名
         /// </summary>
         [StringLength(255)]
         [Description("对接人姓名")]
         [JsonProperty("dockingName")]
-        public string DockingName { get; set; }
+        public string DockingName { get; set; } = "";
         /// <summary>
         /// 对接人手机
         /// </summary>
         [StringLength(255)]
         [Description("对接人手机")]
         [JsonProperty("dockingMobile")]
-        public string DockingMobile { get; set; }
+        public string DockingMobile { get; set; } = "";
         /// <summary>
         /// 对接人邮箱
         /// </summary>
         [StringLength(255)]
         [Description("对接人邮箱")]
         [JsonProperty("dockingEmail")]
-        public string DockingEmail { get; set; }
+        public string DockingEmail { get; set; } = "";
         /// <summary>
         /// 对接人地址
         /// </summary>
         [StringLength(255)]
         [Description("对接人地址")]
         [JsonProperty("dockingAddress")]
-        public string DockingAddress { get; set; }
+        public string DockingAddress { get; set; } = "";
         /// <summary>
         /// 场地Id
         /// </summary>
         [Description("场地Id")]
         [JsonProperty("siteId")]
-        public int SiteId { get; set; } = 0;
+        public int SiteId { get; set; }  = -1;
         /// <summary>
         /// 展厅Id
         /// </summary>
         [Description("展厅Id")]
         [JsonProperty("venueId")]
-        public int VenueId { get; set; } = 0;
+        public int VenueId { get; set; }  = -1;
         /// <summary>
         /// 访客人数
         /// </summary>
         [Description("访客人数")]
         [JsonProperty("visitorQuantity")]
-        public int VisitorQuantity { get; set; } = 0;
+        public int VisitorQuantity { get; set; }  = -1;
         /// <summary>
         /// 泊车数量
         /// </summary>
         [Description("泊车数量")]
         [JsonProperty("parkingQuantity")]
-        public int ParkingQuantity { get; set; }
+        public int ParkingQuantity { get; set; }  = -1;
         /// <summary>
         /// 是否搭建
         /// </summary>
@@ -138,7 +138,7 @@ namespace ERPApi.Entities.BPM
         [StringLength(4000)]
         [Description("任务要求")]
         [JsonProperty("demand")]
-        public string Demand { get; set; }
+        public string Demand { get; set; } = "";
         /// <summary>
         /// 入场时间
         /// </summary>
@@ -162,7 +162,7 @@ namespace ERPApi.Entities.BPM
         /// </summary>
         [Description("创建人Id")]
         [JsonProperty("createUserId")]
-        public int CreateUserId { get; set; } = 0;
+        public int CreateUserId { get; set; }  = -1;
         /// <summary>
         /// 修改时间
         /// </summary>
@@ -174,13 +174,13 @@ namespace ERPApi.Entities.BPM
         /// </summary>
         [Description("修改人Id")]
         [JsonProperty("editUserId")]
-        public int EditUserId { get; set; } = 0;
+        public int EditUserId { get; set; }  = -1;
         /// <summary>
         /// 状态Id
         /// </summary>
         [Description("状态Id")]
         [JsonProperty("statusId")]
-        public int StatusId { get; set; } = 0;
+        public int StatusId { get; set; }  = -1;
         #endregion
 
         #region Not Mapped Property

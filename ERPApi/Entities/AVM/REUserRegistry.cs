@@ -21,13 +21,13 @@ namespace ERPApi.Entities.AVM
         /// </summary>
         [Description("用户Id")]
         [JsonProperty("userId")]
-        public int UserId { get; set; } = 0;
+        public int UserId { get; set; } = -1;
         /// <summary>
         /// 功能Id
         /// </summary>
         [Description("功能Id")]
         [JsonProperty("registryId")]
-        public int RegistryId { get; set; } = 0;
+        public int RegistryId { get; set; } = -1;
         #endregion
 
         #region Not Mapped Property

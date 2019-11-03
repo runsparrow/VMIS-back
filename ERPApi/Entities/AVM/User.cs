@@ -30,49 +30,49 @@ namespace ERPApi.Entities.AVM
         [StringLength(255)]
         [Description("用户名")]
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         /// <summary>
         /// 实名
         /// </summary>
         [StringLength(255)]
         [Description("实名")]
         [JsonProperty("realName")]
-        public string RealName { get; set; }
+        public string RealName { get; set; } = "";
         /// <summary>
         /// 密码
         /// </summary>
         [StringLength(255)]
         [Description("密码")]
         [JsonProperty("password")]
-        public string Password { get; set; }
+        public string Password { get; set; } = "";
         /// <summary>
         /// 电子邮箱
         /// </summary>
         [StringLength(255)]
         [Description("电子邮箱")]
         [JsonProperty("email")]
-        public string Email { get; set; }
+        public string Email { get; set; } = "";
         /// <summary>
         /// 电子邮箱密码
         /// </summary>
         [StringLength(255)]
         [Description("电子邮箱密码")]
         [JsonProperty("emailPassword")]
-        public string EmailPassword { get; set; }
+        public string EmailPassword { get; set; } = "";
         /// <summary>
         /// 手机
         /// </summary>
         [StringLength(20)]
         [Description("手机")]
         [JsonProperty("mobile")]
-        public string Mobile { get; set; }
+        public string Mobile { get; set; } = "";
         /// <summary>
         /// 描述
         /// </summary>
         [StringLength(4000)]
         [Description("描述")]
         [JsonProperty("desc")]
-        public string Desc { get; set; }
+        public string Desc { get; set; } = "";
         /// <summary>
         /// 最后登录时间
         /// </summary>
@@ -84,7 +84,7 @@ namespace ERPApi.Entities.AVM
         /// </summary>
         [Description("最后登录IP")]
         [JsonProperty("loginIPAddress")]
-        public string LoginIPAddress { get; set; }
+        public string LoginIPAddress { get; set; } = "";
         /// <summary>
         /// 创建时间
         /// </summary>
@@ -96,7 +96,7 @@ namespace ERPApi.Entities.AVM
         /// </summary>
         [Description("创建用户Id")]
         [JsonProperty("createUserId")]
-        public int CreateUserId { get; set; } = 0;
+        public int CreateUserId { get; set; } = -1;
         /// <summary>
         /// 最后修改时间
         /// </summary>
@@ -108,13 +108,13 @@ namespace ERPApi.Entities.AVM
         /// </summary>
         [Description("最后修改用户Id")]
         [JsonProperty("editUserId")]
-        public int EditUserId { get; set; } = 0;
+        public int EditUserId { get; set; } = -1;
         /// <summary>
         /// 状态Id
         /// </summary>
         [Description("状态Id")]
         [JsonProperty("statusId")]
-        public int StatusId { get; set; } = 0;
+        public int StatusId { get; set; } = -1;
         #endregion
 
         #region Not Mapped Property
