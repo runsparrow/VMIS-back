@@ -242,6 +242,31 @@ namespace ERPApi.Services.AVM
                     throw ex;
                 }
             }
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="key">用户名</param>
+            /// <param name="password">密码</param>
+            /// <param name="weChatNo">微信号</param>
+            /// <param name="weChatOpenId">微信OpenId</param>
+            /// <returns></returns>
+            public User BindWeChat(string key, string password, string weChatNo, string weChatOpenId)
+            {
+                try
+                {
+                    var user = new RowService().Verify(key, password);
+                    if (user != null)
+                    {
+                        user.WeChatNo = weChatNo;
+                        user.WeChatOpenId = weChatOpenId;
+                    }
+                    return new UpdateService().Update(user);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
         }
         #endregion
 
@@ -366,6 +391,52 @@ namespace ERPApi.Services.AVM
                         return SQLEntityToSingle(
                                 SQLQueryable(context)
                                     .Where(row => row.User.Id == id)
+                                    .SingleOrDefault()
+                            );
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
+            }
+            /// <summary>
+            /// 根据微信号查询
+            /// </summary>
+            /// <param name="weChatNo">Id</param>
+            /// <returns></returns>
+            public User ByWeChatNo(string weChatNo)
+            {
+                using (VMISContext context = new VMISContext())
+                {
+                    try
+                    {
+                        return SQLEntityToSingle(
+                                SQLQueryable(context)
+                                    .Where(row => row.User.WeChatNo == weChatNo)
+                                    .SingleOrDefault()
+                            );
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
+            }
+            /// <summary>
+            /// 根据微信OpenId查询
+            /// </summary>
+            /// <param name="weChatOpenId">Id</param>
+            /// <returns></returns>
+            public User ByWeChatOpenId(string weChatOpenId)
+            {
+                using (VMISContext context = new VMISContext())
+                {
+                    try
+                    {
+                        return SQLEntityToSingle(
+                                SQLQueryable(context)
+                                    .Where(row => row.User.WeChatOpenId == weChatOpenId)
                                     .SingleOrDefault()
                             );
                     }

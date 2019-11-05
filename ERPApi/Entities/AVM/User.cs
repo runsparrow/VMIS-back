@@ -60,6 +60,20 @@ namespace ERPApi.Entities.AVM
         [JsonProperty("emailPassword")]
         public string EmailPassword { get; set; } = "";
         /// <summary>
+        /// 微信号
+        /// </summary>
+        [StringLength(255)]
+        [Description("微信号")]
+        [JsonProperty("weChatNo")]
+        public string WeChatNo { get; set; } = "";
+        /// <summary>
+        /// 微信OpenId
+        /// </summary>
+        [StringLength(255)]
+        [Description("微信OpenId")]
+        [JsonProperty("weChatOpenId")]
+        public string WeChatOpenId { get; set; } = "";
+        /// <summary>
         /// 手机
         /// </summary>
         [StringLength(20)]

@@ -2,11 +2,9 @@
 using ERPApi.HttpClients.HttpModes;
 using ERPApi.Services.AVM;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Security.Claims;
 using static ERPApi.Controllers.AVM.UserController.HttpEntity;
 
 namespace ERPApi.Controllers.AVM
@@ -147,6 +145,12 @@ namespace ERPApi.Controllers.AVM
                         return base.ResponseOk(
                                 request.ToResponse(
                                     service.ToClose(request.Entity)
+                                )
+                            );
+                    case "bindwechat":
+                        return base.ResponseOk(
+                                request.ToResponse(
+                                    service.BindWeChat(request.Function.Args[0], request.Function.Args[1], request.Function.Args[2], request.Function.Args[3])
                                 )
                             );
                     default:
@@ -301,6 +305,18 @@ namespace ERPApi.Controllers.AVM
                 // 指向具体执行的方法
                 switch (request.Function.Name.ToLower())
                 {
+                    case "bywechatno":
+                        return base.ResponseOk(
+                                request.ToResponse(
+                                    service.ByWeChatNo(request.Function.Args[0])
+                                )
+                            );
+                    case "bywechatopenid":
+                        return base.ResponseOk(
+                                request.ToResponse(
+                                    service.ByWeChatOpenId(request.Function.Args[0])
+                                )
+                            );
                     default:
                         if (string.IsNullOrEmpty(request.Function.Name) || request.Function.Name.ToLower().Equals("byid"))
                         {
