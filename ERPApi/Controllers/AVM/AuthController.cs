@@ -1,4 +1,5 @@
-﻿using ERPApi.Services.AVM;
+﻿using ERPApi.Entities.AVM;
+using ERPApi.Services.AVM;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -71,27 +72,28 @@ namespace ERPApi.Controllers.AVM
         [HttpPost]
         public IActionResult GetAuthEntity(string token)
         {
+            // 定义
+            User user = new User();
+            // 获取Claims
             IEnumerator<Claim> ienumerator = new JwtSecurityToken(token).Claims.GetEnumerator();
-            int userId = 0;
-            string userName = "";
-            string realName = "";
+            // 遍历
             while (ienumerator.MoveNext())
             {
                 var claim = ienumerator.Current;
                 if (claim.Type.ToLower().EndsWith("/sid"))
                 {
-                    userId = int.Parse(claim.Value);
+                    user.Id = int.Parse(claim.Value);
                 }
                 if (claim.Type.ToLower().EndsWith("/name"))
                 {
-                    userName = claim.Value;
+                    user.Name = claim.Value;
                 }
                 if (claim.Type.ToLower().EndsWith("/surname"))
                 {
-                    realName = claim.Value;
+                    user.RealName = claim.Value;
                 }
             }
-            return new JsonResult(new { Result = true, Data = token, User = new { UserId = userId, UserName = userName, RealName = realName } });
+            return new JsonResult(new { Result = true, Data = token, User = new { UserId = user.Id, UserName = user.Name, RealName = user.RealName } });
 
         }
         #endregion
