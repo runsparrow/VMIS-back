@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Ocelot.JwtAuthorize;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 namespace ERPApi.Controllers.AVM
@@ -43,11 +45,12 @@ namespace ERPApi.Controllers.AVM
                 var claims = new Claim[] {
                      new Claim(ClaimTypes.Sid, user.Id.ToString()),
                      new Claim(ClaimTypes.Name, user.Name),
+                     new Claim(ClaimTypes.Surname, user.RealName),
                      new Claim(ClaimTypes.Role, "admin"),
                      new Claim(ClaimTypes.NameIdentifier, "ERPApi.Entities.AVM.User")
                 };
                 var ip = HttpContext.Features.Get<IHttpConnectionFeature>()?.RemoteIpAddress?.ToString();
-                var token = _tokenBuilder.BuildJwtToken(claims, ip, DateTime.UtcNow, DateTime.Now.AddSeconds(1200));
+                var token = _tokenBuilder.BuildJwtToken(claims, ip, DateTime.UtcNow, DateTime.Now.AddSeconds(1200)); 
                 return new JsonResult(new { Result = true, Data = token, User = new { UserId=user.Id, UserName = user.Name, RealName = user.RealName} });
             }
             else
@@ -58,6 +61,38 @@ namespace ERPApi.Controllers.AVM
                     Message = "Authentication Failure"
                 });
             }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="authEntity"></param>
+        /// <returns></returns>
+        [Route("ERP/Auth/GetAuthEntity", Name = "ERP_Auth_Get_Auth_Entity")]
+        [HttpPost]
+        public IActionResult GetAuthEntity(string token)
+        {
+            IEnumerator<Claim> ienumerator = new JwtSecurityToken(token).Claims.GetEnumerator();
+            int userId = 0;
+            string userName = "";
+            string realName = "";
+            while (ienumerator.MoveNext())
+            {
+                var claim = ienumerator.Current;
+                if (claim.Type.ToLower().EndsWith("/sid"))
+                {
+                    userId = int.Parse(claim.Value);
+                }
+                if (claim.Type.ToLower().EndsWith("/name"))
+                {
+                    userName = claim.Value;
+                }
+                if (claim.Type.ToLower().EndsWith("/surname"))
+                {
+                    realName = claim.Value;
+                }
+            }
+            return new JsonResult(new { Result = true, Data = token, User = new { UserId = userId, UserName = userName, RealName = realName } });
+
         }
         #endregion
 

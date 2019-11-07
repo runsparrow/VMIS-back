@@ -1,7 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using GatewayApi.Logs;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
+using NLog.Web;
 using Ocelot.DependencyInjection;
 using Ocelot.JwtAuthorize;
 using Ocelot.Middleware;
@@ -12,6 +17,18 @@ namespace GatewayApi
 {
     public class Startup
     {
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="configuration"></param>
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+        /// <summary>
+        /// 属性
+        /// </summary>
+        public IConfiguration Configuration { get; }
         /// <summary>
         /// 
         /// </summary>
@@ -31,16 +48,23 @@ namespace GatewayApi
             services.AddOcelotJwtAuthorize();
         }
         /// <summary>
-        ///  
+        /// 
         /// </summary>
         /// <param name="app"></param>
         /// <param name="env"></param>
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        /// <param name="loggerFactory"></param>
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            loggerFactory.AddConsole();
+            loggerFactory.AddDebug();
+            loggerFactory.AddFileLogger();
+            loggerFactory.AddNLog();
+
             app.UseMvc();
             app.UseOcelot().Wait();
         }

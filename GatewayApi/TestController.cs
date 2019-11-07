@@ -1,13 +1,18 @@
 ﻿
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace GatewayApi
 {
     public class TestController: Controller
     {
-
+        private readonly ILogger<TestController> _logger;
+        public TestController(ILogger<TestController> logger)
+        {
+            _logger = logger;
+        }
         /// <summary>
         /// 测试Ocelot连接
         /// </summary>
@@ -19,6 +24,7 @@ namespace GatewayApi
         {
             try
             {
+                _logger.LogInformation("Ocelot Test");
                 return new OkObjectResult(new TestObject() { Title = "测试通过", Content = "Ocelot Test Success！" });
             }
             catch (Exception ex)
