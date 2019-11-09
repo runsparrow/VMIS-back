@@ -95,6 +95,13 @@ namespace ERPApi.Entities.AVM
                 _status = value;
             }
         }
+        /// <summary>
+        /// 功能
+        /// </summary>
+        [Description("功能")]
+        [JsonProperty("registry")]
+        [NotMapped]
+        public Registry Registry { get; set; }
         #endregion
     }
 }

@@ -13,7 +13,6 @@ namespace GatewayApi
         {
             CreateWebHostBuilder(args).Build().Run();
 
-
             // NLog: setup the logger first to catch all errors
             var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             try

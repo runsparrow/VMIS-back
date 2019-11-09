@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ERPApi.CacheServices.WFM;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -91,6 +92,24 @@ namespace ERPApi.Entities.WFM
 
         #region Not Mapped Property
 
+        private Status _parentStatus;
+        /// <summary>
+        /// 父状态
+        /// </summary>
+        [Description("父状态")]
+        [JsonProperty("parentStatus")]
+        [NotMapped]
+        public Status ParentStatus
+        {
+            get
+            {
+                return new StatusCacheService.RowService().ById(Pid);
+            }
+            set
+            {
+                _parentStatus = value;
+            }
+        }
         #endregion
     }
 }

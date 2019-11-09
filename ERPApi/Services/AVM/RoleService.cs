@@ -354,15 +354,16 @@ namespace ERPApi.Services.AVM
             /// 根据 id 查询
             /// </summary>
             /// <param name="id">Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public Role ById(int id)
+            public Role ById(int id, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToSingle(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Role.Id == id)
                                     .SingleOrDefault()
                             );
@@ -388,15 +389,16 @@ namespace ERPApi.Services.AVM
             /// 模糊查询
             /// </summary>
             /// <param name="keyWord">关键字</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Role> ByKeyWord(string keyWord)
+            public List<Role> ByKeyWord(string keyWord, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Role.Name.Contains(keyWord))
                                     .OrderBy(row => row.Role.Id)
                                     .ToList()
@@ -412,13 +414,14 @@ namespace ERPApi.Services.AVM
             /// 根据用户Id查询
             /// </summary>
             /// <param name="userId"></param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Role> ByUserId(int userId)
+            public List<Role> ByUserId(int userId, params string[] entityAttrs)
             {
                 try
                 {
                     List<Role> resultList = new List<Role>();
-                    new RERoleUserService.RowsService().ByRoleId(userId).ForEach(reRoleUser =>
+                    new RERoleUserService.RowsService().ByRoleId(userId, entityAttrs).ForEach(reRoleUser =>
                     {
                         resultList.Add(reRoleUser.Role);
                     });
@@ -433,13 +436,14 @@ namespace ERPApi.Services.AVM
             /// 根据功能Id查询
             /// </summary>
             /// <param name="registryId"></param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Role> ByRegistryId(int registryId)
+            public List<Role> ByRegistryId(int registryId, params string[] entityAttrs)
             {
                 try
                 {
                     List<Role> resultList = new List<Role>();
-                    new RERoleRegistryService.RowsService().ByRegistryId(registryId).ForEach(reRoleRegistry =>
+                    new RERoleRegistryService.RowsService().ByRegistryId(registryId, entityAttrs).ForEach(reRoleRegistry =>
                     {
                         resultList.Add(reRoleRegistry.Role);
                     });
@@ -609,12 +613,13 @@ namespace ERPApi.Services.AVM
             /// 模糊查询
             /// </summary>
             /// <param name="keyWord">关键字</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Role> ByKeyWord(string keyWord)
+            public List<Role> ByKeyWord(string keyWord, params string[] entityAttrs)
             {
                 try
                 {
-                    return new RowsService().ByKeyWord(keyWord);
+                    return new RowsService().ByKeyWord(keyWord, entityAttrs);
                 }
                 catch (Exception ex)
                 {

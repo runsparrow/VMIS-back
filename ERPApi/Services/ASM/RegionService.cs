@@ -354,15 +354,16 @@ namespace ERPApi.Services.ASM
             /// 根据 id 查询
             /// </summary>
             /// <param name="id">Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public Region ById(int id)
+            public Region ById(int id, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToSingle(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Region.Id == id)
                                     .SingleOrDefault()
                             );
@@ -377,15 +378,16 @@ namespace ERPApi.Services.ASM
             /// 根据功能键名查询
             /// </summary>
             /// <param name="key">功能键名</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public Region ByKey(string key)
+            public Region ByKey(string key, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToSingle(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Region.Key == key)
                                     .SingleOrDefault()
                             );
@@ -411,15 +413,16 @@ namespace ERPApi.Services.ASM
             /// 模糊查询
             /// </summary>
             /// <param name="keyWord">关键字</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Region> ByKeyWord(string keyWord)
+            public List<Region> ByKeyWord(string keyWord, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Region.Name.Contains(keyWord))
                                     .OrderBy(row => row.Region.Id)
                                     .ToList()
@@ -435,15 +438,16 @@ namespace ERPApi.Services.ASM
             /// 根据父Id查询
             /// </summary>
             /// <param name="pid">父Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Region> ByPid(int pid)
+            public List<Region> ByPid(int pid, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Region.Pid == pid)
                                     .OrderBy(row => row.Region.Id)
                                     .ToList()
@@ -459,15 +463,16 @@ namespace ERPApi.Services.ASM
             /// 根据功能路径查询
             /// </summary>
             /// <param name="path">功能路径</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Region> ByPath(string path)
+            public List<Region> ByPath(string path, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Region.Path.StartsWith(path))
                                     .OrderBy(row => row.Region.Id)
                                     .ToList()
@@ -564,14 +569,14 @@ namespace ERPApi.Services.ASM
             /// <summary>
             /// 汇总信息
             /// </summary>
-            /// <param name="keyWord"></param>
-            /// <param name="pageIndex"></param>
-            /// <param name="pageSize"></param>
-            /// <param name="startDate"></param>
-            /// <param name="endDate"></param>
-            /// <param name="status"></param
-            /// <param name="sort"></param>
-            /// <param name="entityAttrs"></param>
+            /// <param name="keyWord">关键字</param>
+            /// <param name="pageIndex">页码</param>
+            /// <param name="pageSize">页内行数</param>
+            /// <param name="startDate">开始时间</param>
+            /// <param name="endDate">结束时间</param>
+            /// <param name="status">状态</param>
+            /// <param name="sort">排序</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
             public SummaryEntity PageSummary(string keyWord, int pageIndex, int pageSize, DateTime startDate, DateTime endDate, ModeBase.Status status, ModeBase.Sort sort, params string[] entityAttrs)
             {
@@ -623,12 +628,13 @@ namespace ERPApi.Services.ASM
             /// 根据Id查询
             /// </summary>
             /// <param name="id">id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public Region ById(int id)
+            public Region ById(int id, params string[] entityAttrs)
             {
                 try
                 {
-                    return new RowService().ById(id);
+                    return new RowService().ById(id, entityAttrs);
                 }
                 catch (Exception ex)
                 {
@@ -639,12 +645,13 @@ namespace ERPApi.Services.ASM
             /// 根据功能键名查询
             /// </summary>
             /// <param name="key">功能键名</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public Region ByKey(string key)
+            public Region ByKey(string key, params string[] entityAttrs)
             {
                 try
                 {
-                    return new RowService().ByKey(key);
+                    return new RowService().ByKey(key, entityAttrs);
                 }
                 catch (Exception ex)
                 {
@@ -655,12 +662,13 @@ namespace ERPApi.Services.ASM
             /// 模糊查询
             /// </summary>
             /// <param name="keyWord">关键字</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Region> ByKeyWord(string keyWord)
+            public List<Region> ByKeyWord(string keyWord, params string[] entityAttrs)
             {
                 try
                 {
-                    return new RowsService().ByKeyWord(keyWord);
+                    return new RowsService().ByKeyWord(keyWord, entityAttrs);
                 }
                 catch (Exception ex)
                 {
@@ -671,12 +679,13 @@ namespace ERPApi.Services.ASM
             /// 根据父Id查询
             /// </summary>
             /// <param name="pid">父Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Region> ByPid(int pid)
+            public List<Region> ByPid(int pid, params string[] entityAttrs)
             {
                 try
                 {
-                    return new RowsService().ByPid(pid);
+                    return new RowsService().ByPid(pid, entityAttrs);
                 }
                 catch (Exception ex)
                 {
@@ -687,12 +696,13 @@ namespace ERPApi.Services.ASM
             /// 根据功能路径查询
             /// </summary>
             /// <param name="path">功能路径</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Region> ByPath(string path)
+            public List<Region> ByPath(string path, params string[] entityAttrs)
             {
                 try
                 {
-                    return new RowsService().ByPath(path);
+                    return new RowsService().ByPath(path, entityAttrs);
                 }
                 catch (Exception ex)
                 {

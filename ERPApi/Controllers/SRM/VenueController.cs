@@ -304,7 +304,7 @@ namespace ERPApi.Controllers.SRM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ById(int.Parse(request.Function.Args[0]))
+                                        service.ById(int.Parse(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -345,7 +345,7 @@ namespace ERPApi.Controllers.SRM
                     case "bysiteid":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.BySiteId(ParseInt(request.Function.Args[0]))
+                                    service.BySiteId(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                 )
                             );
                     default:
@@ -353,7 +353,7 @@ namespace ERPApi.Controllers.SRM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ByKeyWord(request.Function.Args[0])
+                                        service.ByKeyWord(request.Function.Args[0], ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -396,7 +396,7 @@ namespace ERPApi.Controllers.SRM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ById(int.Parse(request.Function.Args[0]))
+                                        service.ById(int.Parse(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -484,7 +484,7 @@ namespace ERPApi.Controllers.SRM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ByKeyWord(request.Function.Args[0])
+                                        service.ByKeyWord(request.Function.Args[0], ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }

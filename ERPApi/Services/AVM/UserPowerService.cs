@@ -280,17 +280,18 @@ namespace ERPApi.Services.AVM
             /// <summary>
             /// 查询唯一值
             /// </summary>
-            /// <param name="userId"></param>
-            /// <param name="registryId"></param>
+            /// <param name="userId">用户Id</param>
+            /// <param name="registryId">功能Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public UserPower Only(int userId, int registryId)
+            public UserPower Only(int userId, int registryId, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToSingle(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.UserPower.UserId == userId && row.UserPower.RegistryId == registryId)
                                     .SingleOrDefault()
                             );
@@ -316,15 +317,16 @@ namespace ERPApi.Services.AVM
             /// 根据用户Id查询
             /// </summary>
             /// <param name="userId">用户Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<UserPower> ByUserId(int userId)
+            public List<UserPower> ByUserId(int userId, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.UserPower.UserId == userId)
                                     .ToList()
                             );
@@ -339,15 +341,16 @@ namespace ERPApi.Services.AVM
             /// 根据功能Id查询
             /// </summary>
             /// <param name="registryId">功能Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<UserPower> ByRegistryId(int registryId)
+            public List<UserPower> ByRegistryId(int registryId, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.UserPower.RegistryId == registryId)
                                     .ToList()
                             );
@@ -518,12 +521,13 @@ namespace ERPApi.Services.AVM
             /// </summary>
             /// <param name="userId">用户Id</param>
             /// <param name="registryId">功能Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public UserPower Only(int userId, int registryId)
+            public UserPower Only(int userId, int registryId, params string[] entityAttrs)
             {
                 try
                 {
-                    return new RowService().Only(userId, registryId);
+                    return new RowService().Only(userId, registryId, entityAttrs);
                 }
                 catch (Exception ex)
                 {

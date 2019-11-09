@@ -353,16 +353,17 @@ namespace ERPApi.Services.SRM
             /// <summary>
             /// 根据 id 查询
             /// </summary>
-            /// <param name="id">Id</param>
+            /// <param name="id">唯一标识</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public Venue ById(int id)
+            public Venue ById(int id, params string [] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToSingle(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Venue.Id == id)
                                     .SingleOrDefault()
                             );
@@ -388,15 +389,16 @@ namespace ERPApi.Services.SRM
             /// 模糊查询
             /// </summary>
             /// <param name="keyWord">关键字</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Venue> ByKeyWord(string keyWord)
+            public List<Venue> ByKeyWord(string keyWord, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Venue.Name.Contains(keyWord))
                                     .OrderBy(row => row.Venue.Id)
                                     .ToList()
@@ -412,15 +414,16 @@ namespace ERPApi.Services.SRM
             /// 根据场地Id查询
             /// </summary>
             /// <param name="siteId">场地Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Venue> BySiteId(int siteId)
+            public List<Venue> BySiteId(int siteId, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Venue.SiteId == siteId)
                                     .OrderBy(row => row.Venue.Id)
                                     .ToList()
@@ -593,12 +596,13 @@ namespace ERPApi.Services.SRM
             /// 模糊查询
             /// </summary>
             /// <param name="keyWord">关键字</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Venue> ByKeyWord(string keyWord)
+            public List<Venue> ByKeyWord(string keyWord, params string [] entityAttrs)
             {
                 try
                 {
-                    return new RowsService().ByKeyWord(keyWord);
+                    return new RowsService().ByKeyWord(keyWord, entityAttrs);
                 }
                 catch (Exception ex)
                 {
@@ -654,24 +658,37 @@ namespace ERPApi.Services.SRM
             var left = context.SRM_Venue.Select(Main => new
             {
                 Venue = Main,
+                Site = context.SRM_Site.FirstOrDefault(row => row.Id != row.Id),
                 Status = context.WFM_Status.FirstOrDefault(row => row.Id != row.Id)
             });
 
             foreach (string entityAttr in entityAttrs)
             {
+                // SQLEntity.Site
+                if (entityAttr.Equals("Site"))
+                    left = left
+                        // main: Venue | left : Status
+                        .LeftOuterJoin(context.SRM_Site, Main => Main.Site.Id, Left => Left.Id, (Main, Left) => new
+                        {
+                            Main.Venue,
+                            Site = Left,
+                            Main.Status
+                        });
                 // SQLEntity.Status
                 if (entityAttr.Equals("Status"))
                     left = left
                         // main: Venue | left : Status
                         .LeftOuterJoin(context.WFM_Status, Main => Main.Venue.StatusId, Left => Left.Id, (Main, Left) => new
                         {
-                            Venue = Main.Venue,
+                            Main.Venue,
+                            Main.Site,
                             Status = Left
                         });
             }
             var group = left.Select(Main => new SQLEntity
             {
                 Venue = Main.Venue,
+                Site = Main.Site,
                 Status = Main.Status
             });
 
@@ -923,6 +940,7 @@ namespace ERPApi.Services.SRM
         private class SQLEntity
         {
             public Venue Venue { get; set; }
+            public Site Site { get; set; }
             public Status Status { get; set; }
         }
         /// <summary>

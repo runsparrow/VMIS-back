@@ -282,15 +282,16 @@ namespace ERPApi.Services.AVM
             /// </summary>
             /// <param name="registryId"></param>
             /// <param name="userId"></param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public REUserRegistry Only(int registryId, int userId)
+            public REUserRegistry Only(int registryId, int userId, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToSingle(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.REUserRegistry.RegistryId == registryId && row.REUserRegistry.UserId == userId)
                                     .SingleOrDefault()
                             );
@@ -316,15 +317,16 @@ namespace ERPApi.Services.AVM
             /// 根据功能Id查询
             /// </summary>
             /// <param name="registryId">功能Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<REUserRegistry> ByRegistryId(int registryId)
+            public List<REUserRegistry> ByRegistryId(int registryId, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.REUserRegistry.RegistryId == registryId)
                                     .ToList()
                             );
@@ -339,15 +341,16 @@ namespace ERPApi.Services.AVM
             /// 根据用户Id查询
             /// </summary>
             /// <param name="userId">用户Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<REUserRegistry> ByUserId(int userId)
+            public List<REUserRegistry> ByUserId(int userId, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.REUserRegistry.UserId == userId)
                                     .ToList()
                             );
@@ -519,12 +522,13 @@ namespace ERPApi.Services.AVM
             /// </summary>
             /// <param name="registryId">功能Id</param>
             /// <param name="userId">用户Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public REUserRegistry Only(int registryId, int userId)
+            public REUserRegistry Only(int registryId, int userId, params string[] entityAttrs)
             {
                 try
                 {
-                    return new RowService().Only(registryId, userId);
+                    return new RowService().Only(registryId, userId, entityAttrs);
                 }
                 catch (Exception ex)
                 {

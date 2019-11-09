@@ -381,15 +381,16 @@ namespace ERPApi.Services.AVM
             /// 根据 id 查询
             /// </summary>
             /// <param name="id">Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public User ById(int id)
+            public User ById(int id, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToSingle(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.User.Id == id)
                                     .SingleOrDefault()
                             );
@@ -404,15 +405,16 @@ namespace ERPApi.Services.AVM
             /// 根据微信号查询
             /// </summary>
             /// <param name="weChatNo">Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public User ByWeChatNo(string weChatNo)
+            public User ByWeChatNo(string weChatNo, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToSingle(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.User.WeChatNo == weChatNo)
                                     .SingleOrDefault()
                             );
@@ -427,15 +429,16 @@ namespace ERPApi.Services.AVM
             /// 根据微信OpenId查询
             /// </summary>
             /// <param name="weChatOpenId">Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public User ByWeChatOpenId(string weChatOpenId)
+            public User ByWeChatOpenId(string weChatOpenId, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToSingle(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.User.WeChatOpenId == weChatOpenId)
                                     .SingleOrDefault()
                             );
@@ -488,15 +491,16 @@ namespace ERPApi.Services.AVM
             /// 模糊查询
             /// </summary>
             /// <param name="keyWord">关键字</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<User> ByKeyWord(string keyWord)
+            public List<User> ByKeyWord(string keyWord, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.User.Name.Contains(keyWord))
                                     .OrderBy(row => row.User.Id)
                                     .ToList()
@@ -512,13 +516,14 @@ namespace ERPApi.Services.AVM
             /// 根据角色Id查询
             /// </summary>
             /// <param name="roleId"></param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<User> ByRoleId(int roleId)
+            public List<User> ByRoleId(int roleId, params string[] entityAttrs)
             {
                 try
                 {
                     List<User> resultList = new List<User>();
-                    new RERoleUserService.RowsService().ByRoleId(roleId).ForEach(reRoleUser =>
+                    new RERoleUserService.RowsService().ByRoleId(roleId, entityAttrs).ForEach(reRoleUser =>
                     {
                         resultList.Add(reRoleUser.User);
                     });
@@ -533,13 +538,14 @@ namespace ERPApi.Services.AVM
             /// 根据功能Id查询
             /// </summary>
             /// <param name="registryId"></param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<User> ByRegistryId(int registryId)
+            public List<User> ByRegistryId(int registryId, params string[] entityAttrs)
             {
                 try
                 {
                     List<User> resultList = new List<User>();
-                    new REUserRegistryService.RowsService().ByRegistryId(registryId).ForEach(reUserRegistry =>
+                    new REUserRegistryService.RowsService().ByRegistryId(registryId, entityAttrs).ForEach(reUserRegistry =>
                     {
                         resultList.Add(reUserRegistry.User);
                     });
@@ -709,12 +715,13 @@ namespace ERPApi.Services.AVM
             /// 模糊查询
             /// </summary>
             /// <param name="keyWord">关键字</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<User> ByKeyWord(string keyWord)
+            public List<User> ByKeyWord(string keyWord, params string[] entityAttrs)
             {
                 try
                 {
-                    return new RowsService().ByKeyWord(keyWord);
+                    return new RowsService().ByKeyWord(keyWord, entityAttrs);
                 }
                 catch (Exception ex)
                 {

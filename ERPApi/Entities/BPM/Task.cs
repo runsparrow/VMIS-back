@@ -1,4 +1,7 @@
 ﻿using ERPApi.CacheServices.WFM;
+using ERPApi.Entities.AVM;
+using ERPApi.Entities.CRM;
+using ERPApi.Entities.SRM;
 using ERPApi.Entities.WFM;
 using Newtonsoft.Json;
 using System;
@@ -202,6 +205,34 @@ namespace ERPApi.Entities.BPM
                 _status = value;
             }
         }
+        /// <summary>
+        /// 接待人
+        /// </summary>
+        [Description("接待人")]
+        [JsonProperty("reception")]
+        [NotMapped]
+        public User Reception { get; set; }
+        /// <summary>
+        /// 客户
+        /// </summary>
+        [Description("客户")]
+        [JsonProperty("customer")]
+        [NotMapped]
+        public Customer Customer { get; set; }
+        /// <summary>
+        /// 场地
+        /// </summary>
+        [Description("场地")]
+        [JsonProperty("site")]
+        [NotMapped]
+        public Site Site { get; set; }
+        /// <summary>
+        /// 场馆
+        /// </summary>
+        [Description("场馆")]
+        [JsonProperty("venue")]
+        [NotMapped]
+        public Venue Venue { get; set; }
         #endregion
     }
 }

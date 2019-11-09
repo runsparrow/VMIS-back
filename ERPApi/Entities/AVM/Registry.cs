@@ -136,6 +136,13 @@ namespace ERPApi.Entities.AVM
                 _status = value;
             }
         }
+        /// <summary>
+        /// 角色
+        /// </summary>
+        [Description("角色")]
+        [JsonProperty("role")]
+        [NotMapped]
+        public Role Role { get; set; }
         #endregion
     }
 }

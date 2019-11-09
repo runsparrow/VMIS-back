@@ -1,5 +1,8 @@
 ﻿using ERPApi.Dal.EF;
+using ERPApi.Entities.AVM;
 using ERPApi.Entities.BPM;
+using ERPApi.Entities.CRM;
+using ERPApi.Entities.SRM;
 using ERPApi.Entities.WFM;
 using ERPApi.HttpClients.HttpModes;
 using System;
@@ -353,16 +356,17 @@ namespace ERPApi.Services.BPM
             /// <summary>
             /// 根据 id 查询
             /// </summary>
-            /// <param name="id">Id</param>
+            /// <param name="id">唯一标识</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public Task ById(int id)
+            public Task ById(int id, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToSingle(
-                                SQLQueryable(context)
+                               SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Task.Id == id)
                                     .SingleOrDefault()
                             );
@@ -388,15 +392,16 @@ namespace ERPApi.Services.BPM
             /// 模糊查询
             /// </summary>
             /// <param name="keyWord">关键字</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Task> ByKeyWord(string keyWord)
+            public List<Task> ByKeyWord(string keyWord, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Task.Name.Contains(keyWord))
                                     .OrderBy(row => row.Task.Id)
                                     .ToList()
@@ -412,15 +417,16 @@ namespace ERPApi.Services.BPM
             /// 根据类型Id查询
             /// </summary>
             /// <param name="typeId">类型Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Task> ByTypeId(int typeId)
+            public List<Task> ByTypeId(int typeId, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Task.TypeId == typeId)
                                     .OrderBy(row => row.Task.Id)
                                     .ToList()
@@ -436,15 +442,16 @@ namespace ERPApi.Services.BPM
             /// 根据接待人Id查询
             /// </summary>
             /// <param name="receptionId">接待人Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Task> ByReceptionId(int receptionId)
+            public List<Task> ByReceptionId(int receptionId, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Task.ReceptionId == receptionId)
                                     .OrderBy(row => row.Task.Id)
                                     .ToList()
@@ -460,15 +467,16 @@ namespace ERPApi.Services.BPM
             /// 根据客户Id查询
             /// </summary>
             /// <param name="customerId">客户Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Task> ByCustomerId(int customerId)
+            public List<Task> ByCustomerId(int customerId, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Task.CustomerId == customerId)
                                     .OrderBy(row => row.Task.Id)
                                     .ToList()
@@ -484,15 +492,16 @@ namespace ERPApi.Services.BPM
             /// 根据场地Id查询
             /// </summary>
             /// <param name="siteId">场地Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Task> BySiteId(int siteId)
+            public List<Task> BySiteId(int siteId, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Task.SiteId == siteId)
                                     .OrderBy(row => row.Task.Id)
                                     .ToList()
@@ -508,15 +517,16 @@ namespace ERPApi.Services.BPM
             /// 根据场馆Id查询
             /// </summary>
             /// <param name="venueId">场馆Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Task> ByVenueId(int venueId)
+            public List<Task> ByVenueId(int venueId, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Task.VenueId == venueId)
                                     .OrderBy(row => row.Task.Id)
                                     .ToList()
@@ -689,12 +699,13 @@ namespace ERPApi.Services.BPM
             /// 模糊查询
             /// </summary>
             /// <param name="keyWord">关键字</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Task> ByKeyWord(string keyWord)
+            public List<Task> ByKeyWord(string keyWord, params string[] entityAttrs)
             {
                 try
                 {
-                    return new RowsService().ByKeyWord(keyWord);
+                    return new RowsService().ByKeyWord(keyWord, entityAttrs);
                 }
                 catch (Exception ex)
                 {
@@ -750,11 +761,67 @@ namespace ERPApi.Services.BPM
             var left = context.BPM_Task.Select(Main => new
             {
                 Task = Main,
+                Reception = context.AVM_User.FirstOrDefault(row => row.Id != row.Id),
+                Customer = context.CRM_Customer.FirstOrDefault(row => row.Id != row.Id),
+                Site = context.SRM_Site.FirstOrDefault(row => row.Id != row.Id),
+                Venue = context.SRM_Venue.FirstOrDefault(row => row.Id != row.Id),
                 Status = context.WFM_Status.FirstOrDefault(row => row.Id != row.Id)
             });
 
             foreach (string entityAttr in entityAttrs)
             {
+                // SQLEntity.Reception
+                if (entityAttr.Equals("Reception"))
+                    left = left
+                        // main: Task | left : Status
+                        .LeftOuterJoin(context.AVM_User, Main => Main.Task.ReceptionId, Left => Left.Id, (Main, Left) => new
+                        {
+                            Main.Task,
+                            Reception = Left,
+                            Main.Customer,
+                            Main.Site,
+                            Main.Venue,
+                            Main.Status
+                        });
+                // SQLEntity.Customer
+                if (entityAttr.Equals("Customer"))
+                    left = left
+                        // main: Task | left : Status
+                        .LeftOuterJoin(context.CRM_Customer, Main => Main.Task.CustomerId, Left => Left.Id, (Main, Left) => new
+                        {
+                            Main.Task,
+                            Main.Reception,
+                            Customer = Left,
+                            Main.Site,
+                            Main.Venue,
+                            Main.Status
+                        });
+                // SQLEntity.Site
+                if (entityAttr.Equals("Site"))
+                    left = left
+                        // main: Task | left : Status
+                        .LeftOuterJoin(context.SRM_Site, Main => Main.Task.SiteId, Left => Left.Id, (Main, Left) => new
+                        {
+                            Main.Task,
+                            Main.Reception,
+                            Main.Customer,
+                            Site = Left,
+                            Main.Venue,
+                            Main.Status
+                        });
+                // SQLEntity.Venue
+                if (entityAttr.Equals("Venue"))
+                    left = left
+                        // main: Task | left : Status
+                        .LeftOuterJoin(context.SRM_Venue, Main => Main.Task.VenueId, Left => Left.Id, (Main, Left) => new
+                        {
+                            Main.Task,
+                            Main.Reception,
+                            Main.Customer,
+                            Main.Site,
+                            Venue = Left,
+                            Main.Status
+                        });
                 // SQLEntity.Status
                 if (entityAttr.Equals("Status"))
                     left = left
@@ -762,12 +829,20 @@ namespace ERPApi.Services.BPM
                         .LeftOuterJoin(context.WFM_Status, Main => Main.Task.StatusId, Left => Left.Id, (Main, Left) => new
                         {
                             Main.Task,
+                            Main.Reception,
+                            Main.Customer,
+                            Main.Site,
+                            Main.Venue,
                             Status = Left
                         });
             }
             var group = left.Select(Main => new SQLEntity
             {
                 Task = Main.Task,
+                Reception = Main.Reception,
+                Customer = Main.Customer,
+                Site = Main.Site,
+                Venue = Main.Venue,
                 Status = Main.Status
             });
 
@@ -987,6 +1062,14 @@ namespace ERPApi.Services.BPM
             {
                 // 主表
                 Task task = entity.Task;
+                // 接待人
+                task.Reception = entity.Reception ?? null;
+                // 客户
+                task.Customer = entity.Customer ?? null;
+                // 场地
+                task.Site = entity.Site ?? null;
+                // 场馆
+                task.Venue = entity.Venue ?? null;
                 // 状态
                 task.Status = entity.Status ?? null;
                 // 返回
@@ -1022,6 +1105,10 @@ namespace ERPApi.Services.BPM
         private class SQLEntity
         {
             public Task Task { get; set; }
+            public User Reception { get; set; }
+            public Customer Customer { get; set; }
+            public Site Site { get; set; }
+            public Venue Venue { get; set; }
             public Status Status { get; set; }
         }
         /// <summary>

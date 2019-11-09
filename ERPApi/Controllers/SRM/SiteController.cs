@@ -304,7 +304,7 @@ namespace ERPApi.Controllers.SRM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ById(int.Parse(request.Function.Args[0]))
+                                        service.ById(int.Parse(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -347,7 +347,7 @@ namespace ERPApi.Controllers.SRM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ByKeyWord(request.Function.Args[0])
+                                        service.ByKeyWord(request.Function.Args[0], ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -390,7 +390,7 @@ namespace ERPApi.Controllers.SRM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ById(int.Parse(request.Function.Args[0]))
+                                        service.ById(int.Parse(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -478,7 +478,7 @@ namespace ERPApi.Controllers.SRM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ByKeyWord(request.Function.Args[0])
+                                        service.ByKeyWord(request.Function.Args[0], ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }

@@ -353,16 +353,17 @@ namespace ERPApi.Services.SRM
             /// <summary>
             /// 根据 id 查询
             /// </summary>
-            /// <param name="id">Id</param>
+            /// <param name="id">唯一标识</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public Site ById(int id)
+            public Site ById(int id, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToSingle(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Site.Id == id)
                                     .SingleOrDefault()
                             );
@@ -388,15 +389,16 @@ namespace ERPApi.Services.SRM
             /// 模糊查询
             /// </summary>
             /// <param name="keyWord">关键字</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Site> ByKeyWord(string keyWord)
+            public List<Site> ByKeyWord(string keyWord, params string [] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Site.Name.Contains(keyWord))
                                     .OrderBy(row => row.Site.Id)
                                     .ToList()
@@ -569,12 +571,13 @@ namespace ERPApi.Services.SRM
             /// 模糊查询
             /// </summary>
             /// <param name="keyWord">关键字</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Site> ByKeyWord(string keyWord)
+            public List<Site> ByKeyWord(string keyWord, params string[] entityAttrs)
             {
                 try
                 {
-                    return new RowsService().ByKeyWord(keyWord);
+                    return new RowsService().ByKeyWord(keyWord, entityAttrs);
                 }
                 catch (Exception ex)
                 {

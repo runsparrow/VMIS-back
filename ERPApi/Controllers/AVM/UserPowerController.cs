@@ -250,7 +250,7 @@ namespace ERPApi.Controllers.AVM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.Only(ParseInt(request.Function.Args[0]), ParseInt(request.Function.Args[1]))
+                                        service.Only(ParseInt(request.Function.Args[0]), ParseInt(request.Function.Args[1]), ToParams(request.Function.Args, 2))
                                     )
                                 );
                         }
@@ -291,7 +291,7 @@ namespace ERPApi.Controllers.AVM
                     case "byregistryid":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByRegistryId(ParseInt(request.Function.Args[0]))
+                                    service.ByRegistryId(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                 )
                             );
                     default:
@@ -299,7 +299,7 @@ namespace ERPApi.Controllers.AVM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ByUserId(ParseInt(request.Function.Args[0]))
+                                        service.ByUserId(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -342,7 +342,7 @@ namespace ERPApi.Controllers.AVM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.Only(ParseInt(request.Function.Args[0]), ParseInt(request.Function.Args[1]))
+                                        service.Only(ParseInt(request.Function.Args[0]), ParseInt(request.Function.Args[1]), ToParams(request.Function.Args, 2))
                                     )
                                 );
                         }
@@ -432,7 +432,7 @@ namespace ERPApi.Controllers.AVM
                                     request.ToResponse(
                                         new List<UserPower>()
                                         {
-                                            service.Only(ParseInt(request.Function.Args[0]), ParseInt(request.Function.Args[1]))
+                                            service.Only(ParseInt(request.Function.Args[0]), ParseInt(request.Function.Args[1]), ToParams(request.Function.Args, 2))
                                         }
                                     )
                                 );

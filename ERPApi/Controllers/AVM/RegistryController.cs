@@ -302,7 +302,7 @@ namespace ERPApi.Controllers.AVM
                     case "bykey":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByKey(request.Function.Args[0])
+                                    service.ByKey(request.Function.Args[0], ToParams(request.Function.Args, 1))
                                 )
                             );
                     default:
@@ -310,7 +310,7 @@ namespace ERPApi.Controllers.AVM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ById(ParseInt(request.Function.Args[0]))
+                                        service.ById(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -351,25 +351,25 @@ namespace ERPApi.Controllers.AVM
                     case "bypid":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByPid(ParseInt(request.Function.Args[0]))
+                                    service.ByPid(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                 )
                             );
                     case "bypath":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByPath(request.Function.Args[0])
+                                    service.ByPath(request.Function.Args[0], ToParams(request.Function.Args, 1))
                                 )
                             );
                     case "byuserid":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByUserId(ParseInt(request.Function.Args[0]))
+                                    service.ByUserId(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                 )
                             );
                     case "byroleid":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByRoleId(ParseInt(request.Function.Args[0]))
+                                    service.ByRoleId(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                 )
                             );
                     default:
@@ -377,7 +377,7 @@ namespace ERPApi.Controllers.AVM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ByKeyWord(request.Function.Args[0])
+                                        service.ByKeyWord(request.Function.Args[0], ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -420,7 +420,7 @@ namespace ERPApi.Controllers.AVM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ById(ParseInt(request.Function.Args[0]))
+                                        service.ById(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -508,7 +508,7 @@ namespace ERPApi.Controllers.AVM
                                 request.ToResponse(
                                     new List<Registry>()
                                     {
-                                        service.ById(ParseInt(request.Function.Args[0]))
+                                        service.ById(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                     }
                                 )
                             );
@@ -517,20 +517,20 @@ namespace ERPApi.Controllers.AVM
                                 request.ToResponse(
                                     new List<Registry>()
                                     {
-                                        service.ByKey(request.Function.Args[0])
+                                        service.ByKey(request.Function.Args[0], ToParams(request.Function.Args, 1))
                                     }
                                 )
                             );
                     case "bypid":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByPid(ParseInt(request.Function.Args[0]))
+                                    service.ByPid(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                 )
                             );
                     case "bypath":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByPath(request.Function.Args[0])
+                                    service.ByPath(request.Function.Args[0], ToParams(request.Function.Args, 1))
                                 )
                             );
                     default:
@@ -538,7 +538,7 @@ namespace ERPApi.Controllers.AVM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ByKeyWord(request.Function.Args[0])
+                                        service.ByKeyWord(request.Function.Args[0], ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }

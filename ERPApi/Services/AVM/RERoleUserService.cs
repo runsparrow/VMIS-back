@@ -282,15 +282,16 @@ namespace ERPApi.Services.AVM
             /// </summary>
             /// <param name="userId"></param>
             /// <param name="roleId"></param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public RERoleUser Only(int userId, int roleId)
+            public RERoleUser Only(int userId, int roleId, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToSingle(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.RERoleUser.UserId == userId && row.RERoleUser.RoleId == roleId)
                                     .SingleOrDefault()
                             );
@@ -316,15 +317,17 @@ namespace ERPApi.Services.AVM
             /// 根据用户Id查询
             /// </summary>
             /// <param name="userId">用户Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<RERoleUser> ByUserId(int userId)
+            public List<RERoleUser> ByUserId(int userId, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
+                        entityAttrs[entityAttrs.Length] = "Role";
                         return SQLEntityToList(
-                                SQLQueryable(context, "Role")
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.RERoleUser.UserId == userId)
                                     .ToList()
                             );
@@ -339,15 +342,17 @@ namespace ERPApi.Services.AVM
             /// 根据角色Id查询
             /// </summary>
             /// <param name="roleId">角色Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<RERoleUser> ByRoleId(int roleId)
+            public List<RERoleUser> ByRoleId(int roleId, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
+                        entityAttrs[entityAttrs.Length] = "User";
                         return SQLEntityToList(
-                                SQLQueryable(context, "User")
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.RERoleUser.RoleId == roleId)
                                     .ToList()
                             );
@@ -519,12 +524,13 @@ namespace ERPApi.Services.AVM
             /// </summary>
             /// <param name="userId">用户Id</param>
             /// <param name="roleId">角色Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public RERoleUser Only(int userId, int roleId)
+            public RERoleUser Only(int userId, int roleId, params string[] entityAttrs)
             {
                 try
                 {
-                    return new RowService().Only(userId, roleId);
+                    return new RowService().Only(userId, roleId, entityAttrs);
                 }
                 catch (Exception ex)
                 {

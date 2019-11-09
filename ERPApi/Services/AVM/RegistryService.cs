@@ -353,16 +353,17 @@ namespace ERPApi.Services.AVM
             /// <summary>
             /// 根据 id 查询
             /// </summary>
-            /// <param name="id">Id</param>
+            /// <param name="id">唯一标识</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public Registry ById(int id)
+            public Registry ById(int id, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToSingle(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Registry.Id == id)
                                     .SingleOrDefault()
                             );
@@ -377,15 +378,16 @@ namespace ERPApi.Services.AVM
             /// 根据功能键名查询
             /// </summary>
             /// <param name="key">功能键名</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public Registry ByKey(string key)
+            public Registry ByKey(string key, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToSingle(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Registry.Key == key)
                                     .SingleOrDefault()
                             );
@@ -411,15 +413,16 @@ namespace ERPApi.Services.AVM
             /// 模糊查询
             /// </summary>
             /// <param name="keyWord">关键字</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Registry> ByKeyWord(string keyWord)
+            public List<Registry> ByKeyWord(string keyWord, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Registry.Name.Contains(keyWord))
                                     .OrderBy(row => row.Registry.Id)
                                     .ToList()
@@ -435,13 +438,14 @@ namespace ERPApi.Services.AVM
             /// 根据角色Id查询
             /// </summary>
             /// <param name="roleId"></param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Registry> ByRoleId(int roleId)
+            public List<Registry> ByRoleId(int roleId, params string[] entityAttrs)
             {
                 try
                 {
                     List<Registry> resultList = new List<Registry>();
-                    new RERoleRegistryService.RowsService().ByRoleId(roleId).ForEach(reRoleRegistry =>
+                    new RERoleRegistryService.RowsService().ByRoleId(roleId, entityAttrs).ForEach(reRoleRegistry =>
                     {
                         resultList.Add(reRoleRegistry.Registry);
                     });
@@ -456,13 +460,14 @@ namespace ERPApi.Services.AVM
             /// 根据用户Id查询
             /// </summary>
             /// <param name="userId"></param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Registry> ByUserId(int userId)
+            public List<Registry> ByUserId(int userId, params string[] entityAttrs)
             {
                 try
                 {
                     List<Registry> resultList = new List<Registry>();
-                    new REUserRegistryService.RowsService().ByUserId(userId).ForEach(reUserRegistry =>
+                    new REUserRegistryService.RowsService().ByUserId(userId, entityAttrs).ForEach(reUserRegistry =>
                     {
                         resultList.Add(reUserRegistry.Registry);
                     });
@@ -477,15 +482,16 @@ namespace ERPApi.Services.AVM
             /// 根据父Id查询
             /// </summary>
             /// <param name="pid">父Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Registry> ByPid(int pid)
+            public List<Registry> ByPid(int pid, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Registry.Pid == pid)
                                     .OrderBy(row => row.Registry.Id)
                                     .ToList()
@@ -501,15 +507,16 @@ namespace ERPApi.Services.AVM
             /// 根据功能路径查询
             /// </summary>
             /// <param name="path">功能路径</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Registry> ByPath(string path)
+            public List<Registry> ByPath(string path, params string[] entityAttrs)
             {
                 using (VMISContext context = new VMISContext())
                 {
                     try
                     {
                         return SQLEntityToList(
-                                SQLQueryable(context)
+                                SQLQueryable(context, entityAttrs)
                                     .Where(row => row.Registry.Path.StartsWith(path))
                                     .OrderBy(row => row.Registry.Id)
                                     .ToList()
@@ -682,12 +689,13 @@ namespace ERPApi.Services.AVM
             /// 根据Id查询
             /// </summary>
             /// <param name="id">id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public Registry ById(int id)
+            public Registry ById(int id, params string[] entityAttrs)
             {
                 try
                 {
-                    return new RowService().ById(id);
+                    return new RowService().ById(id, entityAttrs);
                 }
                 catch (Exception ex)
                 {
@@ -698,12 +706,13 @@ namespace ERPApi.Services.AVM
             /// 根据功能键名查询
             /// </summary>
             /// <param name="key">功能键名</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public Registry ByKey(string key)
+            public Registry ByKey(string key, params string[] entityAttrs)
             {
                 try
                 {
-                    return new RowService().ByKey(key);
+                    return new RowService().ByKey(key, entityAttrs);
                 }
                 catch (Exception ex)
                 {
@@ -714,12 +723,13 @@ namespace ERPApi.Services.AVM
             /// 模糊查询
             /// </summary>
             /// <param name="keyWord">关键字</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Registry> ByKeyWord(string keyWord)
+            public List<Registry> ByKeyWord(string keyWord, params string[] entityAttrs)
             {
                 try
                 {
-                    return new RowsService().ByKeyWord(keyWord);
+                    return new RowsService().ByKeyWord(keyWord, entityAttrs);
                 }
                 catch (Exception ex)
                 {
@@ -730,12 +740,13 @@ namespace ERPApi.Services.AVM
             /// 根据父Id查询
             /// </summary>
             /// <param name="pid">父Id</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Registry> ByPid(int pid)
+            public List<Registry> ByPid(int pid, params string[] entityAttrs)
             {
                 try
                 {
-                    return new RowsService().ByPid(pid);
+                    return new RowsService().ByPid(pid, entityAttrs);
                 }
                 catch (Exception ex)
                 {
@@ -746,12 +757,13 @@ namespace ERPApi.Services.AVM
             /// 根据功能路径查询
             /// </summary>
             /// <param name="path">功能路径</param>
+            /// <param name="entityAttrs">可变参数</param>
             /// <returns></returns>
-            public List<Registry> ByPath(string path)
+            public List<Registry> ByPath(string path, params string[] entityAttrs)
             {
                 try
                 {
-                    return new RowsService().ByPath(path);
+                    return new RowsService().ByPath(path, entityAttrs);
                 }
                 catch (Exception ex)
                 {

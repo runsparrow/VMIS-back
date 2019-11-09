@@ -302,7 +302,7 @@ namespace ERPApi.Controllers.ASM
                     case "bykey":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByKey(request.Function.Args[0])
+                                    service.ByKey(request.Function.Args[0], ToParams(request.Function.Args, 1))
                                 )
                             );
                     default:
@@ -310,7 +310,7 @@ namespace ERPApi.Controllers.ASM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ById(ParseInt(request.Function.Args[0]))
+                                        service.ById(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -351,13 +351,13 @@ namespace ERPApi.Controllers.ASM
                     case "bypid":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByPid(ParseInt(request.Function.Args[0]))
+                                    service.ByPid(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                 )
                             );
                     case "bypath":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByPath(request.Function.Args[0])
+                                    service.ByPath(request.Function.Args[0], ToParams(request.Function.Args, 1))
                                 )
                             );
                     default:
@@ -365,7 +365,7 @@ namespace ERPApi.Controllers.ASM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ByKeyWord(request.Function.Args[0])
+                                        service.ByKeyWord(request.Function.Args[0], ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -408,7 +408,7 @@ namespace ERPApi.Controllers.ASM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ById(ParseInt(request.Function.Args[0]))
+                                        service.ById(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -496,7 +496,7 @@ namespace ERPApi.Controllers.ASM
                                 request.ToResponse(
                                     new List<Region>()
                                     {
-                                        service.ById(ParseInt(request.Function.Args[0]))
+                                        service.ById(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                     }
                                 )
                             );
@@ -505,20 +505,20 @@ namespace ERPApi.Controllers.ASM
                                 request.ToResponse(
                                     new List<Region>()
                                     {
-                                        service.ByKey(request.Function.Args[0])
+                                        service.ByKey(request.Function.Args[0], ToParams(request.Function.Args, 1))
                                     }
                                 )
                             );
                     case "bypid":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByPid(ParseInt(request.Function.Args[0]))
+                                    service.ByPid(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                 )
                             );
                     case "bypath":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByPath(request.Function.Args[0])
+                                    service.ByPath(request.Function.Args[0], ToParams(request.Function.Args, 1))
                                 )
                             );
                     default:
@@ -526,7 +526,7 @@ namespace ERPApi.Controllers.ASM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ByKeyWord(request.Function.Args[0])
+                                        service.ByKeyWord(request.Function.Args[0], ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }

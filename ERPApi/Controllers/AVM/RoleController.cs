@@ -304,7 +304,7 @@ namespace ERPApi.Controllers.AVM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ById(int.Parse(request.Function.Args[0]))
+                                        service.ById(int.Parse(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -345,13 +345,13 @@ namespace ERPApi.Controllers.AVM
                     case "byuserid":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByUserId(ParseInt(request.Function.Args[0]))
+                                    service.ByUserId(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                 )
                             );
                     case "byregistryid":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByRegistryId(ParseInt(request.Function.Args[0]))
+                                    service.ByRegistryId(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                 )
                             );
                     default:
@@ -359,7 +359,7 @@ namespace ERPApi.Controllers.AVM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ByKeyWord(request.Function.Args[0])
+                                        service.ByKeyWord(request.Function.Args[0], ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -402,7 +402,7 @@ namespace ERPApi.Controllers.AVM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ById(int.Parse(request.Function.Args[0]))
+                                        service.ById(int.Parse(request.Function.Args[0]), ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -490,7 +490,7 @@ namespace ERPApi.Controllers.AVM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ByKeyWord(request.Function.Args[0])
+                                        service.ByKeyWord(request.Function.Args[0], ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }

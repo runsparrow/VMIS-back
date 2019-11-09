@@ -167,6 +167,13 @@ namespace ERPApi.Entities.SRM
                 _status = value;
             }
         }
+        /// <summary>
+        /// 场地
+        /// </summary>
+        [Description("场地")]
+        [JsonProperty("site")]
+        [NotMapped]
+        public Site Site { get; set; }
         #endregion
     }
 }
