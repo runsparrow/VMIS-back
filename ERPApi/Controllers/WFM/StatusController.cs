@@ -279,7 +279,7 @@ namespace ERPApi.Controllers.WFM
                     case "bykey":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByKey(request.Function.Args[0])
+                                    service.ByKey(request.Function.Args[0]??"")
                                 )
                             );
                     default:
@@ -287,7 +287,7 @@ namespace ERPApi.Controllers.WFM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ById(int.Parse(request.Function.Args[0]))
+                                        service.ById(int.Parse(request.Function.Args[0]??""))
                                     )
                                 );
                         }
@@ -328,13 +328,13 @@ namespace ERPApi.Controllers.WFM
                     case "bypid":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByPid(ParseInt(request.Function.Args[0]))
+                                    service.ByPid(ParseInt(request.Function.Args[0]??""))
                                 )
                             );
                     case "bypath":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByPath(request.Function.Args[0])
+                                    service.ByPath(request.Function.Args[0]??"")
                                 )
                             );
                     default:
@@ -342,7 +342,7 @@ namespace ERPApi.Controllers.WFM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ByKeyWord(request.Function.Args[0])
+                                        service.ByKeyWord(request.Function.Args[0]??"")
                                     )
                                 );
                         }
@@ -385,7 +385,7 @@ namespace ERPApi.Controllers.WFM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ById(int.Parse(request.Function.Args[0]))
+                                        service.ById(int.Parse(request.Function.Args[0]??""))
                                     )
                                 );
                         }
@@ -428,9 +428,9 @@ namespace ERPApi.Controllers.WFM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.Page(request.Function.Args[0], request.PageIndex, request.PageSize, request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1)),
-                                        service.PageCount(request.Function.Args[0], request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1)),
-                                        service.PageSummary(request.Function.Args[0], request.PageIndex, request.PageSize, request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1))
+                                        service.Page(request.Function.Args[0]??"", request.PageIndex, request.PageSize, request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1)),
+                                        service.PageCount(request.Function.Args[0]??"", request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1)),
+                                        service.PageSummary(request.Function.Args[0]??"", request.PageIndex, request.PageSize, request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -473,7 +473,7 @@ namespace ERPApi.Controllers.WFM
                                 request.ToResponse(
                                     new List<Status>()
                                     {
-                                        service.ById(ParseInt(request.Function.Args[0]))
+                                        service.ById(ParseInt(request.Function.Args[0]??""))
                                     }
                                 )
                             );
@@ -482,20 +482,20 @@ namespace ERPApi.Controllers.WFM
                                 request.ToResponse(
                                     new List<Status>()
                                     {
-                                        service.ByKey(request.Function.Args[0])
+                                        service.ByKey(request.Function.Args[0]??"")
                                     }
                                 )
                             );
                     case "bypid":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByPid(ParseInt(request.Function.Args[0]))
+                                    service.ByPid(ParseInt(request.Function.Args[0]??""))
                                 )
                             );
                     case "bypath":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByPath(request.Function.Args[0])
+                                    service.ByPath(request.Function.Args[0]??"")
                                 )
                             );
                     default:
@@ -503,7 +503,7 @@ namespace ERPApi.Controllers.WFM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ByKeyWord(request.Function.Args[0])
+                                        service.ByKeyWord(request.Function.Args[0]??"")
                                     )
                                 );
                         }

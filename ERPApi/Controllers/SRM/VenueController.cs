@@ -304,7 +304,7 @@ namespace ERPApi.Controllers.SRM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ById(int.Parse(request.Function.Args[0]), ToParams(request.Function.Args, 1))
+                                        service.ById(int.Parse(request.Function.Args[0]??""), ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -345,7 +345,7 @@ namespace ERPApi.Controllers.SRM
                     case "bysiteid":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.BySiteId(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
+                                    service.BySiteId(ParseInt(request.Function.Args[0]??""), ToParams(request.Function.Args, 1))
                                 )
                             );
                     default:
@@ -353,7 +353,7 @@ namespace ERPApi.Controllers.SRM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ByKeyWord(request.Function.Args[0], ToParams(request.Function.Args, 1))
+                                        service.ByKeyWord(request.Function.Args[0]??"", ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -396,7 +396,7 @@ namespace ERPApi.Controllers.SRM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ById(int.Parse(request.Function.Args[0]), ToParams(request.Function.Args, 1))
+                                        service.ById(int.Parse(request.Function.Args[0]??""), ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -439,9 +439,9 @@ namespace ERPApi.Controllers.SRM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.Page(request.Function.Args[0], request.PageIndex, request.PageSize, request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1)),
-                                        service.PageCount(request.Function.Args[0], request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1)),
-                                        service.PageSummary(request.Function.Args[0], request.PageIndex, request.PageSize, request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1))
+                                        service.Page(request.Function.Args[0]??"", request.PageIndex, request.PageSize, request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1)),
+                                        service.PageCount(request.Function.Args[0]??"", request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1)),
+                                        service.PageSummary(request.Function.Args[0]??"", request.PageIndex, request.PageSize, request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -484,7 +484,7 @@ namespace ERPApi.Controllers.SRM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ByKeyWord(request.Function.Args[0], ToParams(request.Function.Args, 1))
+                                        service.ByKeyWord(request.Function.Args[0]??"", ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }

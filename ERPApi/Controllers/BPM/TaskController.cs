@@ -304,7 +304,7 @@ namespace ERPApi.Controllers.BPM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ById(int.Parse(request.Function.Args[0]), ToParams(request.Function.Args, 1))
+                                        service.ById(ParseInt(request.Function.Args[0]??""), ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -345,31 +345,31 @@ namespace ERPApi.Controllers.BPM
                     case "bytypeid":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByTypeId(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
+                                    service.ByTypeId(ParseInt(request.Function.Args[0]??""), ToParams(request.Function.Args, 1))
                                 )
                             );
                     case "bycustomerid":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByCustomerId(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
+                                    service.ByCustomerId(ParseInt(request.Function.Args[0]??""), ToParams(request.Function.Args, 1))
                                 )
                             );
                     case "byreceptionid":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByReceptionId(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
+                                    service.ByReceptionId(ParseInt(request.Function.Args[0]??""), ToParams(request.Function.Args, 1))
                                 )
                             );
                     case "bysiteid":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.BySiteId(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
+                                    service.BySiteId(ParseInt(request.Function.Args[0]??""), ToParams(request.Function.Args, 1))
                                 )
                             );
                     case "byvenueid":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.ByVenueId(ParseInt(request.Function.Args[0]), ToParams(request.Function.Args, 1))
+                                    service.ByVenueId(ParseInt(request.Function.Args[0]??""), ToParams(request.Function.Args, 1))
                                 )
                             );
                     default:
@@ -377,7 +377,7 @@ namespace ERPApi.Controllers.BPM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ByKeyWord(request.Function.Args[0], ToParams(request.Function.Args, 1))
+                                        service.ByKeyWord(request.Function.Args[0]??"", ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -420,7 +420,7 @@ namespace ERPApi.Controllers.BPM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ById(int.Parse(request.Function.Args[0]), ToParams(request.Function.Args, 1))
+                                        service.ById(ParseInt(request.Function.Args[0]??""), ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -463,9 +463,9 @@ namespace ERPApi.Controllers.BPM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.Page(request.Function.Args[0], request.PageIndex, request.PageSize, request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1)),
-                                        service.PageCount(request.Function.Args[0], request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1)),
-                                        service.PageSummary(request.Function.Args[0], request.PageIndex, request.PageSize, request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1))
+                                        service.Page(request.Function.Args[0]??"", request.PageIndex, request.PageSize, request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1)),
+                                        service.PageCount(request.Function.Args[0]??"", request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1)),
+                                        service.PageSummary(request.Function.Args[0]??"", request.PageIndex, request.PageSize, request.StartDate, request.EndDate, request.Status, request.Sort, ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
@@ -508,7 +508,7 @@ namespace ERPApi.Controllers.BPM
                         {
                             return base.ResponseOk(
                                     request.ToResponse(
-                                        service.ByKeyWord(request.Function.Args[0], ToParams(request.Function.Args, 1))
+                                        service.ByKeyWord(request.Function.Args[0]??"", ToParams(request.Function.Args, 1))
                                     )
                                 );
                         }
