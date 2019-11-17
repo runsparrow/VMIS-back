@@ -994,6 +994,13 @@ namespace ERPApi.Services.BPM
                             row.Task.OutDateTime >= startDate && row.Task.OutDateTime <= endDate
                         );
                 }
+                if (entityAttrs.Contains("InDateTime^OutDateTime"))
+                {
+                    return queryable
+                        .Where(row =>
+                            row.Task.OutDateTime >= startDate && row.Task.InDateTime <= endDate
+                        );
+                }
                 return queryable;
             }
             catch (Exception ex)
