@@ -973,6 +973,27 @@ namespace ERPApi.Services.BPM
                             row.Task.CreateDateTime >= startDate && row.Task.CreateDateTime <= endDate
                         );
                 }
+                if (entityAttrs.Contains("ReceptionDateTime"))
+                {
+                    return queryable
+                        .Where(row =>
+                            row.Task.ReceptionDateTime >= startDate && row.Task.ReceptionDateTime <= endDate
+                        );
+                }
+                if (entityAttrs.Contains("InDateTime"))
+                {
+                    return queryable
+                        .Where(row =>
+                            row.Task.InDateTime >= startDate && row.Task.InDateTime <= endDate
+                        );
+                }
+                if (entityAttrs.Contains("OutDateTime"))
+                {
+                    return queryable
+                        .Where(row =>
+                            row.Task.OutDateTime >= startDate && row.Task.OutDateTime <= endDate
+                        );
+                }
                 return queryable;
             }
             catch (Exception ex)
