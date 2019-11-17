@@ -51,7 +51,7 @@ namespace ERPApi.Controllers.AVM
                      new Claim(ClaimTypes.NameIdentifier, "ERPApi.Entities.AVM.User")
                 };
                 var ip = HttpContext.Features.Get<IHttpConnectionFeature>()?.RemoteIpAddress?.ToString();
-                var token = _tokenBuilder.BuildJwtToken(claims, ip, DateTime.UtcNow, DateTime.Now.AddSeconds(1200)); 
+                var token = _tokenBuilder.BuildJwtToken(claims, ip, DateTime.Now, DateTime.Now.AddHours(24)); 
                 return new JsonResult(new { Result = true, Data = token, User = new { UserId=user.Id, UserName = user.Name, RealName = user.RealName} });
             }
             else
