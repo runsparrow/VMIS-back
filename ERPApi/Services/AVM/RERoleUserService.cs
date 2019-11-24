@@ -594,24 +594,24 @@ namespace ERPApi.Services.AVM
             {
                 // SQLEntity.User
                 if (entityAttr.ToLower().Equals("user"))
-                    left = left
-                        // main: RERoleUser | left : User
-                        .LeftOuterJoin(context.AVM_User, Main => Main.RERoleUser.UserId, Left => Left.Id, (Main, Left) => new
-                        {
-                            Main.RERoleUser,
-                            User = Left,
-                            Main.Role
-                        });
+                {
+                    left = left.LeftOuterJoin(context.AVM_User, Main => Main.RERoleUser.UserId, Left => Left.Id, (Main, Left) => new
+                    {
+                        Main.RERoleUser,
+                        User = Left,
+                        Main.Role
+                    });
+                }
                 // SQLEntity.Role
                 if (entityAttr.ToLower().Equals("role"))
-                    left = left
-                        // main: RERoleUser | left : Role
-                        .LeftOuterJoin(context.AVM_Role, Main => Main.RERoleUser.RoleId, Left => Left.Id, (Main, Left) => new
-                        {
-                            Main.RERoleUser,
-                            Main.User,
-                            Role = Left
-                        });
+                {
+                    left = left.LeftOuterJoin(context.AVM_Role, Main => Main.RERoleUser.RoleId, Left => Left.Id, (Main, Left) => new
+                    {
+                        Main.RERoleUser,
+                        Main.User,
+                        Role = Left
+                    });
+                }
             }
             var group = left.Select(Main => new SQLEntity
             {
@@ -687,12 +687,12 @@ namespace ERPApi.Services.AVM
                     // 遍历
                     for (var i = 0; i < splits.Length; i++)
                     {
-                        if (splits[i].ToLower().Contains("userid"))
+                        if (splits[i].ToLower().StartsWith("userid"))
                         {
                             int userId = int.Parse(splits[i].Substring(splits[i].IndexOf("=") + 1, splits[i].Length - splits[i].IndexOf("=") - 1));
                             queryable = queryable.Where(row => row.RERoleUser.UserId == userId);
                         }
-                        if (splits[i].ToLower().Contains("roleid"))
+                        else if (splits[i].ToLower().StartsWith("roleid"))
                         {
                             int roleId = int.Parse(splits[i].Substring(splits[i].IndexOf("=") + 1, splits[i].Length - splits[i].IndexOf("=") - 1));
                             queryable = queryable.Where(row => row.RERoleUser.RoleId == roleId);

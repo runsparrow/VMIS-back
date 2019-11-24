@@ -592,24 +592,24 @@ namespace ERPApi.Services.AVM
             {
                 // SQLEntity.Registry
                 if (entityAttr.ToLower().Equals("registry"))
-                    left = left
-                        // main: REUserRegistry | left : Registry
-                        .LeftOuterJoin(context.AVM_Registry, Main => Main.REUserRegistry.RegistryId, Left => Left.Id, (Main, Left) => new
-                        {
-                            Main.REUserRegistry,
-                            Registry = Left,
-                            Main.User
-                        });
+                {
+                    left = left.LeftOuterJoin(context.AVM_Registry, Main => Main.REUserRegistry.RegistryId, Left => Left.Id, (Main, Left) => new
+                    {
+                        Main.REUserRegistry,
+                        Registry = Left,
+                        Main.User
+                    });
+                }
                 // SQLEntity.User
                 if (entityAttr.ToLower().Equals("user"))
-                    left = left
-                        // main: REUserRegistry | left : User
-                        .LeftOuterJoin(context.AVM_User, Main => Main.REUserRegistry.UserId, Left => Left.Id, (Main, Left) => new
-                        {
-                            Main.REUserRegistry,
-                            Main.Registry,
-                            User = Left
-                        });
+                {
+                    left = left.LeftOuterJoin(context.AVM_User, Main => Main.REUserRegistry.UserId, Left => Left.Id, (Main, Left) => new
+                    {
+                        Main.REUserRegistry,
+                        Main.Registry,
+                        User = Left
+                    });
+                }
             }
             var group = left.Select(Main => new SQLEntity
             {
@@ -685,12 +685,12 @@ namespace ERPApi.Services.AVM
                     // 遍历
                     for (var i = 0; i < splits.Length; i++)
                     {
-                        if (splits[i].ToLower().Contains("registryid"))
+                        if (splits[i].ToLower().StartsWith("registryid"))
                         {
                             int registryId = int.Parse(splits[i].Substring(splits[i].IndexOf("=") + 1, splits[i].Length - splits[i].IndexOf("=") - 1));
                             queryable = queryable.Where(row => row.REUserRegistry.RegistryId == registryId);
                         }
-                        if (splits[i].ToLower().Contains("userid"))
+                        else if (splits[i].ToLower().StartsWith("userid"))
                         {
                             int userId = int.Parse(splits[i].Substring(splits[i].IndexOf("=") + 1, splits[i].Length - splits[i].IndexOf("=") - 1));
                             queryable = queryable.Where(row => row.REUserRegistry.UserId == userId);

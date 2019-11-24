@@ -592,24 +592,24 @@ namespace ERPApi.Services.AVM
             {
                 // SQLEntity.Registry
                 if (entityAttr.ToLower().Equals("registry"))
-                    left = left
-                        // main: RERoleRegistry | left : Registry
-                        .LeftOuterJoin(context.AVM_Registry, Main => Main.RERoleRegistry.RegistryId, Left => Left.Id, (Main, Left) => new
-                        {
-                            Main.RERoleRegistry,
-                            Registry = Left,
-                            Main.Role
-                        });
+                {
+                    left = left.LeftOuterJoin(context.AVM_Registry, Main => Main.RERoleRegistry.RegistryId, Left => Left.Id, (Main, Left) => new
+                    {
+                        Main.RERoleRegistry,
+                        Registry = Left,
+                        Main.Role
+                    });
+                }
                 // SQLEntity.Role
                 if (entityAttr.ToLower().Equals("role"))
-                    left = left
-                        // main: RERoleRegistry | left : Role
-                        .LeftOuterJoin(context.AVM_Role, Main => Main.RERoleRegistry.RoleId, Left => Left.Id, (Main, Left) => new
-                        {
-                            Main.RERoleRegistry,
-                            Main.Registry,
-                            Role = Left
-                        });
+                {
+                    left = left.LeftOuterJoin(context.AVM_Role, Main => Main.RERoleRegistry.RoleId, Left => Left.Id, (Main, Left) => new
+                    {
+                        Main.RERoleRegistry,
+                        Main.Registry,
+                        Role = Left
+                    });
+                }
             }
             var group = left.Select(Main => new SQLEntity
             {
@@ -685,12 +685,12 @@ namespace ERPApi.Services.AVM
                     // 遍历
                     for (var i = 0; i < splits.Length; i++)
                     {
-                        if (splits[i].ToLower().Contains("registryid"))
+                        if (splits[i].ToLower().StartsWith("registryid"))
                         {
                             int registryId = int.Parse(splits[i].Substring(splits[i].IndexOf("=") + 1, splits[i].Length - splits[i].IndexOf("=") - 1));
                             queryable = queryable.Where(row => row.RERoleRegistry.RegistryId == registryId);
                         }
-                        if (splits[i].ToLower().Contains("roleid"))
+                        else if (splits[i].ToLower().StartsWith("roleid"))
                         {
                             int roleId = int.Parse(splits[i].Substring(splits[i].IndexOf("=") + 1, splits[i].Length - splits[i].IndexOf("=") - 1));
                             queryable = queryable.Where(row => row.RERoleRegistry.RoleId == roleId);

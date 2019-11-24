@@ -825,14 +825,14 @@ namespace ERPApi.Services.AVM
             foreach (string entityAttr in entityAttrs)
             {
                 // SQLEntity.Status
-                if (entityAttr.Equals("Status"))
-                    left = left
-                        // main: Registry | left : Status
-                        .LeftOuterJoin(context.WFM_Status, Main => Main.Registry.StatusId, Left => Left.Id, (Main, Left) => new
-                        {
-                            Main.Registry,
-                            Status = Left
-                        });
+                if (entityAttr.ToLower().Equals("status"))
+                {
+                    left = left.LeftOuterJoin(context.WFM_Status, Main => Main.Registry.StatusId, Left => Left.Id, (Main, Left) => new
+                    {
+                        Main.Registry,
+                        Status = Left
+                    });
+                }
             }
             var group = left.Select(Main => new SQLEntity
             {
@@ -914,7 +914,7 @@ namespace ERPApi.Services.AVM
                     // 遍历
                     for (var i = 0; i < splits.Length; i++)
                     {
-                        if (splits[i].ToLower().Contains("statusid"))
+                        if (splits[i].ToLower().StartsWith("statusid"))
                         {
                             int statusId = int.Parse(splits[i].Substring(splits[i].IndexOf("=") + 1, splits[i].Length - splits[i].IndexOf("=") - 1));
                             queryable = queryable.Where(row => row.Registry.StatusId == statusId);
@@ -942,7 +942,7 @@ namespace ERPApi.Services.AVM
             {
                 startDate = startDate == null ? DateTime.MinValue : startDate;
                 endDate = endDate == null ? DateTime.MaxValue : endDate.TimeOfDay.TotalSeconds == 0 ? endDate.Date.AddDays(1).AddSeconds(-1) : endDate;
-                if (entityAttrs.Contains("CreateDateTime"))
+                if (entityAttrs.ToLowers().Contains("createdatetime"))
                 {
                     return queryable
                         .Where(row =>

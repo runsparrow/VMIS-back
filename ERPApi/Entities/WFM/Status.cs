@@ -53,10 +53,9 @@ namespace ERPApi.Entities.WFM
         /// <summary>
         /// 状态键值
         /// </summary>
-        [StringLength(255)]
         [Description("状态键值")]
         [JsonProperty("value")]
-        public string Value { get; set; }
+        public int Value { get; set; }
         /// <summary>
         /// 状态描述
         /// </summary>

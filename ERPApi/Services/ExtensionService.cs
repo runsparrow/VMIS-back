@@ -12,6 +12,32 @@ namespace ERPApi.Services
     public static class ExtensionService
     {
         /// <summary>
+        ///  数组转小写
+        /// </summary>
+        /// <param name="arrs"></param>
+        /// <returns></returns>
+        public static string [] ToLowers(this string [] arrs)
+        {
+            for(var i=0; i<arrs.Length; i++)
+            {
+                arrs[i] = arrs[i].ToLower();
+            }
+            return arrs;
+        }
+        /// <summary>
+        ///  数组转大写
+        /// </summary>
+        /// <param name="arrs"></param>
+        /// <returns></returns>
+        public static string[] ToUpper(this string[] arrs)
+        {
+            for (var i = 0; i < arrs.Length; i++)
+            {
+                arrs[i] = arrs[i].ToUpper();
+            }
+            return arrs;
+        }
+        /// <summary>
         ///  将Request传入的Entity与原始Entity进行比较并合并
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>

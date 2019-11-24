@@ -820,7 +820,7 @@ namespace ERPApi.Services.WFM
             {
                 startDate = startDate == null ? DateTime.MinValue : startDate;
                 endDate = endDate == null ? DateTime.MaxValue : endDate.TimeOfDay.TotalSeconds == 0 ? endDate.Date.AddDays(1).AddSeconds(-1) : endDate;
-                if (entityAttrs.Contains("CreateDateTime"))
+                if (entityAttrs.ToLowers().Contains("createdatetime"))
                 {
                     return queryable
                         .Where(row =>

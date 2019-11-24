@@ -590,13 +590,13 @@ namespace ERPApi.Services.AVM
             {
                 // SQLEntity.User
                 if (entityAttr.ToLower().Equals("user"))
-                    left = left
-                        // main: UserPower | left : User
-                        .LeftOuterJoin(context.AVM_User, Main => Main.UserPower.UserId, Left => Left.Id, (Main, Left) => new
-                        {
-                            Main.UserPower,
-                            User = Left
-                        });
+                {
+                    left = left.LeftOuterJoin(context.AVM_User, Main => Main.UserPower.UserId, Left => Left.Id, (Main, Left) => new
+                    {
+                        Main.UserPower,
+                        User = Left
+                    });
+                }
             }
             var group = left.Select(Main => new SQLEntity
             {

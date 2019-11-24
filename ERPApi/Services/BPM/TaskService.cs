@@ -771,70 +771,70 @@ namespace ERPApi.Services.BPM
             foreach (string entityAttr in entityAttrs)
             {
                 // SQLEntity.Reception
-                if (entityAttr.Equals("Reception"))
-                    left = left
-                        // main: Task | left : Status
-                        .LeftOuterJoin(context.AVM_User, Main => Main.Task.ReceptionId, Left => Left.Id, (Main, Left) => new
-                        {
-                            Main.Task,
-                            Reception = Left,
-                            Main.Customer,
-                            Main.Site,
-                            Main.Venue,
-                            Main.Status
-                        });
+                if (entityAttr.ToLower().Equals("reception"))
+                {
+                    left = left.LeftOuterJoin(context.AVM_User, Main => Main.Task.ReceptionId, Left => Left.Id, (Main, Left) => new
+                    {
+                        Main.Task,
+                        Reception = Left,
+                        Main.Customer,
+                        Main.Site,
+                        Main.Venue,
+                        Main.Status
+                    });
+                }
                 // SQLEntity.Customer
-                if (entityAttr.Equals("Customer"))
-                    left = left
-                        // main: Task | left : Status
-                        .LeftOuterJoin(context.CRM_Customer, Main => Main.Task.CustomerId, Left => Left.Id, (Main, Left) => new
-                        {
-                            Main.Task,
-                            Main.Reception,
-                            Customer = Left,
-                            Main.Site,
-                            Main.Venue,
-                            Main.Status
-                        });
+                if (entityAttr.ToLower().Equals("customer"))
+                {
+                    left = left.LeftOuterJoin(context.CRM_Customer, Main => Main.Task.CustomerId, Left => Left.Id, (Main, Left) => new
+                    {
+                        Main.Task,
+                        Main.Reception,
+                        Customer = Left,
+                        Main.Site,
+                        Main.Venue,
+                        Main.Status
+                    });
+                }
                 // SQLEntity.Site
-                if (entityAttr.Equals("Site"))
-                    left = left
-                        // main: Task | left : Status
-                        .LeftOuterJoin(context.SRM_Site, Main => Main.Task.SiteId, Left => Left.Id, (Main, Left) => new
-                        {
-                            Main.Task,
-                            Main.Reception,
-                            Main.Customer,
-                            Site = Left,
-                            Main.Venue,
-                            Main.Status
-                        });
+                if (entityAttr.ToLower().Equals("site"))
+                {
+                    left = left.LeftOuterJoin(context.SRM_Site, Main => Main.Task.SiteId, Left => Left.Id, (Main, Left) => new
+                    {
+                        Main.Task,
+                        Main.Reception,
+                        Main.Customer,
+                        Site = Left,
+                        Main.Venue,
+                        Main.Status
+                    });
+                }
                 // SQLEntity.Venue
-                if (entityAttr.Equals("Venue"))
-                    left = left
-                        // main: Task | left : Status
-                        .LeftOuterJoin(context.SRM_Venue, Main => Main.Task.VenueId, Left => Left.Id, (Main, Left) => new
-                        {
-                            Main.Task,
-                            Main.Reception,
-                            Main.Customer,
-                            Main.Site,
-                            Venue = Left,
-                            Main.Status
-                        });
+                if (entityAttr.ToLower().Equals("venue"))
+                {
+                    left = left.LeftOuterJoin(context.SRM_Venue, Main => Main.Task.VenueId, Left => Left.Id, (Main, Left) => new
+                    {
+                        Main.Task,
+                        Main.Reception,
+                        Main.Customer,
+                        Main.Site,
+                        Venue = Left,
+                        Main.Status
+                    });
+                }
                 // SQLEntity.Status
-                if (entityAttr.Equals("Status"))
-                    left = left
-                        // main: Task | left : Status
-                        .LeftOuterJoin(context.WFM_Status, Main => Main.Task.StatusId, Left => Left.Id, (Main, Left) => new
-                        {
-                            Main.Task,
-                            Main.Reception,
-                            Main.Customer,
-                            Main.Site,
-                            Main.Venue,
-                            Status = Left
-                        });
+                if (entityAttr.ToLower().Equals("status"))
+                {
+                    left = left.LeftOuterJoin(context.WFM_Status, Main => Main.Task.StatusId, Left => Left.Id, (Main, Left) => new
+                    {
+                        Main.Task,
+                        Main.Reception,
+                        Main.Customer,
+                        Main.Site,
+                        Main.Venue,
+                        Status = Left
+                    });
+                }
             }
             var group = left.Select(Main => new SQLEntity
             {
@@ -938,7 +938,7 @@ namespace ERPApi.Services.BPM
                     // 遍历
                     for (var i = 0; i < splits.Length; i++)
                     {
-                        if (splits[i].ToLower().Contains("statusid"))
+                        if (splits[i].ToLower().StartsWith("statusid"))
                         {
                             int statusId = int.Parse(splits[i].Substring(splits[i].IndexOf("=") + 1, splits[i].Length - splits[i].IndexOf("=") - 1));
                             queryable = queryable.Where(row => row.Task.StatusId == statusId);
@@ -966,35 +966,35 @@ namespace ERPApi.Services.BPM
             {
                 startDate = startDate == null ? DateTime.MinValue : startDate;
                 endDate = endDate == null ? DateTime.MaxValue : endDate.TimeOfDay.TotalSeconds == 0 ? endDate.Date.AddDays(1).AddSeconds(-1) : endDate;
-                if (entityAttrs.Contains("CreateDateTime"))
+                if (entityAttrs.ToLowers().Contains("createdatetime"))
                 {
                     return queryable
                         .Where(row =>
                             row.Task.CreateDateTime >= startDate && row.Task.CreateDateTime <= endDate
                         );
                 }
-                if (entityAttrs.Contains("ReceptionDateTime"))
+                if (entityAttrs.ToLowers().Contains("receptiondatetime"))
                 {
                     return queryable
                         .Where(row =>
                             row.Task.ReceptionDateTime >= startDate && row.Task.ReceptionDateTime <= endDate
                         );
                 }
-                if (entityAttrs.Contains("InDateTime"))
+                if (entityAttrs.ToLowers().Contains("indatetime"))
                 {
                     return queryable
                         .Where(row =>
                             row.Task.InDateTime >= startDate && row.Task.InDateTime <= endDate
                         );
                 }
-                if (entityAttrs.Contains("OutDateTime"))
+                if (entityAttrs.ToLowers().Contains("outdatetime"))
                 {
                     return queryable
                         .Where(row =>
                             row.Task.OutDateTime >= startDate && row.Task.OutDateTime <= endDate
                         );
                 }
-                if (entityAttrs.Contains("InDateTime^OutDateTime"))
+                if (entityAttrs.ToLowers().Contains("indatetime^outdatetime"))
                 {
                     return queryable
                         .Where(row =>

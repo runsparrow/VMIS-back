@@ -463,11 +463,14 @@ namespace ERPApi.Services.AVM
                     {
                         // 加密
                         password = EncryptHelper.GetBase64String(password);
-                        return context.AVM_User.FirstOrDefault(row => (
-                                (row.Name == key && row.Password == password) ||
-                                (row.Mobile == key && row.Password == password) ||
-                                (row.Email == key && row.Password == password)
-                            ) && row.StatusId == 1
+                        return SQLEntityToSingle(
+                            SQLQueryable(context, "status")
+                                .SingleOrDefault(row => (
+                                    (row.User.Name == key && row.User.Password == password) ||
+                                    (row.User.Mobile == key && row.User.Password == password) ||
+                                    (row.User.Email == key && row.User.Password == password) && row.Status.Value == 1
+                                )
+                            )
                         );
                     }
                     catch (Exception ex)
@@ -791,14 +794,14 @@ namespace ERPApi.Services.AVM
             foreach (string entityAttr in entityAttrs)
             {
                 // SQLEntity.Status
-                if (entityAttr.Equals("Status"))
-                    left = left
-                        // main: User | left : Status
-                        .LeftOuterJoin(context.WFM_Status, Main => Main.User.StatusId, Left => Left.Id, (Main, Left) => new
-                        {
-                            Main.User,
-                            Status = Left
-                        });
+                if (entityAttr.ToLower().Equals("status"))
+                {
+                    left = left.LeftOuterJoin(context.WFM_Status, Main => Main.User.StatusId, Left => Left.Id, (Main, Left) => new
+                    {
+                        Main.User,
+                        Status = Left
+                    });
+                }
             }
             var group = left.Select(Main => new SQLEntity
             {
@@ -880,7 +883,7 @@ namespace ERPApi.Services.AVM
                     // 遍历
                     for (var i = 0; i < splits.Length; i++)
                     {
-                        if (splits[i].ToLower().Contains("statusid"))
+                        if (splits[i].ToLower().StartsWith("statusid"))
                         {
                             int statusId = int.Parse(splits[i].Substring(splits[i].IndexOf("=") + 1, splits[i].Length - splits[i].IndexOf("=") - 1));
                             queryable = queryable.Where(row => row.User.StatusId == statusId);
@@ -908,7 +911,7 @@ namespace ERPApi.Services.AVM
             {
                 startDate = startDate == null ? DateTime.MinValue : startDate;
                 endDate = endDate == null ? DateTime.MaxValue : endDate.TimeOfDay.TotalSeconds == 0 ? endDate.Date.AddDays(1).AddSeconds(-1) : endDate;
-                if (entityAttrs.Contains("CreateDateTime"))
+                if (entityAttrs.ToLowers().Contains("createdatetime"))
                 {
                     return queryable
                         .Where(row =>

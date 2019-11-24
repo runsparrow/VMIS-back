@@ -764,15 +764,15 @@ namespace ERPApi.Services.ASM
 
             foreach (string entityAttr in entityAttrs)
             {
-                // SQLEntity.Status
-                if (entityAttr.Equals("Status"))
-                    left = left
-                        // main: Dictionary | left : Status
-                        .LeftOuterJoin(context.WFM_Status, Main => Main.Dictionary.StatusId, Left => Left.Id, (Main, Left) => new
-                        {
-                            Main.Dictionary,
-                            Status = Left
-                        });
+                // SQLEntity.Statusf
+                if (entityAttr.ToLower().Equals("status"))
+                {
+                    left = left.LeftOuterJoin(context.WFM_Status, Main => Main.Dictionary.StatusId, Left => Left.Id, (Main, Left) => new
+                    {
+                        Main.Dictionary,
+                        Status = Left
+                    });
+                }
             }
             var group = left.Select(Main => new SQLEntity
             {
@@ -854,7 +854,7 @@ namespace ERPApi.Services.ASM
                     // 遍历
                     for (var i = 0; i < splits.Length; i++)
                     {
-                        if (splits[i].ToLower().Contains("statusid"))
+                        if (splits[i].ToLower().StartsWith("statusid"))
                         {
                             int statusId = int.Parse(splits[i].Substring(splits[i].IndexOf("=") + 1, splits[i].Length - splits[i].IndexOf("=") - 1));
                             queryable = queryable.Where(row => row.Dictionary.StatusId == statusId);
@@ -882,7 +882,7 @@ namespace ERPApi.Services.ASM
             {
                 startDate = startDate == null ? DateTime.MinValue : startDate;
                 endDate = endDate == null ? DateTime.MaxValue : endDate.TimeOfDay.TotalSeconds == 0 ? endDate.Date.AddDays(1).AddSeconds(-1) : endDate;
-                if (entityAttrs.Contains("CreateDateTime"))
+                if (entityAttrs.ToLowers().Contains("createdatetime"))
                 {
                     return queryable
                         .Where(row =>

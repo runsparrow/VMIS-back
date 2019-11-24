@@ -665,25 +665,25 @@ namespace ERPApi.Services.SRM
             foreach (string entityAttr in entityAttrs)
             {
                 // SQLEntity.Site
-                if (entityAttr.Equals("Site"))
-                    left = left
-                        // main: Venue | left : Status
-                        .LeftOuterJoin(context.SRM_Site, Main => Main.Site.Id, Left => Left.Id, (Main, Left) => new
-                        {
-                            Main.Venue,
-                            Site = Left,
-                            Main.Status
-                        });
+                if (entityAttr.ToLower().Equals("site"))
+                {
+                    left = left.LeftOuterJoin(context.SRM_Site, Main => Main.Site.Id, Left => Left.Id, (Main, Left) => new
+                    {
+                        Main.Venue,
+                        Site = Left,
+                        Main.Status
+                    });
+                }
                 // SQLEntity.Status
-                if (entityAttr.Equals("Status"))
-                    left = left
-                        // main: Venue | left : Status
-                        .LeftOuterJoin(context.WFM_Status, Main => Main.Venue.StatusId, Left => Left.Id, (Main, Left) => new
-                        {
-                            Main.Venue,
-                            Main.Site,
-                            Status = Left
-                        });
+                if (entityAttr.ToLower().Equals("status"))
+                {
+                    left = left.LeftOuterJoin(context.WFM_Status, Main => Main.Venue.StatusId, Left => Left.Id, (Main, Left) => new
+                    {
+                        Main.Venue,
+                        Main.Site,
+                        Status = Left
+                    });
+                }
             }
             var group = left.Select(Main => new SQLEntity
             {
@@ -781,7 +781,7 @@ namespace ERPApi.Services.SRM
                     // 遍历
                     for (var i = 0; i < splits.Length; i++)
                     {
-                        if (splits[i].ToLower().Contains("statusid"))
+                        if (splits[i].ToLower().StartsWith("statusid"))
                         {
                             int statusId = int.Parse(splits[i].Substring(splits[i].IndexOf("=") + 1, splits[i].Length - splits[i].IndexOf("=") - 1));
                             queryable = queryable.Where(row => row.Venue.StatusId == statusId);
@@ -809,7 +809,7 @@ namespace ERPApi.Services.SRM
             {
                 startDate = startDate == null ? DateTime.MinValue : startDate;
                 endDate = endDate == null ? DateTime.MaxValue : endDate.TimeOfDay.TotalSeconds == 0 ? endDate.Date.AddDays(1).AddSeconds(-1) : endDate;
-                if (entityAttrs.Contains("CreateDateTime"))
+                if (entityAttrs.ToLowers().Contains("createdatetime"))
                 {
                     return queryable
                         .Where(row =>
