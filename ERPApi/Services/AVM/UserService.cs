@@ -936,7 +936,7 @@ namespace ERPApi.Services.AVM
         {
             try
             {
-                return queryable;
+                return queryable; 
             }
             catch (Exception ex)
             {
