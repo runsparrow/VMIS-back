@@ -68,7 +68,7 @@ namespace ERPApi.Controllers.AVM
         /// </summary>
         /// <param name="authEntity"></param>
         /// <returns></returns>
-        [Route("ERP/Auth/GetToken", Name = "ERP_Auth_Get_Token")]
+        [Route("ERP/Auth/GetTokenByWeChatOpenId", Name = "ERP_Auth_Get_Token_ByWeChatOpenId")]
         [HttpGet]
         public IActionResult GetTokenByWeChatOpenId(string weChatOpenId)
         {
@@ -100,7 +100,7 @@ namespace ERPApi.Controllers.AVM
         /// </summary>
         /// <param name="authEntity"></param>
         /// <returns></returns>
-        [Route("ERP/Auth/GetToken", Name = "ERP_Auth_Get_Token")]
+        [Route("ERP/Auth/GetTokenByMobile", Name = "ERP_Auth_Get_Token_ByMobile")]
         [HttpGet]
         public IActionResult GetTokenByMobile(string mobile)
         {
