@@ -450,6 +450,30 @@ namespace ERPApi.Services.AVM
                 }
             }
             /// <summary>
+            /// 根据mobile查询
+            /// </summary>
+            /// <param name="mobile">手机号</param>
+            /// <param name="entityAttrs">可变参数</param>
+            /// <returns></returns>
+            public User ByMobile(string mobile, params string[] entityAttrs)
+            {
+                using (VMISContext context = new VMISContext())
+                {
+                    try
+                    {
+                        return SQLEntityToSingle(
+                                SQLQueryable(context, entityAttrs)
+                                    .Where(row => row.User.Mobile == mobile)
+                                    .SingleOrDefault()
+                            );
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
+            }
+            /// <summary>
             /// 
             /// </summary>
             /// <param name="key"></param>

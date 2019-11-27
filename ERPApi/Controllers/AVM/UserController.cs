@@ -317,6 +317,12 @@ namespace ERPApi.Controllers.AVM
                                     service.ByWeChatOpenId(request.Function.Args[0]??"", ToParams(request.Function.Args, 1))
                                 )
                             );
+                    case "bymobile":
+                        return base.ResponseOk(
+                                request.ToResponse(
+                                    service.ByMobile(request.Function.Args[0] ?? "", ToParams(request.Function.Args, 1))
+                                )
+                            );
                     default:
                         if (string.IsNullOrEmpty(request.Function.Name) || request.Function.Name.ToLower().Equals("byid"))
                         {
