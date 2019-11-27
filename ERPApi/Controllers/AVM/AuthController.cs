@@ -37,6 +37,38 @@ namespace ERPApi.Controllers.AVM
         /// <param name="authEntity"></param>
         /// <returns></returns>
         [Route("ERP/Auth/GetToken", Name = "ERP_Auth_Get_Token")]
+        [HttpGet]
+        public IActionResult GetToken(string accountName, string accountPwd)
+        {
+            var user = new UserService.SingleService().Verify(accountName, accountPwd);
+            if (user != null)
+            {
+                var claims = new Claim[] {
+                     new Claim(ClaimTypes.Sid, user.Id.ToString()),
+                     new Claim(ClaimTypes.Name, user.Name),
+                     new Claim(ClaimTypes.Surname, user.RealName),
+                     new Claim(ClaimTypes.Role, "admin"),
+                     new Claim(ClaimTypes.NameIdentifier, "ERPApi.Entities.AVM.User")
+                };
+                var ip = HttpContext.Features.Get<IHttpConnectionFeature>()?.RemoteIpAddress?.ToString();
+                var token = _tokenBuilder.BuildJwtToken(claims, ip, DateTime.Now, DateTime.Now.AddHours(24));
+                return new JsonResult(new { Result = true, Data = token, User = new { UserId = user.Id, UserName = user.Name, RealName = user.RealName, WeChatOpenId = user.WeChatOpenId } });
+            }
+            else
+            {
+                return new JsonResult(new
+                {
+                    Result = false,
+                    Message = "Authentication Failure"
+                });
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="authEntity"></param>
+        /// <returns></returns>
+        [Route("ERP/Auth/GetToken", Name = "ERP_Auth_Get_Token")]
         [HttpPost]
         public IActionResult GetToken([FromForm]HttpEntity authEntity)
         {
@@ -52,7 +84,7 @@ namespace ERPApi.Controllers.AVM
                 };
                 var ip = HttpContext.Features.Get<IHttpConnectionFeature>()?.RemoteIpAddress?.ToString();
                 var token = _tokenBuilder.BuildJwtToken(claims, ip, DateTime.Now, DateTime.Now.AddHours(24));
-                return new JsonResult(new { Result = true, Data = token, User = new { UserId=user.Id, UserName = user.Name, RealName = user.RealName} });
+                return new JsonResult(new { Result = true, Data = token, User = new { UserId=user.Id, UserName = user.Name, RealName = user.RealName, WeChatOpenId = user.WeChatOpenId} });
             }
             else
             {
@@ -93,7 +125,7 @@ namespace ERPApi.Controllers.AVM
                     user.RealName = claim.Value;
                 }
             }
-            return new JsonResult(new { Result = true, Data = token, User = new { UserId = user.Id, UserName = user.Name, RealName = user.RealName } });
+            return new JsonResult(new { Result = true, Data = token, User = new { UserId = user.Id, UserName = user.Name, RealName = user.RealName, WeChatOpenId = user.WeChatOpenId } });
 
         }
         #endregion
