@@ -1186,3 +1186,273 @@
 2019-11-27 23:26:10.5826 Info Found 115 configuration items
 2019-11-27 23:26:10.6045 Info Configuration initialized.
 2019-11-27 23:26:10.6189 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.8.10751. Product version: 4.6.8.
+2019-11-28 10:59:19.8211 Info Message Template Auto Format enabled
+2019-11-28 10:59:19.8525 Info Loading assembly: NLog.Web.AspNetCore
+2019-11-28 10:59:20.0076 Info Adding target FileTarget(Name=AllFile)
+2019-11-28 10:59:20.0121 Info Adding target FileTarget(Name=InfoFile)
+2019-11-28 10:59:20.0121 Info Adding target FileTarget(Name=DebugFile)
+2019-11-28 10:59:20.0121 Info Adding target FileTarget(Name=WarningFile)
+2019-11-28 10:59:20.0121 Info Adding target FileTarget(Name=ErrorFile)
+2019-11-28 10:59:20.1241 Error Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  Exception: System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+2019-11-28 10:59:20.1241 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  ---> System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+   --- End of inner exception stack trace ---
+2019-11-28 10:59:20.1524 Info Found 115 configuration items
+2019-11-28 10:59:20.1661 Info Configuration initialized.
+2019-11-28 10:59:20.1799 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.8.10751. Product version: 4.6.8.
+2019-11-28 11:05:28.4642 Info Message Template Auto Format enabled
+2019-11-28 11:05:28.4884 Info Loading assembly: NLog.Web.AspNetCore
+2019-11-28 11:05:28.5874 Info Adding target FileTarget(Name=AllFile)
+2019-11-28 11:05:28.5874 Info Adding target FileTarget(Name=InfoFile)
+2019-11-28 11:05:28.5874 Info Adding target FileTarget(Name=DebugFile)
+2019-11-28 11:05:28.5874 Info Adding target FileTarget(Name=WarningFile)
+2019-11-28 11:05:28.5874 Info Adding target FileTarget(Name=ErrorFile)
+2019-11-28 11:05:28.6611 Error Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  Exception: System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+2019-11-28 11:05:28.6644 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  ---> System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+   --- End of inner exception stack trace ---
+2019-11-28 11:05:28.6881 Info Found 115 configuration items
+2019-11-28 11:05:28.7067 Info Configuration initialized.
+2019-11-28 11:05:28.7209 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.8.10751. Product version: 4.6.8.
+2019-11-28 11:11:33.0711 Info Message Template Auto Format enabled
+2019-11-28 11:11:33.1014 Info Loading assembly: NLog.Web.AspNetCore
+2019-11-28 11:11:33.2012 Info Adding target FileTarget(Name=AllFile)
+2019-11-28 11:11:33.2012 Info Adding target FileTarget(Name=InfoFile)
+2019-11-28 11:11:33.2012 Info Adding target FileTarget(Name=DebugFile)
+2019-11-28 11:11:33.2012 Info Adding target FileTarget(Name=WarningFile)
+2019-11-28 11:11:33.2012 Info Adding target FileTarget(Name=ErrorFile)
+2019-11-28 11:11:33.2675 Error Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  Exception: System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+2019-11-28 11:11:33.2675 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  ---> System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+   --- End of inner exception stack trace ---
+2019-11-28 11:11:33.2901 Info Found 115 configuration items
+2019-11-28 11:11:33.3054 Info Configuration initialized.
+2019-11-28 11:11:33.3215 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.8.10751. Product version: 4.6.8.
+2019-11-28 11:21:47.4946 Info Message Template Auto Format enabled
+2019-11-28 11:21:47.5110 Info Loading assembly: NLog.Web.AspNetCore
+2019-11-28 11:21:47.5991 Info Adding target FileTarget(Name=AllFile)
+2019-11-28 11:21:47.5991 Info Adding target FileTarget(Name=InfoFile)
+2019-11-28 11:21:47.6014 Info Adding target FileTarget(Name=DebugFile)
+2019-11-28 11:21:47.6014 Info Adding target FileTarget(Name=WarningFile)
+2019-11-28 11:21:47.6014 Info Adding target FileTarget(Name=ErrorFile)
+2019-11-28 11:21:47.6606 Error Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  Exception: System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+2019-11-28 11:21:47.6710 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  ---> System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+   --- End of inner exception stack trace ---
+2019-11-28 11:21:47.6908 Info Found 115 configuration items
+2019-11-28 11:21:47.7075 Info Configuration initialized.
+2019-11-28 11:21:47.7227 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.8.10751. Product version: 4.6.8.
+2019-11-28 11:52:50.9951 Info Message Template Auto Format enabled
+2019-11-28 11:52:51.0140 Info Loading assembly: NLog.Web.AspNetCore
+2019-11-28 11:52:51.1116 Info Adding target FileTarget(Name=AllFile)
+2019-11-28 11:52:51.1116 Info Adding target FileTarget(Name=InfoFile)
+2019-11-28 11:52:51.1116 Info Adding target FileTarget(Name=DebugFile)
+2019-11-28 11:52:51.1145 Info Adding target FileTarget(Name=WarningFile)
+2019-11-28 11:52:51.1145 Info Adding target FileTarget(Name=ErrorFile)
+2019-11-28 11:52:51.1768 Error Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  Exception: System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+2019-11-28 11:52:51.1785 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  ---> System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+   --- End of inner exception stack trace ---
+2019-11-28 11:52:51.1964 Info Found 115 configuration items
+2019-11-28 11:52:51.2118 Info Configuration initialized.
+2019-11-28 11:52:51.2267 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.8.10751. Product version: 4.6.8.
+2019-11-28 12:01:46.7007 Info Message Template Auto Format enabled
+2019-11-28 12:01:46.7204 Info Loading assembly: NLog.Web.AspNetCore
+2019-11-28 12:01:46.8400 Info Adding target FileTarget(Name=AllFile)
+2019-11-28 12:01:46.8400 Info Adding target FileTarget(Name=InfoFile)
+2019-11-28 12:01:46.8400 Info Adding target FileTarget(Name=DebugFile)
+2019-11-28 12:01:46.8400 Info Adding target FileTarget(Name=WarningFile)
+2019-11-28 12:01:46.8400 Info Adding target FileTarget(Name=ErrorFile)
+2019-11-28 12:01:46.9213 Error Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  Exception: System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+2019-11-28 12:01:46.9213 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  ---> System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+   --- End of inner exception stack trace ---
+2019-11-28 12:01:46.9528 Info Found 115 configuration items
+2019-11-28 12:01:46.9758 Info Configuration initialized.
+2019-11-28 12:01:46.9945 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.8.10751. Product version: 4.6.8.
+2019-11-28 12:22:12.7510 Info Message Template Auto Format enabled
+2019-11-28 12:22:12.7843 Info Loading assembly: NLog.Web.AspNetCore
+2019-11-28 12:22:12.8798 Info Adding target FileTarget(Name=AllFile)
+2019-11-28 12:22:12.8818 Info Adding target FileTarget(Name=InfoFile)
+2019-11-28 12:22:12.8818 Info Adding target FileTarget(Name=DebugFile)
+2019-11-28 12:22:12.8818 Info Adding target FileTarget(Name=WarningFile)
+2019-11-28 12:22:12.8818 Info Adding target FileTarget(Name=ErrorFile)
+2019-11-28 12:22:12.9501 Error Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  Exception: System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+2019-11-28 12:22:12.9501 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  ---> System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+   --- End of inner exception stack trace ---
+2019-11-28 12:22:12.9759 Info Found 115 configuration items
+2019-11-28 12:22:12.9965 Info Configuration initialized.
+2019-11-28 12:22:13.0140 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.8.10751. Product version: 4.6.8.
+2019-11-28 12:34:26.4781 Info Message Template Auto Format enabled
+2019-11-28 12:34:26.4962 Info Loading assembly: NLog.Web.AspNetCore
+2019-11-28 12:34:26.5918 Info Adding target FileTarget(Name=AllFile)
+2019-11-28 12:34:26.6014 Info Adding target FileTarget(Name=InfoFile)
+2019-11-28 12:34:26.6014 Info Adding target FileTarget(Name=DebugFile)
+2019-11-28 12:34:26.6014 Info Adding target FileTarget(Name=WarningFile)
+2019-11-28 12:34:26.6014 Info Adding target FileTarget(Name=ErrorFile)
+2019-11-28 12:34:26.6598 Error Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  Exception: System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+2019-11-28 12:34:26.6598 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  ---> System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+   --- End of inner exception stack trace ---
+2019-11-28 12:34:26.6797 Info Found 115 configuration items
+2019-11-28 12:34:26.6934 Info Configuration initialized.
+2019-11-28 12:34:26.6934 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.8.10751. Product version: 4.6.8.
+2019-11-28 12:35:55.8404 Info Message Template Auto Format enabled
+2019-11-28 12:35:55.8595 Info Loading assembly: NLog.Web.AspNetCore
+2019-11-28 12:35:55.9591 Info Adding target FileTarget(Name=AllFile)
+2019-11-28 12:35:55.9591 Info Adding target FileTarget(Name=InfoFile)
+2019-11-28 12:35:55.9591 Info Adding target FileTarget(Name=DebugFile)
+2019-11-28 12:35:55.9591 Info Adding target FileTarget(Name=WarningFile)
+2019-11-28 12:35:55.9591 Info Adding target FileTarget(Name=ErrorFile)
+2019-11-28 12:35:56.0188 Error Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  Exception: System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+2019-11-28 12:35:56.0295 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  ---> System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+   --- End of inner exception stack trace ---
+2019-11-28 12:35:56.0476 Info Found 115 configuration items
+2019-11-28 12:35:56.0624 Info Configuration initialized.
+2019-11-28 12:35:56.0770 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.8.10751. Product version: 4.6.8.
+2019-11-28 12:51:27.7861 Info Message Template Auto Format enabled
+2019-11-28 12:51:27.8104 Info Loading assembly: NLog.Web.AspNetCore
+2019-11-28 12:51:27.9329 Info Adding target FileTarget(Name=AllFile)
+2019-11-28 12:51:27.9329 Info Adding target FileTarget(Name=InfoFile)
+2019-11-28 12:51:27.9329 Info Adding target FileTarget(Name=DebugFile)
+2019-11-28 12:51:27.9329 Info Adding target FileTarget(Name=WarningFile)
+2019-11-28 12:51:27.9329 Info Adding target FileTarget(Name=ErrorFile)
+2019-11-28 12:51:27.9934 Error Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  Exception: System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+2019-11-28 12:51:27.9934 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Exception when parsing D:\WenZhuTech\Projects\VMIS\GatewayApi\bin\Debug\netcoreapp2.2\NLog.config.  ---> System.ArgumentException: Unknown log level: Warning
+   at NLog.LogLevel.FromString(String levelName)
+   at NLog.Config.LoggingConfigurationParser.EnableLevelsForRule(LoggingRule rule, String enableLevels, String minLevel, String maxLevel)
+   at NLog.Config.LoggingConfigurationParser.ParseRuleElement(ILoggingConfigurationElement loggerElement)
+   at NLog.Config.LoggingConfigurationParser.ParseRulesElement(ILoggingConfigurationElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+   --- End of inner exception stack trace ---
+2019-11-28 12:51:28.0154 Info Found 115 configuration items
+2019-11-28 12:51:28.0347 Info Configuration initialized.
+2019-11-28 12:51:28.0552 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.6.8.10751. Product version: 4.6.8.

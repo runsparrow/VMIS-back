@@ -105,6 +105,44 @@ namespace ERPApi.HttpClients
                 throw ex;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="paramArray"></param>
+        /// <param name="contentType"></param>
+        /// <returns></returns>
+        public static string HttpGetRequestAsync(string url, List<KeyValuePair<string, string>> paramArray, string contentType)
+        {
+            try
+            {
+                using (HttpClient http = new HttpClient())
+                {
+                    using (Stream dataStream = new MemoryStream(ContentTypeToByteArray(paramArray, contentType)))
+                    {
+                        using (HttpContent content = new StreamContent(dataStream))
+                        {
+                            http.DefaultRequestHeaders.Add("User-Agent", @"Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)");
+                            http.DefaultRequestHeaders.Add("Accept", @"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                            content.Headers.Add("Content-Type", contentType);
+                            var task = http.GetAsync(BuildRequestUri(url, paramArray));
+                            if (task.Result != null && task.Result.StatusCode == HttpStatusCode.OK)
+                            {
+                                using (task.Result)
+                                {
+                                    return task.Result.Content.ReadAsStringAsync().Result;
+                                }
+                            }
+                        }
+                    }
+                    return "";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
 
         #region Private
