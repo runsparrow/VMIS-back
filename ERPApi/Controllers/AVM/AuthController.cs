@@ -78,7 +78,7 @@ namespace ERPApi.Controllers.AVM
                         message = "微信认证成功，但没有找到对应系统用户！",
                         token = "",
                         weChatEntity = entity,
-                        user = new { weChatOpenId = user.WeChatOpenId }
+                        user = new { }
                     });
                 }
             }
