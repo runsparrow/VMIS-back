@@ -57,7 +57,7 @@ namespace ERPApi.Controllers.AVM
                 )
             );
             // 微信认证判断
-            if(entity != null)
+            if(entity != null && entity.OpenId != null)
             {
                 var user = new UserService.RowService().ByWeChatOpenId(entity.OpenId);
                 // 已有用户
