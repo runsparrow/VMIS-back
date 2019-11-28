@@ -100,7 +100,7 @@ namespace ERPApi.Controllers.AVM
         {
             try
             {
-                User user = new UserService.UpdateService().BindWeChat(accountName, accountPwd, "", weChatOpenId);
+                User user = new UserService.UpdateService().WeChatBind(accountName, accountPwd, "", weChatOpenId);
                 if(user != null)
                 {
                     return new JsonResult(new

@@ -147,12 +147,6 @@ namespace ERPApi.Controllers.AVM
                                     service.ToClose(request.Entity)
                                 )
                             );
-                    case "bindwechat":
-                        return base.ResponseOk(
-                                request.ToResponse(
-                                    service.BindWeChat(request.Function.Args[0]??"", request.Function.Args[1]??"", request.Function.Args[2]??"", request.Function.Args[3]??"")
-                                )
-                            );
                     default:
                         if (string.IsNullOrEmpty(request.Function.Name) || request.Function.Name.ToLower().Equals("commit"))
                         {

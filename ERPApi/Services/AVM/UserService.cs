@@ -250,7 +250,7 @@ namespace ERPApi.Services.AVM
             /// <param name="weChatNo">微信号</param>
             /// <param name="weChatOpenId">微信OpenId</param>
             /// <returns></returns>
-            public User BindWeChat(string key, string password, string weChatNo, string weChatOpenId)
+            public User WeChatBind(string key, string password, string weChatNo, string weChatOpenId)
             {
                 try
                 {
