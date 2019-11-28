@@ -35,7 +35,7 @@ namespace ERPApi.Controllers.AVM
 
         #region IActionResult
         /// <summary>
-        /// 
+        /// 微信认证
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
@@ -85,6 +85,44 @@ namespace ERPApi.Controllers.AVM
             else
             {
                 return new JsonResult(new { result = false, message = "微信认证失败", token = "", weChatEntity = new { }, user = new { } });
+            }
+        }
+        /// <summary>
+        /// 后台绑定微信
+        /// </summary>
+        /// <param name="accountName"></param>
+        /// <param name="accountPwd"></param>
+        /// <param name="weChatOpenId"></param>
+        /// <returns></returns>
+        [Route("ERP/Auth/BindWeChat", Name = "ERP_Auth_BindWeChat")]
+        [HttpGet]
+        public IActionResult BindWeChat(string accountName, string accountPwd, string weChatOpenId)
+        {
+            try
+            {
+                User user = new UserService.UpdateService().BindWeChat(accountName, accountPwd, "", weChatOpenId);
+                if(user != null)
+                {
+                    return new JsonResult(new
+                    {
+                        result = true,
+                        message = "绑定成功",
+                        user = new { userId = user.Id, userName = user.Name, realName = user.RealName, weChatOpenId = user.WeChatOpenId }
+                    });
+                }
+                else
+                {
+                    return new JsonResult(new
+                    {
+                        result = false,
+                        message = "绑定失败",
+                        user = new { }
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
         /// <summary>
