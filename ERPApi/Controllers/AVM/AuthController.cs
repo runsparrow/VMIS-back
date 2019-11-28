@@ -94,9 +94,9 @@ namespace ERPApi.Controllers.AVM
         /// <param name="accountPwd"></param>
         /// <param name="weChatOpenId"></param>
         /// <returns></returns>
-        [Route("ERP/Auth/BindWeChat", Name = "ERP_Auth_BindWeChat")]
+        [Route("ERP/Auth/WeChatBind", Name = "ERP_Auth_WeChat_Bind")]
         [HttpGet]
-        public IActionResult BindWeChat(string accountName, string accountPwd, string weChatOpenId)
+        public IActionResult WeChatBind(string accountName, string accountPwd, string weChatOpenId)
         {
             try
             {
