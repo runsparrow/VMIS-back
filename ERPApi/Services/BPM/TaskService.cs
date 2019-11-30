@@ -943,6 +943,26 @@ namespace ERPApi.Services.BPM
                             int statusId = int.Parse(splits[i].Substring(splits[i].IndexOf("=") + 1, splits[i].Length - splits[i].IndexOf("=") - 1));
                             queryable = queryable.Where(row => row.Task.StatusId == statusId);
                         }
+                        else if (splits[i].ToLower().StartsWith("receptionid"))
+                        {
+                            int receptionId = int.Parse(splits[i].Substring(splits[i].IndexOf("=") + 1, splits[i].Length - splits[i].IndexOf("=") - 1));
+                            queryable = queryable.Where(row => row.Task.ReceptionId == receptionId);
+                        }
+                        else if (splits[i].ToLower().StartsWith("venueid"))
+                        {
+                            int venueId = int.Parse(splits[i].Substring(splits[i].IndexOf("=") + 1, splits[i].Length - splits[i].IndexOf("=") - 1));
+                            queryable = queryable.Where(row => row.Task.VenueId == venueId);
+                        }
+                        else if (splits[i].ToLower().StartsWith("siteid"))
+                        {
+                            int siteId = int.Parse(splits[i].Substring(splits[i].IndexOf("=") + 1, splits[i].Length - splits[i].IndexOf("=") - 1));
+                            queryable = queryable.Where(row => row.Task.SiteId == siteId);
+                        }
+                        else if (splits[i].ToLower().StartsWith("customerid"))
+                        {
+                            int customerId = int.Parse(splits[i].Substring(splits[i].IndexOf("=") + 1, splits[i].Length - splits[i].IndexOf("=") - 1));
+                            queryable = queryable.Where(row => row.Task.CustomerId == customerId);
+                        }
                     }
                 }
                 return queryable;

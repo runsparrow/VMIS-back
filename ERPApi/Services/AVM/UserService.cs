@@ -267,6 +267,31 @@ namespace ERPApi.Services.AVM
                     throw ex;
                 }
             }
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="key">用户名</param>
+            /// <param name="password">密码</param>
+            /// <param name="weChatNo">微信号</param>
+            /// <param name="weChatOpenId">微信OpenId</param>
+            /// <returns></returns>
+            public User WeChatUnbind(string key, string password)
+            {
+                try
+                {
+                    var user = new RowService().Verify(key, password);
+                    if (user != null)
+                    {
+                        user.WeChatNo = "";
+                        user.WeChatOpenId = "";
+                    }
+                    return new UpdateService().Update(user);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
         }
         #endregion
 

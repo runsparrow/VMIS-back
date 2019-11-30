@@ -147,6 +147,12 @@ namespace ERPApi.Controllers.AVM
                                     service.ToClose(request.Entity)
                                 )
                             );
+                    case "wechatunbind":
+                        return base.ResponseOk(
+                                request.ToResponse(
+                                    service.WeChatUnbind(request.Function.Args[0], request.Function.Args[1])
+                                )
+                            );
                     default:
                         if (string.IsNullOrEmpty(request.Function.Name) || request.Function.Name.ToLower().Equals("commit"))
                         {
