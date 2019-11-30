@@ -76,7 +76,7 @@ namespace ERPApi.Controllers.AVM
                     return new JsonResult(new {
                         result = true,
                         message = "微信认证成功，但没有找到对应系统用户！",
-                        token = "",
+                        token = new {},
                         weChatEntity = entity,
                         user = new { }
                     });
@@ -84,7 +84,7 @@ namespace ERPApi.Controllers.AVM
             }
             else
             {
-                return new JsonResult(new { result = false, message = "微信认证失败", token = "", weChatEntity = new { }, user = new { } });
+                return new JsonResult(new { result = false, message = "微信认证失败", token = new {}, weChatEntity = new { }, user = new { } });
             }
         }
         /// <summary>
@@ -150,7 +150,7 @@ namespace ERPApi.Controllers.AVM
                 {
                     result = false,
                     message = "认证失败",
-                    token = "",
+                    token = new {},
                     user = new { }
                 });
             }
@@ -180,7 +180,7 @@ namespace ERPApi.Controllers.AVM
                 {
                     result = false,
                     message = "认证失败",
-                    token = "",
+                    token = new {},
                     user = new { }
                 });
             }
@@ -210,7 +210,7 @@ namespace ERPApi.Controllers.AVM
                 {
                     result = false,
                     message = "认证失败",
-                    token = "",
+                    token = new { },
                     user = new { }
                 });
             }
@@ -240,7 +240,7 @@ namespace ERPApi.Controllers.AVM
                 {
                     result = false,
                     message = "认证失败",
-                    token = "",
+                    token = new { },
                     user = new { }
                 });
             }
