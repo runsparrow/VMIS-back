@@ -150,7 +150,7 @@ namespace ERPApi.Controllers.AVM
                     case "wechatunbind":
                         return base.ResponseOk(
                                 request.ToResponse(
-                                    service.WeChatUnbind(request.Function.Args[0], request.Function.Args[1])
+                                    service.WeChatUnbind(request.Entity)
                                 )
                             );
                     default:
